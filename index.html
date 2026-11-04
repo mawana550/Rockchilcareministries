@@ -751,6 +751,82 @@
         font-size: 1.8rem;
       }
     }
+
+    /* ================= SLIDESHOW ================= */
+    .slideshow { position: relative; max-width: 1000px; margin: 0 auto; }
+    .ss-stage { position: relative; height: clamp(230px, 52vw, 480px); perspective: 1200px; overflow: hidden; }
+    .ss-slide {
+      position: absolute; top: 5%; left: 50%; width: 58%; height: 90%;
+      margin-left: -29%; border-radius: 18px; overflow: hidden; cursor: pointer;
+      background: #000; box-shadow: 0 12px 35px rgba(0,0,0,.25);
+      transition: transform .7s cubic-bezier(.22,.8,.3,1), opacity .7s ease, filter .7s ease;
+      will-change: transform, opacity;
+    }
+    .ss-slide img, .ss-slide video { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+    .ss-slide .play-badge {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 3rem; text-shadow: 0 2px 12px rgba(0,0,0,.6); pointer-events: none;
+    }
+    .ss-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%); z-index: 20;
+      width: 44px; height: 44px; border-radius: 50%; border: none; cursor: pointer;
+      background: rgba(255,255,255,.92); color: var(--orange); font-size: 1.1rem;
+      box-shadow: 0 4px 14px rgba(0,0,0,.2); transition: .25s;
+    }
+    .ss-arrow:hover { background: var(--orange); color: #fff; transform: translateY(-50%) scale(1.1); }
+    .ss-prev { left: 4px; } .ss-next { right: 4px; }
+    .ss-caption { text-align: center; font-weight: 600; color: var(--orange); margin-top: 12px; min-height: 1.6em; }
+
+    /* ================= HEART GRID ================= */
+    .heart-grid {
+      display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px;
+      width: min(100%, 560px); margin: 0 auto; perspective: 800px;
+    }
+    .heart-tile {
+      aspect-ratio: 1; border-radius: 12px; overflow: hidden; cursor: pointer; position: relative;
+      background: var(--orange-light); box-shadow: 0 4px 12px rgba(255,107,0,.25);
+      transition: transform .25s ease, opacity .6s ease, filter .6s ease; transform-style: preserve-3d;
+    }
+    .heart-tile img, .heart-tile video { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+    .heart-tile.fading { opacity: 0; filter: blur(4px); transform: scale(.6); }
+    .heart-tile:hover { z-index: 5; box-shadow: 0 8px 22px rgba(255,107,0,.5); }
+    .heart-tile .play-badge { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.2rem; text-shadow: 0 1px 6px rgba(0,0,0,.7); }
+
+    /* ================= PARTNER MODAL ================= */
+    .partner-quote {
+      background: var(--orange-light); border-left: 4px solid var(--orange);
+      padding: 14px 16px; border-radius: 10px; margin-bottom: 18px;
+      font-style: italic; font-weight: 500; font-size: .95rem;
+    }
+    .partner-sub { font-weight: 700; margin: 6px 0 10px; color: var(--orange); }
+    .partner-error { color: #c0392b; font-size: .88rem; margin-bottom: 10px; font-weight: 600; }
+
+    /* ================= LIFE & MOTION ================= */
+    #scrollBar { position: fixed; top: 0; left: 0; height: 4px; width: 0; background: linear-gradient(90deg,var(--orange),#ffb347); z-index: 5000; }
+    #cursorGlow {
+      position: fixed; top: 0; left: 0; width: 320px; height: 320px; margin: -160px 0 0 -160px;
+      border-radius: 50%; pointer-events: none; z-index: 1;
+      background: radial-gradient(circle, rgba(255,107,0,.16), rgba(255,107,0,0) 65%);
+      transition: opacity .4s; opacity: 0;
+    }
+    .float-heart {
+      position: fixed; pointer-events: none; z-index: 6000; color: var(--orange);
+      animation: floatUp 1.4s ease-out forwards;
+    }
+    @keyframes floatUp {
+      from { opacity: 1; transform: translate(0,0) scale(.6); }
+      to { opacity: 0; transform: translate(var(--dx), -90px) scale(1.4); }
+    }
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity .8s ease, transform .8s cubic-bezier(.22,.8,.3,1); }
+    .reveal.in { opacity: 1; transform: none; }
+    .tilt { transition: transform .15s ease-out; will-change: transform; }
+    .btn, .btn-submit-form, .method-btn { position: relative; overflow: hidden; }
+    .ripple { position: absolute; border-radius: 50%; background: rgba(255,255,255,.55); transform: scale(0); animation: rippleAnim .6s linear; pointer-events: none; }
+    @keyframes rippleAnim { to { transform: scale(4); opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .float-heart, #cursorGlow { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -1015,44 +1091,21 @@
       A glimpse into the people and moments behind our work.
     </p>
   </div>
-  <div class="gallery">
-    <div class="gallery-item" onclick="viewImage('/IMG_8583.jpeg','Girl in Prayer')">
-      <img src="/IMG_8583.jpeg" alt="Girl in prayer">
-      <div class="gallery-caption">Hope & Faith</div>
-    </div>
-    <div class="gallery-item" onclick="viewImage('/IMG_0437.jpeg','Meal Serving')">
-      <img src="/IMG_0437.jpeg" alt="Meal serving">
-      <div class="gallery-caption">Meal Support</div>
-    </div>
-    <div class="gallery-item" onclick="viewImage('/IMG_0718.jpeg','Food Distribution')">
-      <img src="/IMG_0718.jpeg" alt="Food distribution">
-      <div class="gallery-caption">Food Distribution</div>
-    </div>
-    <div class="gallery-item" onclick="viewImage('/IMG_4544.jpeg','Community Gathering')">
-      <img src="/IMG_4544.jpeg" alt="Community gathering">
-      <div class="gallery-caption">Community</div>
-    </div>
-    <div class="gallery-item" onclick="viewImage('/IMG_0717.jpeg','Care Program')">
-      <img src="/IMG_0717.jpeg" alt="Care program">
-      <div class="gallery-caption">Child Care</div>
-    </div>
-    <div class="gallery-item" onclick="viewImage('/IMG_0724.jpeg','Bread Distribution')">
-      <img src="/IMG_0724.jpeg" alt="Bread distribution">
-      <div class="gallery-caption">Sharing Food</div>
-    </div>
-    <div class="gallery-item">
-      <img src="https://images.unsplash.com/photo-1489493585363-d69421e0edd3?auto=format&fit=crop&w=900&q=80" alt="Community children">
-      <div class="gallery-caption">Community & Care</div>
-    </div>
-    <div class="gallery-item">
-      <img src="https://images.unsplash.com/photo-1494386346843-e12284507169?auto=format&fit=crop&w=900&q=80" alt="Children learning">
-      <div class="gallery-caption">Learning Together</div>
-    </div>
-    <div class="gallery-item">
-      <img src="https://images.unsplash.com/photo-1504159506876-f8338247a14a?auto=format&fit=crop&w=900&q=80" alt="Children outdoors">
-      <div class="gallery-caption">Growing Together</div>
-    </div>
+  <!-- Main slideshow -->
+  <div class="slideshow" id="slideshow">
+    <button class="ss-arrow ss-prev" onclick="slideMove(-1)" aria-label="Previous">&#10094;</button>
+    <div class="ss-stage" id="ssStage"></div>
+    <button class="ss-arrow ss-next" onclick="slideMove(1)" aria-label="Next">&#10095;</button>
   </div>
+  <p class="ss-caption" id="ssCaption"></p>
+
+  <!-- Heart of memories -->
+  <div class="section-heading" style="margin-top:50px;">
+    <h2>Our Hearts, Our Moments ❤️</h2>
+    <p>Tap any picture or video to view it.</p>
+  </div>
+  <div class="heart-grid" id="heartGrid"></div>
+
   <div style="text-align:center;margin-top:40px">
     <button class="btn btn-primary btn-large" onclick="openModal('donateModal')">
       Support These Children ❤️
@@ -1108,7 +1161,7 @@
       <p style="margin-bottom: 20px;">
         We collaborate with compassionate individuals, local groups, and international sponsors to transform lives.
       </p>
-      <button class="btn btn-primary" onclick="openModal('donateModal')">
+      <button class="btn btn-primary" onclick="openModal('partnerModal')">
         Become a Partner
       </button>
     </div>
@@ -1259,17 +1312,84 @@
   </div>
 </div>
 
+<!-- ================= PARTNER MODAL ================= -->
+<div class="modal-overlay" id="partnerModal">
+  <div class="modal-card">
+    <span class="modal-close" onclick="closeModal('partnerModal')">&times;</span>
+    <h2 class="modal-title">Become a Partner ❤️</h2>
+
+    <div id="partnerFormWrap">
+      <p class="partner-quote">
+        “Our journey of establishing hope starts with you. Become a partner, a friend or a donor to this hope-giving project.”
+      </p>
+
+      <form id="partnerForm" onsubmit="handlePartnerSubmit(event)">
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
+        <div class="form-group">
+          <label for="p-name">Your Full Name</label>
+          <input type="text" id="p-name" required placeholder="John Doe">
+        </div>
+
+        <div class="form-group">
+          <label for="p-location">Your Location</label>
+          <input type="text" id="p-location" placeholder="City, Country">
+        </div>
+
+        <div class="form-group">
+          <label for="p-role">I want to join as</label>
+          <select id="p-role" required>
+            <option value="Partner">A Partner</option>
+            <option value="Donor">A Donor</option>
+            <option value="Friend">A Friend of the Project</option>
+          </select>
+        </div>
+
+        <p class="partner-sub">How can we contact you? <span class="opt">(fill in at least one)</span></p>
+
+        <div class="form-group">
+          <label for="p-facebook"><i class="fab fa-facebook-f" style="color:#1877f2"></i> Facebook username</label>
+          <input type="text" id="p-facebook" placeholder="e.g. john.doe">
+        </div>
+
+        <div class="form-group">
+          <label for="p-whatsapp"><i class="fab fa-whatsapp" style="color:#25D366"></i> WhatsApp name / number</label>
+          <input type="text" id="p-whatsapp" placeholder="e.g. +1 555 123 4567">
+        </div>
+
+        <div class="form-group">
+          <label for="p-email"><i class="fas fa-envelope" style="color:var(--orange)"></i> Email</label>
+          <input type="email" id="p-email" placeholder="you@example.com">
+        </div>
+
+        <p id="partnerError" class="partner-error" style="display:none;"></p>
+        <button type="submit" class="btn-submit-form" id="partnerBtn">Become a Partner</button>
+      </form>
+    </div>
+
+    <div id="partnerThanks" style="display:none;text-align:center;padding:20px 0;">
+      <div style="font-size:3rem;">🎉❤️</div>
+      <h3 style="color:var(--orange);margin:10px 0;">Thank you for joining us!</h3>
+      <p>Your details have been sent. Our team will contact you very soon.</p>
+      <button type="button" class="btn-submit-form" style="margin-top:20px;" onclick="closeModal('partnerModal')">Close</button>
+    </div>
+  </div>
+</div>
+
 <!-- ================= IMAGE MODAL ================= -->
 <div class="modal" id="imageModal">
   <div class="modal-box" style="max-width:850px;text-align:center">
     <span class="close" onclick="closeModal('imageModal')">&times;</span>
     <h2 id="imageTitle" style="color:var(--orange);margin-bottom:15px">Photo</h2>
     <img id="largeImage" src="" alt="Gallery photo" style="width:100%;max-height:70vh;object-fit:contain;border-radius:12px;">
+    <video id="largeVideo" controls playsinline style="display:none;width:100%;max-height:70vh;border-radius:12px;background:#000;"></video>
   </div>
 </div>
 
 <!-- ================= TOAST ================= -->
 <div class="toast-container" id="toastContainer"></div>
+<div id="scrollBar"></div>
+<div id="cursorGlow"></div>
 
 <!-- ================= FOOTER ================= -->
 <footer>
@@ -1372,10 +1492,12 @@
     if (targetModal) {
       targetModal.classList.add('show');
       if (id === 'donateModal') backToForm();
+      if (id === 'partnerModal') resetPartner();
     }
   }
 
   function closeModal(id) {
+    if (id === 'imageModal') stopVideo();
     const targetModal = document.getElementById(id);
     if (targetModal) {
       targetModal.classList.remove('show');
@@ -1470,17 +1592,321 @@
     openModal('donateModal');
   }
 
-  /* IMAGE VIEWER */
-  function viewImage(src, title) {
-    document.getElementById('largeImage').src = src;
+  /* IMAGE / VIDEO VIEWER */
+  function stopVideo() {
+    const v = document.getElementById('largeVideo');
+    if (v) { v.pause(); }
+  }
+  function viewImage(src, title, type) {
+    const img = document.getElementById('largeImage');
+    const vid = document.getElementById('largeVideo');
     document.getElementById('imageTitle').innerText = title;
+    if (type === 'video') {
+      img.style.display = 'none';
+      vid.style.display = 'block';
+      vid.src = src;
+      vid.play().catch(() => {});
+    } else {
+      vid.pause();
+      vid.style.display = 'none';
+      img.style.display = 'block';
+      img.src = src;
+    }
     openModal('imageModal');
   }
+
+  /* ================= PARTNER FORM (sent to email) =================
+     Uses FormSubmit.co, which forwards the form to your email.
+     FIRST TIME ONLY: after the first submission, FormSubmit sends an
+     activation email to the address below. Click the link in it once. */
+  const PARTNER_EMAIL = 'mulwanaian6@gmail.com';
+
+  function resetPartner() {
+    document.getElementById('partnerFormWrap').style.display = 'block';
+    document.getElementById('partnerThanks').style.display = 'none';
+    document.getElementById('partnerError').style.display = 'none';
+  }
+
+  async function handlePartnerSubmit(event) {
+    event.preventDefault();
+    const val = id => document.getElementById(id).value.trim();
+    const err = document.getElementById('partnerError');
+    const btn = document.getElementById('partnerBtn');
+    if (!val('p-facebook') && !val('p-whatsapp') && !val('p-email')) {
+      err.textContent = 'Please fill in at least one way for us to contact you (Facebook, WhatsApp or Email).';
+      err.style.display = 'block';
+      return;
+    }
+    err.style.display = 'none';
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    const payload = {
+      _subject: 'New ' + val('p-role') + ' request - Rock ChildCare Ministries',
+      _template: 'table',
+      _captcha: 'false',
+      Name: val('p-name'),
+      Location: val('p-location') || 'Not given',
+      Joining_as: val('p-role'),
+      Facebook: val('p-facebook') || 'Not given',
+      WhatsApp: val('p-whatsapp') || 'Not given',
+      Email: val('p-email') || 'Not given'
+    };
+    if (val('p-email')) payload._replyto = val('p-email');
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/' + PARTNER_EMAIL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (!res.ok || data.success === 'false' || data.success === false) throw new Error('send failed');
+      document.getElementById('partnerForm').reset();
+      document.getElementById('partnerFormWrap').style.display = 'none';
+      document.getElementById('partnerThanks').style.display = 'block';
+    } catch (e) {
+      err.textContent = 'Sorry, we could not send your details. Please check your internet and try again, or email us at ' + PARTNER_EMAIL + '.';
+      err.style.display = 'block';
+    }
+    btn.disabled = false;
+    btn.textContent = 'Become a Partner';
+  }
+
+  /* ================= GALLERY DATA =================
+     To add a video use:  { type:'video', src:'/myvideo.mp4', caption:'My video' }
+     (optional poster: poster:'/thumb.jpeg')  */
+  const GALLERY = [
+    { src: '/IMG_8583.jpeg', caption: 'Hope & Faith' },
+    { src: '/IMG_0437.jpeg', caption: 'Meal Support' },
+    { src: '/IMG_0718.jpeg', caption: 'Food Distribution' },
+    { src: '/IMG_4544.jpeg', caption: 'Community' },
+    { src: '/IMG_0717.jpeg', caption: 'Child Care' },
+    { src: '/IMG_0724.jpeg', caption: 'Sharing Food' },
+    { src: 'https://images.unsplash.com/photo-1489493585363-d69421e0edd3?auto=format&fit=crop&w=900&q=80', caption: 'Community & Care' },
+    { src: 'https://images.unsplash.com/photo-1494386346843-e12284507169?auto=format&fit=crop&w=900&q=80', caption: 'Learning Together' },
+    { src: 'https://images.unsplash.com/photo-1504159506876-f8338247a14a?auto=format&fit=crop&w=900&q=80', caption: 'Growing Together' }
+  ];
+
+  function mediaEl(item) {
+    if (item.type === 'video') {
+      const v = document.createElement('video');
+      v.src = item.src; v.muted = true; v.playsInline = true; v.preload = 'metadata';
+      if (item.poster) v.poster = item.poster;
+      return v;
+    }
+    const i = document.createElement('img');
+    i.src = item.src; i.alt = item.caption; i.loading = 'lazy';
+    return i;
+  }
+  function badge() {
+    const b = document.createElement('div');
+    b.className = 'play-badge';
+    b.innerHTML = '<i class="fas fa-play-circle"></i>';
+    return b;
+  }
+  function openItem(item) { viewImage(item.src, item.caption, item.type); }
+
+  /* ---------- SLIDESHOW (centre big, left & right smaller) ---------- */
+  let ssCur = 0, ssTimer = null;
+  const ssSlides = [];
+
+  function buildSlideshow() {
+    const stage = document.getElementById('ssStage');
+    if (!stage) return;
+    GALLERY.forEach((item, i) => {
+      const d = document.createElement('div');
+      d.className = 'ss-slide';
+      d.appendChild(mediaEl(item));
+      if (item.type === 'video') d.appendChild(badge());
+      d.addEventListener('click', () => {
+        if (d.dataset.off === '0') openItem(item);
+        else slideMove(Number(d.dataset.off));
+      });
+      stage.appendChild(d);
+      ssSlides.push(d);
+    });
+    // swipe support
+    let x0 = null;
+    stage.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; ssStop(); }, { passive: true });
+    stage.addEventListener('touchend', e => {
+      if (x0 === null) return;
+      const dx = e.changedTouches[0].clientX - x0;
+      if (Math.abs(dx) > 40) slideMove(dx < 0 ? 1 : -1);
+      x0 = null; ssStart();
+    });
+    const box = document.getElementById('slideshow');
+    box.addEventListener('mouseenter', ssStop);
+    box.addEventListener('mouseleave', ssStart);
+    renderSlides();
+    ssStart();
+  }
+
+  function renderSlides() {
+    const n = GALLERY.length, half = Math.floor(n / 2);
+    ssSlides.forEach((d, i) => {
+      let off = ((i - ssCur + n + half) % n) - half;
+      d.dataset.off = off;
+      if (off === 0) {
+        d.style.transform = 'translateX(0) scale(1)';
+        d.style.opacity = 1; d.style.zIndex = 3; d.style.filter = 'none';
+      } else if (Math.abs(off) === 1) {
+        d.style.transform = 'translateX(' + (off * 62) + '%) scale(.72) rotateY(' + (off * -18) + 'deg)';
+        d.style.opacity = .65; d.style.zIndex = 2; d.style.filter = 'brightness(.8)';
+      } else {
+        d.style.transform = 'translateX(' + (Math.sign(off) * 90) + '%) scale(.5)';
+        d.style.opacity = 0; d.style.zIndex = 1; d.style.filter = 'none';
+      }
+      d.style.pointerEvents = Math.abs(off) > 1 ? 'none' : 'auto';
+    });
+    document.getElementById('ssCaption').textContent = GALLERY[ssCur].caption;
+  }
+
+  function slideMove(dir) {
+    const n = GALLERY.length;
+    ssCur = (ssCur + dir + n) % n;
+    renderSlides();
+  }
+  function ssStart() { ssStop(); ssTimer = setInterval(() => slideMove(1), 3500); }
+  function ssStop() { if (ssTimer) { clearInterval(ssTimer); ssTimer = null; } }
+
+  /* ---------- HEART OF PICTURES ---------- */
+  const HEART_SHAPE = [
+    '.XX.XX.',
+    'XXXXXXX',
+    '.XXXXX.',
+    '..XXX..',
+    '...X...'
+  ];
+  const heartTiles = [];
+
+  function buildHeart() {
+    const grid = document.getElementById('heartGrid');
+    if (!grid) return;
+    let k = 0;
+    HEART_SHAPE.join('').split('').forEach(ch => {
+      if (ch !== 'X') {
+        const gap = document.createElement('div');
+        grid.appendChild(gap);
+        return;
+      }
+      const tile = document.createElement('div');
+      tile.className = 'heart-tile';
+      const idx = (k * 2) % GALLERY.length;
+      k++;
+      tile.dataset.idx = idx;
+      fillTile(tile, idx);
+      tile.addEventListener('click', () => openItem(GALLERY[tile.dataset.idx]));
+      grid.appendChild(tile);
+      heartTiles.push(tile);
+    });
+    // every 2 seconds one tile fades away and comes back with a new picture
+    setInterval(() => {
+      if (!document.getElementById('gallery-section').classList.contains('active-section')) return;
+      const tile = heartTiles[Math.floor(Math.random() * heartTiles.length)];
+      tile.classList.add('fading');
+      setTimeout(() => {
+        const next = (Number(tile.dataset.idx) + 1 + Math.floor(Math.random() * (GALLERY.length - 1))) % GALLERY.length;
+        tile.dataset.idx = next;
+        fillTile(tile, next);
+        tile.classList.remove('fading');
+      }, 650);
+    }, 2000);
+  }
+  function fillTile(tile, idx) {
+    tile.innerHTML = '';
+    const item = GALLERY[idx];
+    tile.appendChild(mediaEl(item));
+    if (item.type === 'video') tile.appendChild(badge());
+  }
+
+  buildSlideshow();
+  buildHeart();
+
+  /* ================= LIFE: MOUSE & SCROLL RESPONSIVENESS ================= */
+  (function () {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // scroll progress bar
+    const bar = document.getElementById('scrollBar');
+    function onScroll() {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // reveal on scroll (works going down and back up)
+    const targets = document.querySelectorAll(
+      '.section-heading, .contact-card, .donation-banner, .gallery-item, .ss-stage, .heart-grid'
+    );
+    if ('IntersectionObserver' in window && !reduce) {
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(en => en.target.classList.toggle('in', en.isIntersecting));
+      }, { threshold: .12 });
+      targets.forEach(t => { t.classList.add('reveal'); io.observe(t); });
+    }
+
+    // cursor glow + floating hearts
+    const glow = document.getElementById('cursorGlow');
+    let gx = 0, gy = 0, tx = 0, ty = 0, lastHeart = 0;
+    function follow() {
+      gx += (tx - gx) * .12; gy += (ty - gy) * .12;
+      glow.style.transform = 'translate(' + gx + 'px,' + gy + 'px)';
+      requestAnimationFrame(follow);
+    }
+    function move(x, y) {
+      tx = x; ty = y; glow.style.opacity = 1;
+      const now = Date.now();
+      if (now - lastHeart > 160 && !reduce) { lastHeart = now; heart(x, y, .6); }
+    }
+    function heart(x, y, chance) {
+      if (Math.random() > chance) return;
+      const h = document.createElement('i');
+      h.className = 'fas fa-heart float-heart';
+      h.style.left = x + 'px'; h.style.top = y + 'px';
+      h.style.fontSize = (8 + Math.random() * 10) + 'px';
+      h.style.setProperty('--dx', (Math.random() * 60 - 30) + 'px');
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 1400);
+    }
+    if (!reduce) follow();
+    window.addEventListener('mousemove', e => move(e.clientX, e.clientY));
+    window.addEventListener('touchmove', e => { const t = e.touches[0]; move(t.clientX, t.clientY); }, { passive: true });
+    window.addEventListener('touchstart', e => { const t = e.touches[0]; tx = gx = t.clientX; ty = gy = t.clientY; glow.style.opacity = 1; for (let i = 0; i < 3; i++) heart(t.clientX, t.clientY, 1); }, { passive: true });
+    window.addEventListener('touchend', () => { glow.style.opacity = 0; });
+
+    // 3D tilt following the pointer
+    const tiltEls = document.querySelectorAll('.contact-card, .donation-banner, .heart-tile');
+    tiltEls.forEach(el => {
+      if (!el.classList.contains('heart-tile')) el.classList.add('tilt');
+      el.addEventListener('mousemove', e => {
+        if (reduce) return;
+        const r = el.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - .5;
+        const py = (e.clientY - r.top) / r.height - .5;
+        el.style.transform = 'perspective(700px) rotateX(' + (-py * 10) + 'deg) rotateY(' + (px * 10) + 'deg) scale(1.03)';
+      });
+      el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+    });
+
+    // tap / click ripple on buttons
+    document.addEventListener('click', e => {
+      const b = e.target.closest('.btn, .btn-submit-form, .method-btn');
+      if (!b) return;
+      const r = b.getBoundingClientRect(), size = Math.max(r.width, r.height);
+      const sp = document.createElement('span');
+      sp.className = 'ripple';
+      sp.style.cssText = 'width:' + size + 'px;height:' + size + 'px;left:' + (e.clientX - r.left - size / 2) + 'px;top:' + (e.clientY - r.top - size / 2) + 'px';
+      b.appendChild(sp);
+      setTimeout(() => sp.remove(), 600);
+      if (!reduce) heart(e.clientX, e.clientY, 1);
+    });
+  })();
 
   /* CLOSE MODAL WHEN CLICKING OUTSIDE */
   window.addEventListener('click', function(event) {
     if (event.target.classList.contains('modal') || event.target.classList.contains('modal-overlay')) {
       event.target.classList.remove('show');
+      stopVideo();
     }
   });
 
