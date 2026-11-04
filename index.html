@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wasswa Rock ChildCare Ministries Uganda</title>
+  <title>Rock ChildCare Ministries Uganda</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -634,6 +634,14 @@
       background: var(--orange);
       color: white;
     }
+    .opt { font-weight: 400; color: var(--gray); font-size: .8rem; }
+    .pay-summary { background: var(--orange-light); padding: 12px 15px; border-radius: 10px; margin-bottom: 15px; font-size: .92rem; }
+    .method-grid { display: grid; gap: 10px; }
+    .method-btn { padding: 14px; border: 1.5px solid var(--orange); background: white; color: var(--orange); border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: .25s; }
+    .method-btn:hover, .method-btn.active { background: var(--orange); color: white; }
+    .steps { margin: 0 0 12px 18px; font-size: .88rem; }
+    .steps li { margin-bottom: 4px; }
+    .back-link { background: none; border: none; color: var(--gray); cursor: pointer; margin-top: 15px; font-size: .9rem; text-decoration: underline; }
     /* ================= TOAST ================= */
     .toast-container {
       position: fixed;
@@ -749,9 +757,9 @@
 <!-- ================= HEADER ================= -->
 <header>
   <div class="brand" onclick="showTab('home')">
-    <img src="/IMG_0689.png" alt="Wasswa Rock Logo">
+    <img src="/IMG_0689.png" alt="Rock ChildCare Ministries Logo">
     <div>
-      <h2>Wasswa Rock</h2>
+      <h2>Rock ChildCare Ministries</h2>
       <span>ChildCare Ministries Uganda</span>
     </div>
   </div>
@@ -785,7 +793,7 @@
         Hope Begins With <span>One Helping Hand.</span>
       </h1>
       <p>
-        Wasswa Rock ChildCare Ministries is working to support vulnerable
+        Rock ChildCare Ministries is working to support vulnerable
         children and young people through food, education, shelter,
         skills development and community care.
       </p>
@@ -889,7 +897,7 @@
 <!-- ================= ABOUT ================= -->
 <section id="about-section" class="page-section">
   <div class="section-heading">
-    <h2>About Wasswa Rock</h2>
+    <h2>About Rock ChildCare Ministries</h2>
     <p>
       Restoring hope, dignity and opportunity for vulnerable
       children and young people in Uganda.
@@ -933,7 +941,7 @@
       and families.
     </p>
     <button class="btn btn-large" onclick="openModal('donateModal')">
-      Support Wasswa Rock
+      Support Rock ChildCare Ministries
     </button>
   </div>
 </section>
@@ -945,7 +953,7 @@
       THE ROCK CAMPAIGN
     </h1>
     <p class="campaign-subtitle">
-      Powered by Wasswa Rock ChildCare Ministries
+      Powered by Rock ChildCare Ministries
     </p>
     <img src="/IMG_0514.jpeg" class="campaign-main-photo" alt="Children receiving support">
     <div style="text-align:center;margin:35px 0">
@@ -1056,7 +1064,7 @@
 <section id="contact-section" class="page-section">
   <div class="section-heading">
     <h2>Contact Us</h2>
-    <p>Get in touch with Wasswa Rock ChildCare Ministries or connect with our team.</p>
+    <p>Get in touch with Rock ChildCare Ministries or connect with our team.</p>
   </div>
 
   <!-- OUR LEADERSHIP & STAFF -->
@@ -1149,16 +1157,17 @@
   <div class="modal-card">
     <span class="modal-close" onclick="closeModal('donateModal')">&times;</span>
     <h2 class="modal-title">How to Donate</h2>
-    
+
+    <!-- STEP 1: DETAILS -->
     <form id="donationForm" onsubmit="handleFormSubmit(event)">
       <div class="form-group">
-        <label for="donor-name">Your Full Name</label>
-        <input type="text" id="donor-name" required placeholder="John Doe">
+        <label for="donor-name">Your Full Name <span class="opt">(optional)</span></label>
+        <input type="text" id="donor-name" placeholder="Leave blank to stay anonymous">
       </div>
 
       <div class="form-group">
-        <label for="donor-location">Your Location</label>
-        <input type="text" id="donor-location" required placeholder="City, Country">
+        <label for="donor-location">Your Location <span class="opt">(optional)</span></label>
+        <input type="text" id="donor-location" placeholder="City, Country">
       </div>
 
       <div class="form-group">
@@ -1179,41 +1188,69 @@
       <button type="submit" class="btn-submit-form">Proceed to Payment Options</button>
     </form>
 
-    <hr style="margin: 25px 0; border: none; border-top: 1px solid var(--border);">
-
-    <!-- Mobile Wallet Instructions -->
-    <div class="payment-option">
-      <h4>1. Mobile Wallet Instructions</h4>
-      <p>Send to CEO: <strong>Mulwana Patrick</strong></p>
-      <p>Phone: <strong>0753669250</strong> (Kampala, Uganda)</p>
-      <p style="margin-top: 6px;"><strong>OR</strong></p>
-      <p>Send to Treasurer: <strong>Mawanda Ian</strong></p>
-      <p>Phone: <strong>0755759491</strong> (Kampala, Uganda)</p>
-
-      <div class="logo-badge-container">
-        <a href="https://www.worldremit.com/en" target="_blank" class="payment-link-btn">
-          <i class="fas fa-globe"></i> WorldRemit
-        </a>
-        <a href="https://www.wave.com/en/" target="_blank" class="payment-link-btn">
-          <i class="fas fa-mobile-alt"></i> Wave
-        </a>
+    <!-- STEP 2: CHOOSE METHOD -->
+    <div id="payStep" style="display:none;">
+      <p id="paySummary" class="pay-summary"></p>
+      <p style="font-weight:600;margin-bottom:10px;">Choose how you want to send your donation:</p>
+      <div class="method-grid">
+        <button type="button" class="method-btn" onclick="showMethod('wave')"><i class="fas fa-mobile-alt"></i> Send through Wave</button>
+        <button type="button" class="method-btn" onclick="showMethod('worldremit')"><i class="fas fa-globe"></i> Send through WorldRemit</button>
+        <button type="button" class="method-btn" onclick="showMethod('moneygram')"><i class="fas fa-university"></i> Send through MoneyGram</button>
       </div>
-    </div>
 
-    <!-- Cash Pickup -->
-    <div class="payment-option">
-      <h4>2. Cash Pick Up</h4>
-      <p>Send to: <strong>Mulwana Patrick</strong> (Kampala, Uganda)</p>
-      <p>Phone: <strong>0753669250</strong></p>
-      
-      <div class="logo-badge-container">
-        <a href="https://www.moneygram.com/r/ug/en" target="_blank" class="payment-link-btn">
-          <i class="fas fa-university"></i> MoneyGram
-        </a>
+      <!-- STEP 3: DETAILS FOR CHOSEN METHOD -->
+      <div class="payment-option method-panel" id="method-wave" style="display:none;">
+        <h4>Send through Wave</h4>
+        <ol class="steps">
+          <li>Open the Wave app or visit the Wave website.</li>
+          <li>Choose Uganda as the destination and mobile wallet as the delivery method.</li>
+          <li>Enter one of the recipients below and send your amount.</li>
+          <li>Email your receipt to <strong>mulwanaian6@gmail.com</strong> or send it to our Facebook page.</li>
+        </ol>
+        <p><strong>CEO:</strong> Mulwana Patrick</p>
+        <p>Phone: <strong>0753669250</strong> (Kampala, Uganda)</p>
+        <p style="margin-top:6px;"><strong>OR</strong></p>
+        <p><strong>Treasurer:</strong> Mawanda Ian</p>
+        <p>Phone: <strong>0755759491</strong> (Kampala, Uganda)</p>
+        <div class="logo-badge-container">
+          <a href="https://www.wave.com/en/" target="_blank" class="payment-link-btn"><i class="fas fa-mobile-alt"></i> Open Wave</a>
+        </div>
       </div>
-      <p style="font-size: 0.85rem; color: var(--gray); margin-top: 10px;">
-        * Please send your transaction receipt to <strong>mulwanaian6@gmail.com</strong> or our Facebook page.
-      </p>
+
+      <div class="payment-option method-panel" id="method-worldremit" style="display:none;">
+        <h4>Send through WorldRemit</h4>
+        <ol class="steps">
+          <li>Open the WorldRemit app or website.</li>
+          <li>Select Uganda and choose mobile money as the delivery method.</li>
+          <li>Enter one of the recipients below and send your amount.</li>
+          <li>Email your receipt to <strong>mulwanaian6@gmail.com</strong> or send it to our Facebook page.</li>
+        </ol>
+        <p><strong>CEO:</strong> Mulwana Patrick</p>
+        <p>Phone: <strong>0753669250</strong> (Kampala, Uganda)</p>
+        <p style="margin-top:6px;"><strong>OR</strong></p>
+        <p><strong>Treasurer:</strong> Mawanda Ian</p>
+        <p>Phone: <strong>0755759491</strong> (Kampala, Uganda)</p>
+        <div class="logo-badge-container">
+          <a href="https://www.worldremit.com/en" target="_blank" class="payment-link-btn"><i class="fas fa-globe"></i> Open WorldRemit</a>
+        </div>
+      </div>
+
+      <div class="payment-option method-panel" id="method-moneygram" style="display:none;">
+        <h4>Send through MoneyGram (Cash Pick Up)</h4>
+        <ol class="steps">
+          <li>Visit a MoneyGram location or open the MoneyGram app or website.</li>
+          <li>Choose Uganda and the cash pick up option.</li>
+          <li>Enter the recipient below and send your amount.</li>
+          <li>Email your receipt to <strong>mulwanaian6@gmail.com</strong> or send it to our Facebook page.</li>
+        </ol>
+        <p><strong>Send to:</strong> Mulwana Patrick (Kampala, Uganda)</p>
+        <p>Phone: <strong>0753669250</strong></p>
+        <div class="logo-badge-container">
+          <a href="https://www.moneygram.com/r/ug/en" target="_blank" class="payment-link-btn"><i class="fas fa-university"></i> Open MoneyGram</a>
+        </div>
+      </div>
+
+      <button type="button" class="back-link" onclick="backToForm()">&larr; Change my details</button>
     </div>
 
     <p style="text-align: center; margin-top: 20px; font-weight: 600; color: var(--orange);">
@@ -1238,7 +1275,7 @@
 <footer>
   <div class="footer-grid">
     <div>
-      <h3>Wasswa Rock ChildCare Ministries</h3>
+      <h3>Rock ChildCare Ministries</h3>
       <p>
         Supporting vulnerable children and young people
         through food, education, shelter and skills development.
@@ -1272,7 +1309,7 @@
   </div>
   <div class="copyright">
     <p>
-      © 2026 Wasswa Rock ChildCare Ministries Uganda.
+      © 2026 Rock ChildCare Ministries Uganda.
       All rights reserved.
     </p>
   </div>
@@ -1334,6 +1371,7 @@
     const targetModal = document.getElementById(id);
     if (targetModal) {
       targetModal.classList.add('show');
+      if (id === 'donateModal') backToForm();
     }
   }
 
@@ -1344,19 +1382,83 @@
     }
   }
 
+  /* ================= TRANSACTION DATABASE =================
+     Every transaction is stored (key: rcm_transactions).
+     Only the 5 most recent are shown in the pop-ups.
+     NOTE: this uses the visitor's browser storage. To share donations
+     between all visitors, replace saveTransaction()/getTransactions()
+     with calls to a server database (e.g. Firebase). */
+  const DB_KEY = 'rcm_transactions';
+
+  function getTransactions() {
+    try {
+      return JSON.parse(localStorage.getItem(DB_KEY)) || [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function saveTransaction(tx) {
+    const all = getTransactions();
+    all.push(tx);
+    try {
+      localStorage.setItem(DB_KEY, JSON.stringify(all));
+    } catch (e) {}
+  }
+
+  function getLatestFive() {
+    return getTransactions()
+      .sort((a, b) => b.time - a.time)
+      .slice(0, 5);
+  }
+
   /* DONATION FORM PROCESSING */
   function handleFormSubmit(event) {
     event.preventDefault();
-    const name = document.getElementById('donor-name').value;
-    const location = document.getElementById('donor-location').value;
-    const purpose = document.getElementById('donor-purpose').value;
+    const name = document.getElementById('donor-name').value.trim();
+    const location = document.getElementById('donor-location').value.trim();
+    const purposeEl = document.getElementById('donor-purpose');
+    const purpose = purposeEl.options[purposeEl.selectedIndex].text;
     const amount = document.getElementById('donor-amount').value;
 
-    alert(
-      "Thank you " + name + " from " + location + "!\n\n" +
-      "You have selected to donate $" + amount + " towards " + purpose + ".\n" +
-      "Please proceed with sending your donation via Mobile Wallet or Cash Pick Up options listed below."
-    );
+    saveTransaction({
+      name: name || '',
+      location: location || '',
+      purpose: purpose,
+      amount: amount,
+      time: Date.now()
+    });
+
+    const who = name ? name : 'Anonymous supporter';
+    document.getElementById('paySummary').innerHTML =
+      'Thank you, <strong>' + who.replace(/</g, '&lt;') + '</strong>! You are giving <strong>$' +
+      amount + '</strong> toward <strong>' + purpose + '</strong>.';
+
+    document.getElementById('donationForm').style.display = 'none';
+    document.getElementById('payStep').style.display = 'block';
+    hideMethods();
+  }
+
+  function hideMethods() {
+    document.querySelectorAll('.method-panel').forEach(p => p.style.display = 'none');
+    document.querySelectorAll('.method-btn').forEach(b => b.classList.remove('active'));
+  }
+
+  function showMethod(method) {
+    hideMethods();
+    const panel = document.getElementById('method-' + method);
+    if (panel) {
+      panel.style.display = 'block';
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+    const idx = { wave: 0, worldremit: 1, moneygram: 2 }[method];
+    const btns = document.querySelectorAll('.method-btn');
+    if (btns[idx]) btns[idx].classList.add('active');
+  }
+
+  function backToForm() {
+    document.getElementById('payStep').style.display = 'none';
+    document.getElementById('donationForm').style.display = 'block';
   }
 
   /* DONATION AMOUNT SELECTOR FROM CAMPAIGN */
@@ -1382,28 +1484,41 @@
     }
   });
 
-  /* DONATION ACTIVITY TOAST */
-  const donors = [
+  /* DONATION ACTIVITY TOAST - shows only the 5 latest transactions */
+  const fallbackMessages = [
     "A supporter just joined the campaign ❤️",
-    "Someone contributed toward food support ❤️",
-    "A new supporter joined Wasswa Rock ❤️",
     "Someone is helping provide hope to a child ❤️"
   ];
+  let toastIndex = 0;
+
+  function escapeHtml(t) {
+    return String(t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  function formatTransaction(tx) {
+    const who = tx.name ? escapeHtml(tx.name) : 'A kind supporter';
+    const from = tx.location ? ' from ' + escapeHtml(tx.location) : '';
+    return who + from + ' donated <strong>$' + escapeHtml(tx.amount) + '</strong> to ' + escapeHtml(tx.purpose) + ' ❤️';
+  }
+
   function showToast() {
     const container = document.getElementById('toastContainer');
     if (!container) return;
+    const latest = getLatestFive();
+    let message;
+    if (latest.length) {
+      message = formatTransaction(latest[toastIndex % latest.length]);
+      toastIndex++;
+    } else {
+      message = fallbackMessages[toastIndex++ % fallbackMessages.length];
+    }
     const toast = document.createElement('div');
     toast.className = 'toast';
-    toast.innerHTML =
-      '<i class="fas fa-heart" style="color:#ff6b00"></i> ' +
-      donors[Math.floor(Math.random() * donors.length)];
+    toast.innerHTML = '<i class="fas fa-heart" style="color:#ff6b00"></i> ' + message;
     container.appendChild(toast);
-    setTimeout(() => {
-      toast.remove();
-    }, 5000);
+    setTimeout(() => toast.remove(), 5000);
   }
 
-  /* SHOW OCCASIONAL ACTIVITY */
   setTimeout(showToast, 5000);
   setInterval(showToast, 14000);
 </script>
