@@ -1,0 +1,1411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wasswa Rock ChildCare Ministries Uganda</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --orange: #ff6b00;
+      --orange-dark: #df5700;
+      --orange-light: #fff4eb;
+      --dark: #171717;
+      --gray: #666;
+      --white: #fff;
+      --light: #f8fafc;
+      --border: #e8e8e8;
+      --green: #159447;
+      --header-height: 80px;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
+    body {
+      background: #fff;
+      color: var(--dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+      padding-top: var(--header-height);
+    }
+    /* ================= FIXED HEADER ================= */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-height);
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 3px 20px rgba(0,0,0,.08);
+      padding: 0 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
+    .brand img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+    }
+    .brand h2 {
+      font-size: 1.05rem;
+      line-height: 1.2;
+      font-weight: 800;
+    }
+    .brand span {
+      display: block;
+      color: var(--orange);
+      font-size: .72rem;
+      font-weight: 600;
+    }
+    .nav-container {
+      display: flex;
+      align-items: center;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      list-style: none;
+    }
+    .nav a {
+      color: var(--dark);
+      text-decoration: none;
+      font-size: .9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: .25s;
+    }
+    .nav a:hover,
+    .nav a.active {
+      color: var(--orange);
+    }
+    .menu-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--dark);
+      cursor: pointer;
+    }
+    /* ================= BUTTONS ================= */
+    .btn {
+      border: none;
+      border-radius: 50px;
+      padding: 12px 23px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: .3s;
+    }
+    .btn-primary {
+      background: var(--orange);
+      color: white;
+      box-shadow: 0 7px 20px rgba(255,107,0,.25);
+    }
+    .btn-primary:hover {
+      background: var(--orange-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(255,107,0,.35);
+    }
+    .btn-outline {
+      background: white;
+      color: var(--orange);
+      border: 2px solid var(--orange);
+    }
+    .btn-outline:hover {
+      background: var(--orange);
+      color: white;
+    }
+    .btn-large {
+      padding: 15px 32px;
+      font-size: 1rem;
+    }
+    /* ================= SECTIONS ================= */
+    .page-section {
+      display: none;
+      max-width: 1250px;
+      margin: auto;
+      padding: 55px 5%;
+    }
+    .page-section.active-section {
+      display: block;
+      animation: fadeIn .45s ease;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .section-heading {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+    .section-heading h2 {
+      font-size: 2.4rem;
+      color: var(--orange);
+      margin-bottom: 8px;
+    }
+    .section-heading p {
+      color: var(--gray);
+    }
+    /* ================= HERO ================= */
+    .hero {
+      min-height: 620px;
+      border-radius: 25px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.78), rgba(0,0,0,.25)),
+        url("/IMG_0514.jpeg") center/cover;
+      color: white;
+      padding: 70px;
+    }
+    .hero-content {
+      max-width: 680px;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(255,107,0,.95);
+      padding: 8px 17px;
+      border-radius: 50px;
+      font-size: .85rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      line-height: 1.05;
+      margin-bottom: 20px;
+      font-weight: 800;
+    }
+    .hero h1 span {
+      color: #ff8a35;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      color: #f3f3f3;
+      margin-bottom: 28px;
+      max-width: 620px;
+    }
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+    }
+    /* ================= QUICK STATS ================= */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 15px;
+      margin: -45px 5% 50px;
+      position: relative;
+      z-index: 5;
+    }
+    .stat {
+      background: white;
+      padding: 25px 15px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 8px 30px rgba(0,0,0,.1);
+    }
+    .stat i {
+      color: var(--orange);
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+    }
+    .stat h3 {
+      font-size: 1.7rem;
+      color: var(--dark);
+    }
+    .stat p {
+      color: var(--gray);
+      font-size: .85rem;
+    }
+    /* ================= PHOTO STRIP ================= */
+    .photo-strip {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 15px;
+      margin-top: 35px;
+    }
+    .photo-strip img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 17px;
+      transition: .4s;
+    }
+    .photo-strip img:hover {
+      transform: scale(1.025);
+    }
+    /* ================= CARDS ================= */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+      gap: 22px;
+    }
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 28px;
+      transition: .3s;
+      box-shadow: 0 5px 20px rgba(0,0,0,.04);
+    }
+    .card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 15px 35px rgba(0,0,0,.1);
+    }
+    .card i {
+      width: 55px;
+      height: 55px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--orange-light);
+      color: var(--orange);
+      border-radius: 14px;
+      font-size: 1.5rem;
+      margin-bottom: 17px;
+    }
+    .card h3 {
+      margin-bottom: 8px;
+    }
+    .card p {
+      color: var(--gray);
+      font-size: .92rem;
+    }
+    /* ================= CAMPAIGN ================= */
+    .campaign-box {
+      background: linear-gradient(135deg,#fff4eb,#fff);
+      border: 1px solid #ffe0cc;
+      border-radius: 25px;
+      padding: 35px;
+      margin-top: 40px;
+    }
+    .campaign-title {
+      text-align: center;
+      color: var(--orange);
+      font-size: 2.8rem;
+      font-weight: 800;
+    }
+    .campaign-subtitle {
+      text-align: center;
+      color: var(--gray);
+      margin-bottom: 30px;
+    }
+    .campaign-main-photo {
+      width: 100%;
+      max-height: 520px;
+      object-fit: cover;
+      border-radius: 18px;
+      display: block;
+    }
+    .progress-card {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.07);
+      margin-top: 30px;
+    }
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    .progress {
+      height: 20px;
+      background: #e9edf1;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .progress span {
+      display: block;
+      width: 4.8%;
+      height: 100%;
+      background: linear-gradient(90deg,var(--orange),#ff9b52);
+      border-radius: 20px;
+      animation: progressGrow 1.5s ease;
+    }
+    @keyframes progressGrow {
+      from { width: 0; }
+      to { width: 4.8%; }
+    }
+    .amounts {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 22px 0;
+    }
+    .amount {
+      padding: 11px 22px;
+      border-radius: 50px;
+      background: white;
+      border: 2px solid var(--orange);
+      color: var(--orange);
+      font-weight: 700;
+      cursor: pointer;
+      transition: .2s;
+    }
+    .amount:hover,
+    .amount.selected {
+      background: var(--orange);
+      color: white;
+    }
+    /* ================= DONATION BANNER ================= */
+    .donation-banner {
+      margin-top: 45px;
+      padding: 45px;
+      border-radius: 25px;
+      background:
+        linear-gradient(90deg,rgba(255,107,0,.95),rgba(255,107,0,.72)),
+        url("/IMG_0716.jpeg") center/cover;
+      color: white;
+      text-align: center;
+    }
+    .donation-banner h2 {
+      font-size: 2.3rem;
+      margin-bottom: 10px;
+    }
+    .donation-banner p {
+      max-width: 650px;
+      margin: 0 auto 22px;
+    }
+    .donation-banner .btn {
+      background: white;
+      color: var(--orange);
+    }
+    /* ================= GALLERY ================= */
+    .gallery {
+      columns: 3 280px;
+      column-gap: 18px;
+    }
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 18px;
+      overflow: hidden;
+      border-radius: 15px;
+      position: relative;
+      cursor: pointer;
+    }
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      transition: .4s;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 25px 15px 12px;
+      color: white;
+      background: linear-gradient(transparent,rgba(0,0,0,.75));
+      font-weight: 600;
+    }
+    /* ================= CONTACT ================= */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 20px;
+    }
+    .contact-card {
+      background: var(--light);
+      border-radius: 18px;
+      padding: 28px;
+      border-left: 5px solid var(--orange);
+    }
+    .contact-card i {
+      color: var(--orange);
+      font-size: 1.5rem;
+      margin-right: 8px;
+    }
+    .contact-card p {
+      margin-top: 8px;
+      color: var(--gray);
+    }
+    /* ================= FOOTER ================= */
+    footer {
+      background: #171717;
+      color: white;
+      margin-top: 50px;
+      padding: 50px 5% 25px;
+    }
+    .footer-grid {
+      max-width: 1200px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 35px;
+    }
+    footer h3 {
+      margin-bottom: 15px;
+    }
+    footer p {
+      color: #bbb;
+      font-size: .9rem;
+    }
+    .socials {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    .socials a {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #292929;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: .3s;
+    }
+    .socials a:hover {
+      background: var(--orange);
+      transform: translateY(-3px);
+    }
+    .copyright {
+      text-align: center;
+      border-top: 1px solid #333;
+      margin-top: 35px;
+      padding-top: 20px;
+    }
+    /* ================= MODAL & FORM STYLES ================= */
+    .modal, .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.75);
+      z-index: 3000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal.show, .modal-overlay.show {
+      display: flex;
+    }
+    .modal-box, .modal-card {
+      width: 100%;
+      max-width: 580px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: white;
+      border-radius: 22px;
+      padding: 30px;
+      position: relative;
+      animation: modalIn .3s ease;
+    }
+    @keyframes modalIn {
+      from {
+        opacity: 0;
+        transform: scale(.92);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    .close, .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 20px;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #777;
+      transition: .2s;
+    }
+    .close:hover, .modal-close:hover {
+      color: var(--orange);
+    }
+    .modal-title {
+      color: var(--orange);
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 15px;
+    }
+    .form-group {
+      margin-bottom: 16px;
+      text-align: left;
+    }
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+      color: var(--dark);
+    }
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.95rem;
+      background: var(--light);
+      outline: none;
+      transition: 0.25s;
+    }
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: var(--orange);
+      background: white;
+    }
+    .btn-submit-form {
+      width: 100%;
+      padding: 14px;
+      background: var(--orange);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 5px 18px rgba(255,107,0,.3);
+    }
+    .btn-submit-form:hover {
+      background: var(--orange-dark);
+      transform: translateY(-2px);
+    }
+    .payment-option {
+      background: var(--orange-light);
+      padding: 18px;
+      border-radius: 14px;
+      margin-top: 15px;
+      text-align: left;
+    }
+    .payment-option h4 {
+      color: var(--orange);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .logo-badge-container {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    .payment-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: white;
+      color: var(--orange);
+      border: 1.5px solid var(--orange);
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: 0.25s;
+    }
+    .payment-link-btn:hover {
+      background: var(--orange);
+      color: white;
+    }
+    /* ================= TOAST ================= */
+    .toast-container {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 4000;
+    }
+    .toast {
+      background: white;
+      border-left: 5px solid var(--orange);
+      padding: 13px 18px;
+      border-radius: 10px;
+      box-shadow: 0 7px 25px rgba(0,0,0,.15);
+      margin-top: 10px;
+      animation: toastIn .4s ease;
+      font-size: .85rem;
+    }
+    @keyframes toastIn {
+      from {
+        opacity: 0;
+        transform: translateX(-100px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    /* ================= MOBILE & RESPONSIVE ================= */
+    @media(max-width:850px) {
+      .menu-toggle {
+        display: block;
+      }
+      .nav {
+        position: fixed;
+        top: var(--header-height);
+        left: 0;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        padding: 20px;
+        box-shadow: 0 10px 20px rgba(0,0,0,.1);
+        display: none;
+        gap: 15px;
+      }
+      .nav.show-menu {
+        display: flex;
+      }
+      .hero {
+        min-height: 570px;
+        padding: 35px 25px;
+      }
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+      .stats {
+        grid-template-columns: repeat(2,1fr);
+        margin: -30px 4% 40px;
+      }
+      .photo-strip {
+        grid-template-columns: 1fr;
+      }
+      .photo-strip img {
+        height: 230px;
+      }
+      .campaign-box {
+        padding: 20px;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media(max-width:500px) {
+      .page-section {
+        padding: 35px 4%;
+      }
+      .hero {
+        border-radius: 18px;
+      }
+      .hero h1 {
+        font-size: 2.3rem;
+      }
+      .hero p {
+        font-size: .95rem;
+      }
+      .stats {
+        gap: 10px;
+      }
+      .stat {
+        padding: 18px 8px;
+      }
+      .stat h3 {
+        font-size: 1.3rem;
+      }
+      .section-heading h2 {
+        font-size: 2rem;
+      }
+      .campaign-title {
+        font-size: 2rem;
+      }
+      .progress-info {
+        font-size: .85rem;
+      }
+      .donation-banner {
+        padding: 30px 20px;
+      }
+      .donation-banner h2 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<!-- ================= HEADER ================= -->
+<header>
+  <div class="brand" onclick="showTab('home')">
+    <img src="/IMG_0689.png" alt="Wasswa Rock Logo">
+    <div>
+      <h2>Wasswa Rock</h2>
+      <span>ChildCare Ministries Uganda</span>
+    </div>
+  </div>
+  <nav class="nav-container">
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">
+      <i class="fas fa-bars"></i>
+    </button>
+    <ul class="nav" id="mainNav">
+      <li><a href="javascript:void(0)" onclick="showTab('home')" id="nav-home" class="active">Home</a></li>
+      <li><a href="javascript:void(0)" onclick="showTab('about')" id="nav-about">About</a></li>
+      <li><a href="javascript:void(0)" onclick="showTab('campaign')" id="nav-campaign">Campaign</a></li>
+      <li><a href="javascript:void(0)" onclick="showTab('gallery')" id="nav-gallery">Gallery</a></li>
+      <li><a href="javascript:void(0)" onclick="showTab('contact')" id="nav-contact">Contact</a></li>
+      <li>
+        <button class="btn btn-primary" onclick="openModal('donateModal')">
+          Donate ❤️
+        </button>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ================= HOME ================= -->
+<section id="home-section" class="page-section active-section">
+  <div class="hero">
+    <div class="hero-content">
+      <span class="hero-tag">
+        ❤️ Serving Children in Uganda
+      </span>
+      <h1>
+        Hope Begins With <span>One Helping Hand.</span>
+      </h1>
+      <p>
+        Wasswa Rock ChildCare Ministries is working to support vulnerable
+        children and young people through food, education, shelter,
+        skills development and community care.
+      </p>
+      <div class="hero-buttons">
+        <button class="btn btn-primary btn-large" onclick="showTab('campaign')">
+          Support Our Campaign
+        </button>
+        <button class="btn btn-outline btn-large" onclick="showTab('gallery')">
+          View Our Photos
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- QUICK STATS -->
+  <div class="stats">
+    <div class="stat">
+      <i class="fas fa-child"></i>
+      <h3>200+</h3>
+      <p>Children Reached</p>
+    </div>
+    <div class="stat">
+      <i class="fas fa-bowl-food"></i>
+      <h3>Food</h3>
+      <p>Relief Programs</p>
+    </div>
+    <div class="stat">
+      <i class="fas fa-school"></i>
+      <h3>Education</h3>
+      <p>Support Programs</p>
+    </div>
+    <div class="stat">
+      <i class="fas fa-hands-helping"></i>
+      <h3>Uganda</h3>
+      <p>Community Support</p>
+    </div>
+  </div>
+  <!-- PHOTO STRIP -->
+  <div class="section-heading">
+    <h2>Making a Difference</h2>
+    <p>Every contribution can help create another moment of hope.</p>
+  </div>
+  <div class="photo-strip">
+    <img src="/IMG_0716.jpeg" alt="Children receiving food">
+    <img src="/IMG_8583.jpeg" alt="Child in prayer">
+    <img src="/IMG_0718.jpeg" alt="Food distribution">
+  </div>
+  <!-- PROGRAMS -->
+  <div style="margin-top:65px">
+    <div class="section-heading">
+      <h2>What We Do</h2>
+      <p>Practical support for children, youth and vulnerable families.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <i class="fas fa-utensils"></i>
+        <h3>Food & Nutrition</h3>
+        <p>
+          Helping provide meals and food assistance to children
+          experiencing food insecurity.
+        </p>
+      </div>
+      <div class="card">
+        <i class="fas fa-book-open"></i>
+        <h3>Education</h3>
+        <p>
+          Supporting children's access to education and opportunities
+          to develop their future.
+        </p>
+      </div>
+      <div class="card">
+        <i class="fas fa-house"></i>
+        <h3>Safe Shelter</h3>
+        <p>
+          Working toward safe and supportive environments for
+          vulnerable children.
+        </p>
+      </div>
+      <div class="card">
+        <i class="fas fa-scissors"></i>
+        <h3>Girls' Skills</h3>
+        <p>
+          Supporting vocational skills, entrepreneurship and
+          practical opportunities for young girls.
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- DONATION CTA -->
+  <div class="donation-banner">
+    <h2>Give Hope Today ❤️</h2>
+    <p>
+      Your support can contribute toward food, education,
+      skills training and care for vulnerable children.
+    </p>
+    <button class="btn btn-large" onclick="openModal('donateModal')">
+      Donate Now
+    </button>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about-section" class="page-section">
+  <div class="section-heading">
+    <h2>About Wasswa Rock</h2>
+    <p>
+      Restoring hope, dignity and opportunity for vulnerable
+      children and young people in Uganda.
+    </p>
+  </div>
+  <div class="photo-strip">
+    <img src="/IMG_4544.jpeg" alt="Community gathering">
+    <img src="/IMG_0437.jpeg" alt="Children receiving food">
+    <img src="/IMG_0724.jpeg" alt="Bread distribution">
+  </div>
+  <div class="cards" style="margin-top:40px">
+    <div class="card">
+      <i class="fas fa-bullseye"></i>
+      <h3>Our Purpose</h3>
+      <p>
+        To support vulnerable children through food,
+        education, shelter and practical life skills.
+      </p>
+    </div>
+    <div class="card">
+      <i class="fas fa-heart"></i>
+      <h3>Our Values</h3>
+      <p>
+        Compassion, dignity, transparency, service and
+        community empowerment guide our work.
+      </p>
+    </div>
+    <div class="card">
+      <i class="fas fa-person-dress"></i>
+      <h3>Girls Support</h3>
+      <p>
+        Supporting girls through vocational skills,
+        health education, tailoring and entrepreneurship.
+      </p>
+    </div>
+  </div>
+  <div class="donation-banner">
+    <h2>Be Part of the Journey</h2>
+    <p>
+      You can help us continue reaching vulnerable children
+      and families.
+    </p>
+    <button class="btn btn-large" onclick="openModal('donateModal')">
+      Support Wasswa Rock
+    </button>
+  </div>
+</section>
+
+<!-- ================= CAMPAIGN ================= -->
+<section id="campaign-section" class="page-section">
+  <div class="campaign-box">
+    <h1 class="campaign-title">
+      THE ROCK CAMPAIGN
+    </h1>
+    <p class="campaign-subtitle">
+      Powered by Wasswa Rock ChildCare Ministries
+    </p>
+    <img src="/IMG_0514.jpeg" class="campaign-main-photo" alt="Children receiving support">
+    <div style="text-align:center;margin:35px 0">
+      <h2>Connect Your Generosity With Their Survival</h2>
+      <p style="color:#666;max-width:700px;margin:10px auto">
+        We are working to reach vulnerable children with food,
+        education and practical support.
+      </p>
+    </div>
+    <!-- PROGRESS -->
+    <div class="progress-card">
+      <div class="progress-info">
+        <span>Raised: <strong>$2,400</strong></span>
+        <span>Goal: <strong>$50,000</strong></span>
+      </div>
+      <div class="progress">
+        <span></span>
+      </div>
+      <p style="text-align:center;margin-top:10px;color:#777">
+        4.8% of campaign goal reached
+      </p>
+      <h3 style="text-align:center;margin-top:28px">
+        Choose an Amount
+      </h3>
+      <div class="amounts">
+        <button class="amount" onclick="selectAmount(40)">$40</button>
+        <button class="amount" onclick="selectAmount(75)">$75</button>
+        <button class="amount" onclick="selectAmount(100)">$100</button>
+        <button class="amount" onclick="selectAmount(150)">$150</button>
+        <button class="amount" onclick="selectAmount(200)">$200</button>
+        <button class="amount" onclick="openModal('donateModal')">Custom</button>
+      </div>
+      <div style="text-align:center">
+        <button class="btn btn-primary btn-large" onclick="openModal('donateModal')">
+          Donate Now ❤️
+        </button>
+      </div>
+    </div>
+    <!-- CAMPAIGN PHOTOS -->
+    <div style="margin-top:45px">
+      <div class="section-heading">
+        <h2>Campaign Moments</h2>
+        <p>Real moments from our community programs.</p>
+      </div>
+      <div class="photo-strip">
+        <img src="/IMG_0718.jpeg" alt="Food support">
+        <img src="/IMG_0717.jpeg" alt="Child care">
+        <img src="/IMG_0724.jpeg" alt="Bread distribution">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GALLERY ================= -->
+<section id="gallery-section" class="page-section">
+  <div class="section-heading">
+    <h2>Our Gallery</h2>
+    <p>
+      A glimpse into the people and moments behind our work.
+    </p>
+  </div>
+  <div class="gallery">
+    <div class="gallery-item" onclick="viewImage('/IMG_8583.jpeg','Girl in Prayer')">
+      <img src="/IMG_8583.jpeg" alt="Girl in prayer">
+      <div class="gallery-caption">Hope & Faith</div>
+    </div>
+    <div class="gallery-item" onclick="viewImage('/IMG_0437.jpeg','Meal Serving')">
+      <img src="/IMG_0437.jpeg" alt="Meal serving">
+      <div class="gallery-caption">Meal Support</div>
+    </div>
+    <div class="gallery-item" onclick="viewImage('/IMG_0718.jpeg','Food Distribution')">
+      <img src="/IMG_0718.jpeg" alt="Food distribution">
+      <div class="gallery-caption">Food Distribution</div>
+    </div>
+    <div class="gallery-item" onclick="viewImage('/IMG_4544.jpeg','Community Gathering')">
+      <img src="/IMG_4544.jpeg" alt="Community gathering">
+      <div class="gallery-caption">Community</div>
+    </div>
+    <div class="gallery-item" onclick="viewImage('/IMG_0717.jpeg','Care Program')">
+      <img src="/IMG_0717.jpeg" alt="Care program">
+      <div class="gallery-caption">Child Care</div>
+    </div>
+    <div class="gallery-item" onclick="viewImage('/IMG_0724.jpeg','Bread Distribution')">
+      <img src="/IMG_0724.jpeg" alt="Bread distribution">
+      <div class="gallery-caption">Sharing Food</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1489493585363-d69421e0edd3?auto=format&fit=crop&w=900&q=80" alt="Community children">
+      <div class="gallery-caption">Community & Care</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1494386346843-e12284507169?auto=format&fit=crop&w=900&q=80" alt="Children learning">
+      <div class="gallery-caption">Learning Together</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1504159506876-f8338247a14a?auto=format&fit=crop&w=900&q=80" alt="Children outdoors">
+      <div class="gallery-caption">Growing Together</div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:40px">
+    <button class="btn btn-primary btn-large" onclick="openModal('donateModal')">
+      Support These Children ❤️
+    </button>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact-section" class="page-section">
+  <div class="section-heading">
+    <h2>Contact Us</h2>
+    <p>Get in touch with Wasswa Rock ChildCare Ministries or connect with our team.</p>
+  </div>
+
+  <!-- OUR LEADERSHIP & STAFF -->
+  <div style="margin-bottom: 50px;">
+    <h3 style="text-align: center; color: var(--orange); font-size: 1.8rem; margin-bottom: 25px; font-weight: 700;">
+      Our Leadership & Staff
+    </h3>
+    <div class="cards" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); text-align: center;">
+      <!-- CEO Card -->
+      <div class="card" style="padding: 20px;">
+        <img src="/IMG_0689.png" alt="Mulwana Patrick" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 15px; border: 3px solid var(--orange);">
+        <h3>Mulwana Patrick</h3>
+        <p style="color: var(--orange); font-weight: 600; margin-bottom: 5px;">Chief Executive Officer (CEO)</p>
+        <p style="font-size: 0.85rem;">Leading the mission and vision to empower vulnerable children in Uganda.</p>
+      </div>
+
+      <!-- Treasurer Card -->
+      <div class="card" style="padding: 20px;">
+        <img src="/IMG_0717.jpeg" alt="Mawanda Ian" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 15px; border: 3px solid var(--orange);">
+        <h3>Mawanda Ian</h3>
+        <p style="color: var(--orange); font-weight: 600; margin-bottom: 5px;">Treasurer</p>
+        <p style="font-size: 0.85rem;">Managing financial integrity and ensuring transparent resource allocation.</p>
+      </div>
+
+      <!-- Secretary Card -->
+      <div class="card" style="padding: 20px;">
+        <img src="/IMG_0718.jpeg" alt="Staff Secretary" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 15px; border: 3px solid var(--orange);">
+        <h3>Staff Secretary</h3>
+        <p style="color: var(--orange); font-weight: 600; margin-bottom: 5px;">Secretary</p>
+        <p style="font-size: 0.85rem;">Coordinating daily operations, administrative records, and communications.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- OUR PARTNERS & CONNECT WITH US -->
+  <div class="contact-grid">
+    <div class="contact-card" style="border-left-color: var(--orange);">
+      <h3 style="margin-bottom: 15px;">
+        <i class="fas fa-handshake"></i> Our Partners
+      </h3>
+      <p style="margin-bottom: 20px;">
+        We collaborate with compassionate individuals, local groups, and international sponsors to transform lives.
+      </p>
+      <button class="btn btn-primary" onclick="openModal('donateModal')">
+        Become a Partner
+      </button>
+    </div>
+
+    <div class="contact-card" style="border-left-color: #25D366;">
+      <h3 style="margin-bottom: 15px;">
+        <i class="fab fa-whatsapp" style="color: #25D366;"></i> Direct Contact & WhatsApp
+      </h3>
+      <p><strong>CEO WhatsApp / Phone:</strong> 0753669250</p>
+      <p><strong>Treasurer Phone:</strong> 0755759491</p>
+      <p><strong>Email:</strong> mulwanaian6@gmail.com</p>
+      <p style="font-size: 0.85rem; margin-top: 10px;">Kampala, Uganda</p>
+    </div>
+
+    <div class="contact-card" style="border-left-color: var(--orange);">
+      <h3 style="margin-bottom: 15px;">
+        <i class="fas fa-globe"></i> Reach Out / Connect With Us
+      </h3>
+      <p style="margin-bottom: 15px;">Follow our social platforms for updates, live stories, and news:</p>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <a href="https://www.facebook.com/share/1KEZx2XuXu/?mibextid=wwXIfr" target="_blank" class="btn btn-outline" style="text-align: left; padding: 10px 20px;">
+          <i class="fab fa-facebook-f" style="margin-right: 10px; font-size: 1rem;"></i> Facebook Page
+        </a>
+        <a href="#" target="_blank" class="btn btn-outline" style="text-align: left; padding: 10px 20px;">
+          <i class="fab fa-instagram" style="margin-right: 10px; font-size: 1rem;"></i> Instagram Account
+        </a>
+        <a href="#" target="_blank" class="btn btn-outline" style="text-align: left; padding: 10px 20px;">
+          <i class="fab fa-tiktok" style="margin-right: 10px; font-size: 1rem;"></i> TikTok Channel
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- DONATION CTA BANNER -->
+  <div class="donation-banner" style="margin-top: 40px;">
+    <h2>Want to Help?</h2>
+    <p>Your support helps us provide food, education, and care to vulnerable children.</p>
+    <button class="btn btn-large" onclick="openModal('donateModal')">
+      Donate ❤️
+    </button>
+  </div>
+</section>
+
+<!-- ================= DONATION MODAL ================= -->
+<div class="modal-overlay" id="donateModal">
+  <div class="modal-card">
+    <span class="modal-close" onclick="closeModal('donateModal')">&times;</span>
+    <h2 class="modal-title">How to Donate</h2>
+    
+    <form id="donationForm" onsubmit="handleFormSubmit(event)">
+      <div class="form-group">
+        <label for="donor-name">Your Full Name</label>
+        <input type="text" id="donor-name" required placeholder="John Doe">
+      </div>
+
+      <div class="form-group">
+        <label for="donor-location">Your Location</label>
+        <input type="text" id="donor-location" required placeholder="City, Country">
+      </div>
+
+      <div class="form-group">
+        <label for="donor-purpose">Select Support Category</label>
+        <select id="donor-purpose" required>
+          <option value="Food">Food Provision</option>
+          <option value="Shelter">Safe Shelter</option>
+          <option value="Education">Education</option>
+          <option value="Girl Support">Girls Support Initiative</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="donor-amount">Donation Amount ($)</label>
+        <input type="number" id="donor-amount" value="50" min="1" required>
+      </div>
+
+      <button type="submit" class="btn-submit-form">Proceed to Payment Options</button>
+    </form>
+
+    <hr style="margin: 25px 0; border: none; border-top: 1px solid var(--border);">
+
+    <!-- Mobile Wallet Instructions -->
+    <div class="payment-option">
+      <h4>1. Mobile Wallet Instructions</h4>
+      <p>Send to CEO: <strong>Mulwana Patrick</strong></p>
+      <p>Phone: <strong>0753669250</strong> (Kampala, Uganda)</p>
+      <p style="margin-top: 6px;"><strong>OR</strong></p>
+      <p>Send to Treasurer: <strong>Mawanda Ian</strong></p>
+      <p>Phone: <strong>0755759491</strong> (Kampala, Uganda)</p>
+
+      <div class="logo-badge-container">
+        <a href="https://www.worldremit.com/en" target="_blank" class="payment-link-btn">
+          <i class="fas fa-globe"></i> WorldRemit
+        </a>
+        <a href="https://www.wave.com/en/" target="_blank" class="payment-link-btn">
+          <i class="fas fa-mobile-alt"></i> Wave
+        </a>
+      </div>
+    </div>
+
+    <!-- Cash Pickup -->
+    <div class="payment-option">
+      <h4>2. Cash Pick Up</h4>
+      <p>Send to: <strong>Mulwana Patrick</strong> (Kampala, Uganda)</p>
+      <p>Phone: <strong>0753669250</strong></p>
+      
+      <div class="logo-badge-container">
+        <a href="https://www.moneygram.com/r/ug/en" target="_blank" class="payment-link-btn">
+          <i class="fas fa-university"></i> MoneyGram
+        </a>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--gray); margin-top: 10px;">
+        * Please send your transaction receipt to <strong>mulwanaian6@gmail.com</strong> or our Facebook page.
+      </p>
+    </div>
+
+    <p style="text-align: center; margin-top: 20px; font-weight: 600; color: var(--orange);">
+      Your donation creates a difference in a child’s life!
+    </p>
+  </div>
+</div>
+
+<!-- ================= IMAGE MODAL ================= -->
+<div class="modal" id="imageModal">
+  <div class="modal-box" style="max-width:850px;text-align:center">
+    <span class="close" onclick="closeModal('imageModal')">&times;</span>
+    <h2 id="imageTitle" style="color:var(--orange);margin-bottom:15px">Photo</h2>
+    <img id="largeImage" src="" alt="Gallery photo" style="width:100%;max-height:70vh;object-fit:contain;border-radius:12px;">
+  </div>
+</div>
+
+<!-- ================= TOAST ================= -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <h3>Wasswa Rock ChildCare Ministries</h3>
+      <p>
+        Supporting vulnerable children and young people
+        through food, education, shelter and skills development.
+      </p>
+      <div class="socials">
+        <a href="https://www.facebook.com/share/1KEZx2XuXu/?mibextid=wwXIfr" target="_blank">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="#">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="#">
+          <i class="fab fa-tiktok"></i>
+        </a>
+      </div>
+    </div>
+    <div>
+      <h3>Quick Links</h3>
+      <p onclick="showTab('home')" style="cursor:pointer">Home</p>
+      <p onclick="showTab('about')" style="cursor:pointer">About Us</p>
+      <p onclick="showTab('campaign')" style="cursor:pointer">Campaign</p>
+      <p onclick="showTab('gallery')" style="cursor:pointer">Gallery</p>
+    </div>
+    <div>
+      <h3>Support</h3>
+      <p>Food Programs</p>
+      <p>Education</p>
+      <p>Childcare</p>
+      <p>Girls' Skills</p>
+    </div>
+  </div>
+  <div class="copyright">
+    <p>
+      © 2026 Wasswa Rock ChildCare Ministries Uganda.
+      All rights reserved.
+    </p>
+  </div>
+</footer>
+
+<!-- ================= JAVASCRIPT ================= -->
+<script>
+  /* MOBILE MENU TOGGLE */
+  const menuToggle = document.getElementById('menuToggle');
+  const mainNav = document.getElementById('mainNav');
+
+  if (menuToggle && mainNav) {
+    menuToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      mainNav.classList.toggle('show-menu');
+    });
+  }
+
+  /* TAB NAVIGATION SWITCHER */
+  function showTab(tabName) {
+    // Hide all sections
+    const sections = document.querySelectorAll('.page-section');
+    sections.forEach(sec => {
+      sec.classList.remove('active-section');
+    });
+
+    // Remove active class from all header links
+    const navLinks = document.querySelectorAll('.nav a');
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+    });
+
+    // Display selected section
+    const activeSec = document.getElementById(tabName + '-section');
+    if (activeSec) {
+      activeSec.classList.add('active-section');
+    }
+
+    // Set active status on header link
+    const activeNav = document.getElementById('nav-' + tabName);
+    if (activeNav) {
+      activeNav.classList.add('active');
+    }
+
+    // Close mobile dropdown if open
+    if (mainNav) {
+      mainNav.classList.remove('show-menu');
+    }
+
+    // Scroll to top
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+
+  /* MODALS */
+  function openModal(id) {
+    const targetModal = document.getElementById(id);
+    if (targetModal) {
+      targetModal.classList.add('show');
+    }
+  }
+
+  function closeModal(id) {
+    const targetModal = document.getElementById(id);
+    if (targetModal) {
+      targetModal.classList.remove('show');
+    }
+  }
+
+  /* DONATION FORM PROCESSING */
+  function handleFormSubmit(event) {
+    event.preventDefault();
+    const name = document.getElementById('donor-name').value;
+    const location = document.getElementById('donor-location').value;
+    const purpose = document.getElementById('donor-purpose').value;
+    const amount = document.getElementById('donor-amount').value;
+
+    alert(
+      "Thank you " + name + " from " + location + "!\n\n" +
+      "You have selected to donate $" + amount + " towards " + purpose + ".\n" +
+      "Please proceed with sending your donation via Mobile Wallet or Cash Pick Up options listed below."
+    );
+  }
+
+  /* DONATION AMOUNT SELECTOR FROM CAMPAIGN */
+  function selectAmount(amount) {
+    const donorAmountInput = document.getElementById('donor-amount');
+    if (donorAmountInput) {
+      donorAmountInput.value = amount;
+    }
+    openModal('donateModal');
+  }
+
+  /* IMAGE VIEWER */
+  function viewImage(src, title) {
+    document.getElementById('largeImage').src = src;
+    document.getElementById('imageTitle').innerText = title;
+    openModal('imageModal');
+  }
+
+  /* CLOSE MODAL WHEN CLICKING OUTSIDE */
+  window.addEventListener('click', function(event) {
+    if (event.target.classList.contains('modal') || event.target.classList.contains('modal-overlay')) {
+      event.target.classList.remove('show');
+    }
+  });
+
+  /* DONATION ACTIVITY TOAST */
+  const donors = [
+    "A supporter just joined the campaign ❤️",
+    "Someone contributed toward food support ❤️",
+    "A new supporter joined Wasswa Rock ❤️",
+    "Someone is helping provide hope to a child ❤️"
+  ];
+  function showToast() {
+    const container = document.getElementById('toastContainer');
+    if (!container) return;
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.innerHTML =
+      '<i class="fas fa-heart" style="color:#ff6b00"></i> ' +
+      donors[Math.floor(Math.random() * donors.length)];
+    container.appendChild(toast);
+    setTimeout(() => {
+      toast.remove();
+    }, 5000);
+  }
+
+  /* SHOW OCCASIONAL ACTIVITY */
+  setTimeout(showToast, 5000);
+  setInterval(showToast, 14000);
+</script>
+</body>
+</html>
