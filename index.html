@@ -1642,31 +1642,46 @@
     { src: '/IMG_0722.jpg', caption: 'Our moments of hope' },
     { src: '/IMG_0725.jpg', caption: 'Our moments of hope' },
     { src: '/IMG_0726.jpg', caption: 'Our moments of hope' },
-    { type: 'video', src: '/IMG_7464.mp4', caption: 'Our moments of hope' },
     { src: '/IMG_1152.jpg', caption: 'Our moments of hope' },
     { src: '/IMG_1453.jpg', caption: 'Our moments of hope' },
     { src: '/IMG_1457.jpg', caption: 'Our moments of hope' },
     { src: '/IMG_1460.jpg', caption: 'Our moments of hope' },
     { src: '/IMG_1462.jpg', caption: 'Our moments of hope' },
-    { type: 'video', src: '/IMG_8589.mp4', caption: 'Our moments of hope' },
     { src: '/IMG_1564.jpg', caption: 'Our moments of hope' },
     { src: '/IMG_0436.jpg', caption: 'Our moments of hope' },
     { src: '/IMG_0514.jpg', caption: 'Our moments of hope' },
     { src: '/IMG_0690.jpg', caption: 'Our moments of hope' },
     { src: '/IMG_0719.jpg', caption: 'Our moments of hope' },
-    { type: 'video', src: '/IMG_0468.mp4', caption: 'Our moments of hope' },
     { src: '/IMG_0724.jpg', caption: 'Our moments of hope' },
     { src: '/IMG_1146.jpg', caption: 'Our moments of hope' },
     { src: '/IMG_1148.jpg', caption: 'Our moments of hope' },
     { src: '/IMG_1150.jpg', caption: 'Our moments of hope' },
     { src: '/IMG_1151.jpg', caption: 'Our moments of hope' },
-    { type: 'video', src: '/IMG_1147.mp4', caption: 'Our moments of hope' },
     { src: '/IMG_8583.jpg', caption: 'Our moments of hope' },
     { src: '/IMG_9691.jpg', caption: 'Our moments of hope' }
   ];
 
   /* Only pictures/videos that really load are used (working GALLERY) */
   let GALLERY = [];
+
+  /* If a picture name does not match (IMG_ / img_, .jpg / .JPG / .jpeg / .png),
+     try the other spellings automatically. */
+  function srcVariants(src) {
+    const m = src.match(/^(.*\/)?img[_-](\d+)\.\w+$/i);
+    if (!m) return [];
+    const dir = m[1] || '', num = m[2], out = [];
+    ['IMG_', 'img_', 'IMG-', 'img-'].forEach(pre =>
+      ['jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG'].forEach(ext => out.push(dir + pre + num + '.' + ext)));
+    return out.filter(v => v !== src);
+  }
+
+  // same fallback for every normal picture on the page
+  document.addEventListener('error', e => {
+    const img = e.target;
+    if (!img || img.tagName !== 'IMG') return;
+    if (!img._tries) img._tries = srcVariants(img.getAttribute('src') || '');
+    if (img._tries.length) img.src = img._tries.shift();
+  }, true);
 
   function checkItem(item) {
     return new Promise(resolve => {
@@ -1675,11 +1690,16 @@
           .then(r => resolve(r.ok && /video/.test(r.headers.get('content-type') || 'video')))
           .catch(() => resolve(location.protocol === 'file:'));
       } else {
-        const im = new Image();
-        im.onload = () => resolve(true);
-        im.onerror = () => resolve(false);
-        setTimeout(() => resolve(false), 20000);
-        im.src = item.src;
+        const tries = [item.src].concat(srcVariants(item.src));
+        const next = () => {
+          if (!tries.length) return resolve(false);
+          const candidate = tries.shift();
+          const im = new Image();
+          im.onload = () => { item.src = candidate; resolve(true); };
+          im.onerror = next;
+          im.src = candidate;
+        };
+        next();
       }
     });
   }
