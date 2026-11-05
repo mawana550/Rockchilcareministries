@@ -1636,7 +1636,7 @@
   /* ================= GALLERY DATA =================
      To add a video use:  { type:'video', src:'/myvideo.mp4', caption:'My video' }
      (optional poster: poster:'/thumb.jpg')  */
-  const GALLERY = [
+  const ALL_GALLERY = [
     { src: '/IMG_7922.jpg', caption: 'Our moments of hope' },
     { src: '/IMG_0716.jpg', caption: 'Our moments of hope' },
     { src: '/IMG_0722.jpg', caption: 'Our moments of hope' },
@@ -1664,6 +1664,41 @@
     { src: '/IMG_8583.jpg', caption: 'Our moments of hope' },
     { src: '/IMG_9691.jpg', caption: 'Our moments of hope' }
   ];
+
+  /* Only pictures/videos that really load are used (working GALLERY) */
+  let GALLERY = [];
+
+  function checkItem(item) {
+    return new Promise(resolve => {
+      if (item.type === 'video') {
+        fetch(item.src, { method: 'HEAD' })
+          .then(r => resolve(r.ok && /video/.test(r.headers.get('content-type') || 'video')))
+          .catch(() => resolve(location.protocol === 'file:'));
+      } else {
+        const im = new Image();
+        im.onload = () => resolve(true);
+        im.onerror = () => resolve(false);
+        setTimeout(() => resolve(false), 20000);
+        im.src = item.src;
+      }
+    });
+  }
+
+  async function initGallery() {
+    const results = await Promise.all(ALL_GALLERY.map(checkItem));
+    GALLERY = ALL_GALLERY.filter((_, i) => results[i]);
+    const missing = ALL_GALLERY.filter((_, i) => !results[i]).map(g => g.src);
+    if (missing.length) console.warn('Gallery files not found (check the names):', missing.join(', '));
+    if (!GALLERY.length) {
+      const box = document.getElementById('slideshow');
+      if (box) box.style.display = 'none';
+      const hg = document.getElementById('heartGrid');
+      if (hg) hg.innerHTML = '<p style="text-align:center">Gallery coming soon.</p>';
+      return;
+    }
+    buildSlideshow();
+    buildHeart();
+  }
 
   function mediaEl(item, forSlideshow) {
     if (item.type === 'video') {
@@ -1767,43 +1802,49 @@
   function ssStart() { ssRunning = true; scheduleNext(); }
   function ssStop() { ssRunning = false; clearTimeout(ssTimer); ssTimer = null; }
 
-  /* ---------- HEART OF PICTURES ---------- */
-  const HEART_SHAPE = [
-    '.XX.XX.',
-    'XXXXXXX',
-    '.XXXXX.',
-    '..XXX..',
-    '...X...'
+  /* ---------- HEART OF PICTURES (no repeated pictures) ---------- */
+  const HEART_SHAPES = [
+    ['.XX.XX.', 'XXXXXXX', '.XXXXX.', '..XXX..', '...X...'],   // 20 pictures
+    ['XX.XX', 'XXXXX', '.XXX.', '..X..'],                      // 13 pictures
+    ['.X.X.', 'XXXXX', '.XXX.', '..X..']                       // 11 pictures
   ];
   const heartTiles = [];
+
+  function countX(shape) { return shape.join('').split('X').length - 1; }
 
   function buildHeart() {
     const grid = document.getElementById('heartGrid');
     if (!grid) return;
+    // choose the biggest heart that can be filled with different pictures
+    let shape = HEART_SHAPES.find(sh => countX(sh) <= GALLERY.length) || HEART_SHAPES[2];
+    const cols = shape[0].length;
+    grid.style.gridTemplateColumns = 'repeat(' + cols + ', 1fr)';
+    grid.style.width = 'min(100%, ' + (cols * 80) + 'px)';
+
+    const order = GALLERY.map((_, i) => i).sort(() => Math.random() - .5);
     let k = 0;
-    HEART_SHAPE.join('').split('').forEach(ch => {
-      if (ch !== 'X') {
-        const gap = document.createElement('div');
-        grid.appendChild(gap);
-        return;
-      }
+    shape.join('').split('').forEach(ch => {
+      if (ch !== 'X') { grid.appendChild(document.createElement('div')); return; }
+      if (k >= order.length) { grid.appendChild(document.createElement('div')); return; }
       const tile = document.createElement('div');
       tile.className = 'heart-tile';
-      const idx = (k * 2) % GALLERY.length;
-      k++;
-      tile.dataset.idx = idx;
-      fillTile(tile, idx);
+      tile.dataset.idx = order[k++];
+      fillTile(tile, tile.dataset.idx);
       tile.addEventListener('click', () => openItem(GALLERY[tile.dataset.idx]));
       grid.appendChild(tile);
       heartTiles.push(tile);
     });
-    // every 2 seconds one tile fades away and comes back with a new picture
+
+    // every 2 seconds one tile fades away and comes back with a picture not shown yet
     setInterval(() => {
       if (!document.getElementById('gallery-section').classList.contains('active-section')) return;
+      const shown = heartTiles.map(t => Number(t.dataset.idx));
+      const spare = GALLERY.map((_, i) => i).filter(i => !shown.includes(i));
+      if (!spare.length) return;
       const tile = heartTiles[Math.floor(Math.random() * heartTiles.length)];
+      const next = spare[Math.floor(Math.random() * spare.length)];
       tile.classList.add('fading');
       setTimeout(() => {
-        const next = (Number(tile.dataset.idx) + 1 + Math.floor(Math.random() * (GALLERY.length - 1))) % GALLERY.length;
         tile.dataset.idx = next;
         fillTile(tile, next);
         tile.classList.remove('fading');
@@ -1817,8 +1858,7 @@
     if (item.type === 'video') tile.appendChild(badge());
   }
 
-  buildSlideshow();
-  buildHeart();
+  initGallery();
 
   /* ================= LIFE: MOUSE & SCROLL RESPONSIVENESS ================= */
   (function () {
