@@ -1504,36 +1504,6 @@
     }
   }
 
-  /* ================= TRANSACTION DATABASE =================
-     Every transaction is stored (key: rcm_transactions).
-     Only the 5 most recent are shown in the pop-ups.
-     NOTE: this uses the visitor's browser storage. To share donations
-     between all visitors, replace saveTransaction()/getTransactions()
-     with calls to a server database (e.g. Firebase). */
-  const DB_KEY = 'rcm_transactions';
-
-  function getTransactions() {
-    try {
-      return JSON.parse(localStorage.getItem(DB_KEY)) || [];
-    } catch (e) {
-      return [];
-    }
-  }
-
-  function saveTransaction(tx) {
-    const all = getTransactions();
-    all.push(tx);
-    try {
-      localStorage.setItem(DB_KEY, JSON.stringify(all));
-    } catch (e) {}
-  }
-
-  function getLatestFive() {
-    return getTransactions()
-      .sort((a, b) => b.time - a.time)
-      .slice(0, 5);
-  }
-
   /* DONATION FORM PROCESSING */
   function handleFormSubmit(event) {
     event.preventDefault();
@@ -1542,14 +1512,6 @@
     const purposeEl = document.getElementById('donor-purpose');
     const purpose = purposeEl.options[purposeEl.selectedIndex].text;
     const amount = document.getElementById('donor-amount').value;
-
-    saveTransaction({
-      name: name || '',
-      location: location || '',
-      purpose: purpose,
-      amount: amount,
-      time: Date.now()
-    });
 
     const who = name ? name : 'Anonymous supporter';
     document.getElementById('paySummary').innerHTML =
@@ -1910,34 +1872,21 @@
     }
   });
 
-  /* DONATION ACTIVITY TOAST - shows only the 5 latest transactions */
-  const fallbackMessages = [
-    "A supporter just joined the campaign ❤️",
-    "Someone is helping provide hope to a child ❤️"
+  /* DONATION POP-UPS - the same 5 motivating messages, in a loop.
+     Edit the text below to change them. */
+  const toastMessages = [
+    "A gift of $10 can help give a child a meal ❤️",
+    "$50 can go toward food for children in need ❤️",
+    "$100 can go toward safe shelter for a child ❤️",
+    "$150 can go toward a child's education ❤️",
+    "$200 can support our Girls Support Initiative ❤️"
   ];
   let toastIndex = 0;
-
-  function escapeHtml(t) {
-    return String(t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  }
-
-  function formatTransaction(tx) {
-    const who = tx.name ? escapeHtml(tx.name) : 'A kind supporter';
-    const from = tx.location ? ' from ' + escapeHtml(tx.location) : '';
-    return who + from + ' donated <strong>$' + escapeHtml(tx.amount) + '</strong> to ' + escapeHtml(tx.purpose) + ' ❤️';
-  }
 
   function showToast() {
     const container = document.getElementById('toastContainer');
     if (!container) return;
-    const latest = getLatestFive();
-    let message;
-    if (latest.length) {
-      message = formatTransaction(latest[toastIndex % latest.length]);
-      toastIndex++;
-    } else {
-      message = fallbackMessages[toastIndex++ % fallbackMessages.length];
-    }
+    const message = toastMessages[toastIndex++ % toastMessages.length];
     const toast = document.createElement('div');
     toast.className = 'toast';
     toast.innerHTML = '<i class="fas fa-heart" style="color:#ff6b00"></i> ' + message;
