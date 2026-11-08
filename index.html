@@ -2199,7 +2199,7 @@
     }, 5500);
   })();
 
-  /* PROGRAM POPUP DATA WITH video_1.mp4 AS FIRST ITEM FOR FOOD */
+  /* PROGRAM POPUP DATA WITH food.mp4 AS FIRST ITEM FOR FOOD */
   const PROGRAMS = {
     children: {
       icon: 'fa-child',
@@ -2223,7 +2223,7 @@
       category: 'Food',
       donateLabel: 'Donate to Food Relief ❤️',
       photos: [
-        { type: 'video', src: 'video_1.mp4' },
+        { type: 'video', src: 'food.mp4' },
         'IMG_8583.jpg', 'IMG_4543.jpg', 'IMG_1455.JPG', 'ceo.jpg'
       ],
       article: [
@@ -2308,7 +2308,6 @@
     document.getElementById('pmArticle').innerHTML = d.article.map(t => t.startsWith('<') ? t : '<p>' + t + '</p>').join('');
     document.getElementById('pmDonateBtn').textContent = d.donateLabel;
 
-    /* slideshow media setup supporting videos & images */
     const slider = document.getElementById('pmSlider');
     slider.querySelectorAll('.pm-slide').forEach(n => n.remove());
     const dots = document.getElementById('pmDots'); dots.innerHTML = '';
@@ -2356,7 +2355,6 @@
     document.querySelector('#programModal .modal-card').scrollTop = 0;
     document.body.style.overflow = 'hidden';
 
-    // Play first slide if video
     if (pmSlides[0].tagName === 'VIDEO') {
       pmSlides[0].currentTime = 0;
       pmSlides[0].play().catch(() => {});
@@ -2369,7 +2367,6 @@
   function pmGo(i) {
     if (!pmSlides.length) return;
     
-    // Pause previous video if any
     if (pmSlides[pmIdx].tagName === 'VIDEO') {
       pmSlides[pmIdx].pause();
     }
@@ -2381,7 +2378,6 @@
     pmSlides[pmIdx].classList.add('on');
     document.querySelectorAll('#pmDots button')[pmIdx].classList.add('on');
 
-    // Play current video if any
     if (pmSlides[pmIdx].tagName === 'VIDEO') {
       pmSlides[pmIdx].currentTime = 0;
       pmSlides[pmIdx].play().catch(() => {});
@@ -2411,7 +2407,6 @@
 
   function closeProgram() {
     clearInterval(pmTimer); pmTimer = null;
-    // Pause any playing videos inside popup
     document.querySelectorAll('#pmSlider video').forEach(v => v.pause());
     document.getElementById('programModal').classList.remove('show');
     document.body.style.overflow = '';
