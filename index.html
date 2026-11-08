@@ -172,47 +172,39 @@
       }
     }
 
-    /* Impact Story Modal Styling */
+    /* Impact Story Modal Layout (Header -> Centered Image -> Description) */
     .impact-modal-box {
       max-width: 750px !important;
       padding: 35px 30px !important;
     }
-    .impact-story-item {
-      display: flex;
-      gap: 20px;
-      margin-bottom: 25px;
+    .impact-story-block {
+      margin-bottom: 35px;
       background: var(--light);
-      padding: 18px;
-      border-radius: 16px;
-      border-left: 4px solid var(--orange);
-      align-items: center;
+      padding: 24px;
+      border-radius: 18px;
+      border-top: 4px solid var(--orange);
+      text-align: center;
     }
-    .impact-story-item img {
-      width: 140px;
-      height: 140px;
-      object-fit: cover;
-      border-radius: 12px;
-      flex-shrink: 0;
-    }
-    .impact-story-text h4 {
+    .impact-story-block h4 {
       color: var(--orange);
-      font-size: 1.15rem;
-      margin-bottom: 6px;
+      font-size: 1.3rem;
+      margin-bottom: 14px;
+      font-weight: 700;
     }
-    .impact-story-text p {
-      font-size: 0.9rem;
+    .impact-story-block img {
+      width: 100%;
+      max-height: 320px;
+      object-fit: cover;
+      border-radius: 14px;
+      margin: 0 auto 16px;
+      display: block;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    }
+    .impact-story-block p {
+      font-size: 0.95rem;
       color: #444;
-      line-height: 1.5;
-    }
-    @media (max-width: 650px) {
-      .impact-story-item {
-        flex-direction: column;
-        text-align: center;
-      }
-      .impact-story-item img {
-        width: 100%;
-        height: 180px;
-      }
+      line-height: 1.6;
+      text-align: left;
     }
 
     /* ================= SECTIONS ================= */
@@ -469,6 +461,7 @@
       padding: 28px;
       transition: .3s;
       box-shadow: 0 5px 20px rgba(0,0,0,.04);
+      cursor: pointer;
     }
     .card:hover {
       transform: translateY(-7px);
@@ -492,6 +485,13 @@
     .card p {
       color: var(--gray);
       font-size: .92rem;
+    }
+    .card-link-text {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--orange);
     }
     /* ================= CAMPAIGN ================= */
     .campaign-box {
@@ -1029,7 +1029,7 @@
   <div class="brand" onclick="showTab('home')">
     <img src="/IMG_0689.png" alt="Rock ChildCare Ministries Logo">
     <div>
-      22<h2>Rock ChildCare Ministries</h2>
+      <h2>Rock ChildCare Ministries</h2>
       <span>ChildCare Ministries Uganda</span>
     </div>
   </div>
@@ -1091,25 +1091,25 @@
   </div>
   <!-- QUICK STATS -->
   <div class="stats">
-    <div class="stat" role="button" tabindex="0" onclick="openProgram('children')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProgram('children')}" aria-label="Learn more: 200+ Children Reached">
+    <div class="stat" role="button" tabindex="0" onclick="openProgram('children')" aria-label="Learn more: 200+ Children Reached">
       <i class="fas fa-child"></i>
       <h3>200+</h3>
       <p>Children Reached</p>
       <span class="stat-more">Learn more <i class="fas fa-arrow-right" style="font-size:.7rem;margin:0"></i></span>
     </div>
-    <div class="stat" role="button" tabindex="0" onclick="openProgram('food')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProgram('food')}" aria-label="Learn more: Food Relief Programs">
+    <div class="stat" role="button" tabindex="0" onclick="openProgram('food')" aria-label="Learn more: Food Relief Programs">
       <i class="fas fa-bowl-food"></i>
       <h3>Food</h3>
       <p>Relief Programs</p>
       <span class="stat-more">Learn more <i class="fas fa-arrow-right" style="font-size:.7rem;margin:0"></i></span>
     </div>
-    <div class="stat" role="button" tabindex="0" onclick="openProgram('education')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProgram('education')}" aria-label="Learn more: Education Support Programs">
+    <div class="stat" role="button" tabindex="0" onclick="openProgram('education')" aria-label="Learn more: Education Support Programs">
       <i class="fas fa-school"></i>
       <h3>Education</h3>
       <p>Support Programs</p>
       <span class="stat-more">Learn more <i class="fas fa-arrow-right" style="font-size:.7rem;margin:0"></i></span>
     </div>
-    <div class="stat" role="button" tabindex="0" onclick="openProgram('uganda')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProgram('uganda')}" aria-label="Learn more: Uganda Community Support">
+    <div class="stat" role="button" tabindex="0" onclick="openProgram('uganda')" aria-label="Learn more: Uganda Community Support">
       <i class="fas fa-hands-helping"></i>
       <h3>Uganda</h3>
       <p>Community Support</p>
@@ -1126,44 +1126,48 @@
     <img src="/IMG_8583.jpg" alt="Rock ChildCare Ministries">
     <img src="/IMG_1148.jpg" alt="Rock ChildCare Ministries">
   </div>
-  <!-- PROGRAMS -->
+  <!-- WHAT WE DO (PROGRAMS LINKED TO POPUPS) -->
   <div style="margin-top:65px">
     <div class="section-heading">
       <h2>What We Do</h2>
       <p>Practical support for children, youth and vulnerable families.</p>
     </div>
     <div class="cards">
-      <div class="card">
+      <div class="card" onclick="openProgram('food')">
         <i class="fas fa-utensils"></i>
         <h3>Food & Nutrition</h3>
         <p>
           Helping provide meals and food assistance to children
           experiencing food insecurity.
         </p>
+        <span class="card-link-text">Learn More &rarr;</span>
       </div>
-      <div class="card">
+      <div class="card" onclick="openProgram('education')">
         <i class="fas fa-book-open"></i>
         <h3>Education</h3>
         <p>
           Supporting children's access to education and opportunities
           to develop their future.
         </p>
+        <span class="card-link-text">Learn More &rarr;</span>
       </div>
-      <div class="card">
+      <div class="card" onclick="openProgram('shelter')">
         <i class="fas fa-house"></i>
         <h3>Safe Shelter</h3>
         <p>
           Working toward safe and supportive environments for
           vulnerable children.
         </p>
+        <span class="card-link-text">Learn More &rarr;</span>
       </div>
-      <div class="card">
+      <div class="card" onclick="openProgram('girlskills')">
         <i class="fas fa-scissors"></i>
         <h3>Girls' Skills</h3>
         <p>
           Supporting vocational skills, entrepreneurship and
           practical opportunities for young girls.
         </p>
+        <span class="card-link-text">Learn More &rarr;</span>
       </div>
     </div>
   </div>
@@ -1195,7 +1199,7 @@
     <img src="/IMG_0514.jpg" alt="About Rock ChildCare Ministries">
   </div>
   <div class="cards" style="margin-top:40px">
-    <div class="card">
+    <div class="card" onclick="openModal('impactModal')">
       <i class="fas fa-bullseye"></i>
       <h3>Our Purpose</h3>
       <p>
@@ -1203,7 +1207,7 @@
         education, shelter and practical life skills.
       </p>
     </div>
-    <div class="card">
+    <div class="card" onclick="openModal('partnerModal')">
       <i class="fas fa-heart"></i>
       <h3>Our Values</h3>
       <p>
@@ -1211,7 +1215,7 @@
         community empowerment guide our work.
       </p>
     </div>
-    <div class="card">
+    <div class="card" onclick="openProgram('girlskills')">
       <i class="fas fa-person-dress"></i>
       <h3>Girls Support</h3>
       <p>
@@ -1421,31 +1425,25 @@
     <h2 class="modal-title" style="text-align: center;">Our Impact</h2>
     <p style="text-align: center; color: var(--gray); margin-bottom: 25px;">From a Humble Home to a Bright Future</p>
 
-    <!-- STEP 1 -->
-    <div class="impact-story-item">
-      <img src="/IMG_0719.jpg" alt="Childhood Home">
-      <div class="impact-story-text">
-        <h4>1. The Beginning</h4>
-        <p>Before hope took root, this humble house was where her journey began. Growing up with minimal resources, basic daily needs like school fees, uniforms, and learning materials were distant dreams.</p>
-      </div>
+    <!-- STEP 1: HEADING -> IMAGE -> WORDS -->
+    <div class="impact-story-block">
+      <h4>1. The Beginning</h4>
+      <img src="/IMG_0719.jpg" alt="The Beginning Childhood Home">
+      <p>Before hope took root, this humble house was where her journey began. Growing up with minimal resources, basic daily needs like school fees, uniforms, and learning materials were distant dreams. Like so many children in vulnerable circumstances, her potential was limited only by her surroundings—waiting for an opportunity to step toward a different future.</p>
     </div>
 
-    <!-- STEP 2 -->
-    <div class="impact-story-item">
-      <img src="/IMG_0720.jpg" alt="Childhood Image">
-      <div class="impact-story-text">
-        <h4>2. A Spark of Hope</h4>
-        <p>When our organization met her, we saw a bright, resilient girl with endless potential. With generous support, we provided basic care, mentorship, and full educational support to ignite her future.</p>
-      </div>
+    <!-- STEP 2: HEADING -> IMAGE -> WORDS -->
+    <div class="impact-story-block">
+      <h4>2. A Spark of Hope</h4>
+      <img src="/IMG_0720.jpg" alt="A Spark of Hope">
+      <p>When our organization met her, we saw a bright, resilient girl with endless potential waiting to be unlocked. With the generous support of people like you, we provided her with basic care, mentorship, and full educational support. For the first time, she walked into a classroom holding a brand-new notebook, a school uniform, and a reason to dream big.</p>
     </div>
 
-    <!-- STEP 3 -->
-    <div class="impact-story-item">
-      <img src="/IMG_1148.jpg" alt="Educated Today">
-      <div class="impact-story-text">
-        <h4>3. Growing & Learning</h4>
-        <p>Years of dedication and steady support transformed her world. Today, she isn't just going to school—she is thriving, confident, and empowered to shape her own destiny.</p>
-      </div>
+    <!-- STEP 3: HEADING -> IMAGE -> WORDS -->
+    <div class="impact-story-block">
+      <h4>3. Growing & Learning</h4>
+      <img src="/IMG_1148.jpg" alt="Growing and Learning Educated Today">
+      <p>Years of dedication, learning, and steady support have transformed her world. Today, she isn't just going to school—she is thriving. Educated, confident, and empowered, she is preparing to shape her own destiny and uplift her entire community.</p>
     </div>
 
     <!-- CALL TO ACTION -->
@@ -1464,15 +1462,20 @@
 <div class="modal-overlay" id="programModal" role="dialog" aria-modal="true" aria-labelledby="pmTitle">
   <div class="modal-card pm-card">
     <span class="modal-close" onclick="closeProgram()" aria-label="Close">&times;</span>
+    <div class="pm-body" style="padding-bottom: 10px;">
+      <div class="pm-icon"><i id="pmIcon" class="fas"></i></div>
+      <h2 class="pm-title" id="pmTitle"></h2>
+      <p class="pm-sub" id="pmSub"></p>
+    </div>
+
+    <!-- IMAGE SLIDESHOW -->
     <div class="pm-slider" id="pmSlider">
       <button class="pm-arrow pm-prev" onclick="pmMove(-1)" aria-label="Previous photo"><i class="fas fa-chevron-left"></i></button>
       <button class="pm-arrow pm-next" onclick="pmMove(1)" aria-label="Next photo"><i class="fas fa-chevron-right"></i></button>
       <div class="pm-dots" id="pmDots"></div>
     </div>
-    <div class="pm-body">
-      <div class="pm-icon"><i id="pmIcon" class="fas"></i></div>
-      <h2 class="pm-title" id="pmTitle"></h2>
-      <p class="pm-sub" id="pmSub"></p>
+
+    <div class="pm-body" style="padding-top: 20px;">
       <div class="pm-article" id="pmArticle"></div>
       <div class="pm-numbers" id="pmNumbers"></div>
       <div class="pm-donate">
@@ -1723,36 +1726,30 @@
 
   /* TAB NAVIGATION SWITCHER */
   function showTab(tabName) {
-    // Hide all sections
     const sections = document.querySelectorAll('.page-section');
     sections.forEach(sec => {
       sec.classList.remove('active-section');
     });
 
-    // Remove active class from all header links
     const navLinks = document.querySelectorAll('.nav a');
     navLinks.forEach(link => {
       link.classList.remove('active');
     });
 
-    // Display selected section
     const activeSec = document.getElementById(tabName + '-section');
     if (activeSec) {
       activeSec.classList.add('active-section');
     }
 
-    // Set active status on header link
     const activeNav = document.getElementById('nav-' + tabName);
     if (activeNav) {
       activeNav.classList.add('active');
     }
 
-    // Close mobile dropdown if open
     if (mainNav) {
       mainNav.classList.remove('show-menu');
     }
 
-    // Scroll to top
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
@@ -1850,9 +1847,7 @@
     openModal('imageModal');
   }
 
-  /* ================= PARTNER FORM (sent to WhatsApp) =================
-     The details are written into a WhatsApp message to the number below.
-     The person only has to press Send in WhatsApp. */
+  /* PARTNER FORM (WhatsApp) */
   const PARTNER_WHATSAPP = '256753669250';
 
   function resetPartner() {
@@ -1886,9 +1881,7 @@
     document.getElementById('partnerThanks').style.display = 'block';
   }
 
-  /* ================= GALLERY DATA =================
-     To add a video use:  { type:'video', src:'/myvideo.mp4', caption:'My video' }
-     (optional poster: poster:'/thumb.jpg')  */
+  /* GALLERY DATA */
   const ALL_GALLERY = [
     { src: '/IMG_7922.jpg', caption: 'Our moments of hope' },
     { src: '/IMG_0716.jpg', caption: 'Our moments of hope' },
@@ -1920,11 +1913,8 @@
     { src: '/IMG_0715.jpg', caption: 'Our moments of hope' }
   ];
 
-  /* Only pictures/videos that really load are used (working GALLERY) */
   let GALLERY = [];
 
-  /* If a picture name does not match (IMG_ / img_, .jpg / .JPG / .jpeg / .png),
-     try the other spellings automatically. */
   function srcVariants(src) {
     const m = src.match(/^(.*\/)?img[_-](\d+)\.\w+$/i);
     if (!m) return [];
@@ -1934,7 +1924,6 @@
     return out.filter(v => v !== src);
   }
 
-  // same fallback for every normal picture on the page
   document.addEventListener('error', e => {
     const img = e.target;
     if (!img || img.tagName !== 'IMG') return;
@@ -1966,8 +1955,6 @@
   async function initGallery() {
     const results = await Promise.all(ALL_GALLERY.map(checkItem));
     GALLERY = ALL_GALLERY.filter((_, i) => results[i]);
-    const missing = ALL_GALLERY.filter((_, i) => !results[i]).map(g => g.src);
-    if (missing.length) console.warn('Gallery files not found (check the names):', missing.join(', '));
     if (!GALLERY.length) {
       const box = document.getElementById('slideshow');
       if (box) box.style.display = 'none';
@@ -2002,7 +1989,7 @@
   }
   function openItem(item) { viewImage(item.src, item.caption, item.type); }
 
-  /* ---------- SLIDESHOW (centre big, left & right smaller) ---------- */
+  /* SLIDESHOW */
   let ssCur = 0, ssTimer = null;
   const ssSlides = [];
 
@@ -2024,7 +2011,6 @@
       stage.appendChild(d);
       ssSlides.push(d);
     });
-    // swipe support
     let x0 = null;
     stage.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; ssStop(); }, { passive: true });
     stage.addEventListener('touchend', e => {
@@ -2075,17 +2061,16 @@
   function scheduleNext() {
     clearTimeout(ssTimer);
     const isVideo = GALLERY[ssCur].type === 'video';
-    // pictures stay 3.5s; videos play until they end (max 12s)
     ssTimer = setTimeout(() => slideMove(1), isVideo ? 12000 : 3500);
   }
   function ssStart() { ssRunning = true; scheduleNext(); }
   function ssStop() { ssRunning = false; clearTimeout(ssTimer); ssTimer = null; }
 
-  /* ---------- HEART OF PICTURES (no repeated pictures) ---------- */
+  /* HEART GRID */
   const HEART_SHAPES = [
-    ['.XX.XX.', 'XXXXXXX', '.XXXXX.', '..XXX..', '...X...'],   // 20 pictures
-    ['XX.XX', 'XXXXX', '.XXX.', '..X..'],                      // 13 pictures
-    ['.X.X.', 'XXXXX', '.XXX.', '..X..']                       // 11 pictures
+    ['.XX.XX.', 'XXXXXXX', '.XXXXX.', '..XXX..', '...X...'],
+    ['XX.XX', 'XXXXX', '.XXX.', '..X..'],
+    ['.X.X.', 'XXXXX', '.XXX.', '..X..']
   ];
   const heartTiles = [];
 
@@ -2094,7 +2079,6 @@
   function buildHeart() {
     const grid = document.getElementById('heartGrid');
     if (!grid) return;
-    // choose the biggest heart that can be filled with different pictures
     let shape = HEART_SHAPES.find(sh => countX(sh) <= GALLERY.length) || HEART_SHAPES[2];
     const cols = shape[0].length;
     grid.style.gridTemplateColumns = 'repeat(' + cols + ', 1fr)';
@@ -2114,7 +2098,6 @@
       heartTiles.push(tile);
     });
 
-    // every 2 seconds one tile fades away and comes back with a picture not shown yet
     setInterval(() => {
       if (!document.getElementById('gallery-section').classList.contains('active-section')) return;
       const shown = heartTiles.map(t => Number(t.dataset.idx));
@@ -2139,11 +2122,9 @@
 
   initGallery();
 
-  /* ================= LIFE: MOUSE & SCROLL RESPONSIVENESS ================= */
+  /* MOTION AND RESPONSIVENESS */
   (function () {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    // scroll progress bar
     const bar = document.getElementById('scrollBar');
     function onScroll() {
       const h = document.documentElement.scrollHeight - window.innerHeight;
@@ -2152,7 +2133,6 @@
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
 
-    // reveal on scroll (works going down and back up)
     const targets = document.querySelectorAll(
       '.section-heading, .contact-card, .donation-banner, .gallery-item, .ss-stage, .heart-grid'
     );
@@ -2163,7 +2143,6 @@
       targets.forEach(t => { t.classList.add('reveal'); io.observe(t); });
     }
 
-    // cursor glow + floating hearts
     const glow = document.getElementById('cursorGlow');
     let gx = 0, gy = 0, tx = 0, ty = 0, lastHeart = 0;
     function follow() {
@@ -2192,7 +2171,6 @@
     window.addEventListener('touchstart', e => { const t = e.touches[0]; tx = gx = t.clientX; ty = gy = t.clientY; glow.style.opacity = 1; for (let i = 0; i < 3; i++) heart(t.clientX, t.clientY, 1); }, { passive: true });
     window.addEventListener('touchend', () => { glow.style.opacity = 0; });
 
-    // 3D tilt following the pointer
     const tiltEls = document.querySelectorAll('.contact-card, .donation-banner, .heart-tile');
     tiltEls.forEach(el => {
       if (!el.classList.contains('heart-tile')) el.classList.add('tilt');
@@ -2206,7 +2184,6 @@
       el.addEventListener('mouseleave', () => { el.style.transform = ''; });
     });
 
-    // tap / click ripple on buttons
     document.addEventListener('click', e => {
       const b = e.target.closest('.btn, .btn-submit-form, .method-btn, .impact-float-btn');
       if (!b) return;
@@ -2220,10 +2197,7 @@
     });
   })();
 
-
-  /* =====================================================
-     HERO BACKGROUND - photos fade into each other
-     ===================================================== */
+  /* HERO BACKGROUND SLIDESHOW */
   (function () {
     const slides = document.querySelectorAll('#heroSlides .hero-slide');
     const dots = document.querySelectorAll('#heroDots span');
@@ -2236,9 +2210,7 @@
     }, 5500);
   })();
 
-  /* =====================================================
-     PROGRAM POPUPS  (the 4 cards under the hero)
-     ===================================================== */
+  /* ALL PROGRAM POPUP DATA (Heading -> Images Slider -> Content & Quotes) */
   const PROGRAMS = {
     children: {
       icon: 'fa-child',
@@ -2285,6 +2257,36 @@
       ],
       numbers: [[150, 'Goes toward a child\'s education', '$', ''], [200, 'Supports our Girls Support Initiative', '$', ''], [200, 'Children we serve', '', '+']]
     },
+    shelter: {
+      icon: 'fa-house',
+      title: 'Safe Shelter & Care',
+      sub: 'Providing safe environments for vulnerable children.',
+      category: 'Shelter',
+      donateLabel: 'Donate to Safe Shelter ❤️',
+      photos: ['IMG_0716.jpg', 'IMG_0719.jpg', 'IMG_1150.jpg', 'IMG_0514.jpg'],
+      article: [
+        'A safe place to live, rest, and play is essential for every growing child. Many children face severe living conditions that threaten their health, wellbeing, and security.',
+        'Rock ChildCare Ministries works to provide safe, clean, and supportive living spaces where children are sheltered from danger and surrounded by care, guidance, and community.',
+        '<blockquote>"Every child deserves to go to sleep knowing they are safe and cared for."</blockquote>',
+        'Your generous contribution directly funds housing maintenance, bedding, and secure facilities for children under our care.'
+      ],
+      numbers: [[100, 'Provides safe housing support', '$', ''], [50, 'Helps repair emergency shelters', '$', ''], [200, 'Children kept safe', '', '+']]
+    },
+    girlskills: {
+      icon: 'fa-scissors',
+      title: 'Girls\' Vocational Skills',
+      sub: 'Empowering young women through practical independence.',
+      category: 'Girl Support',
+      donateLabel: 'Donate to Girls\' Skills ❤️',
+      photos: ['IMG_0721.jpg', 'IMG_0722.jpg', 'IMG_1460.jpg', 'IMG_1462.jpg'],
+      article: [
+        'Empowering young girls with practical skills breaks generational cycles of vulnerability and inequality. Our Girls Support Initiative focuses on hands-on vocational training.',
+        'Through tailoring, craft creation, business skills, and health education, young women gain self-reliance, confidence, and the tools to support themselves and their families.',
+        '<blockquote>"Empower a girl with a skill, and you build a stronger community."</blockquote>',
+        'Your donation helps purchase sewing machines, fabric, training supplies, and materials for our young female entrepreneurs.'
+      ],
+      numbers: [[200, 'Supports Girls\' Initiative', '$', ''], [75, 'Provides a sewing kit', '$', ''], [100, 'Empowered young women', '', '+']]
+    },
     uganda: {
       icon: 'fa-hands-helping',
       title: 'Uganda Community Support',
@@ -2314,7 +2316,7 @@
     document.getElementById('pmArticle').innerHTML = d.article.map(t => t.startsWith('<') ? t : '<p>' + t + '</p>').join('');
     document.getElementById('pmDonateBtn').textContent = d.donateLabel;
 
-    /* photos */
+    /* photos slideshow setup */
     const slider = document.getElementById('pmSlider');
     slider.querySelectorAll('.pm-slide').forEach(n => n.remove());
     const dots = document.getElementById('pmDots'); dots.innerHTML = '';
@@ -2330,7 +2332,7 @@
       return im;
     });
 
-    /* numbers */
+    /* numbers counter setup */
     const nums = document.getElementById('pmNumbers');
     nums.innerHTML = d.numbers.map(n =>
       '<div class="pm-num"><strong data-to="' + n[0] + '" data-pre="' + (n[2] || '') + '" data-suf="' + (n[3] || '') + '">' +
@@ -2382,11 +2384,11 @@
     closeProgram();
     closeModal('impactModal');
     const sel = document.getElementById('donor-purpose');
-    openModal('donateModal');               /* resets the form first */
-    if (sel) sel.value = category;           /* then pre-selects the category */
+    openModal('donateModal');
+    if (sel) sel.value = category;
   }
 
-  /* Esc closes popups; clicking the dark area closes it too */
+  /* ESC & OUTSIDE CLICK HANDLERS */
   document.addEventListener('keydown', e => { 
     if (e.key === 'Escape') {
       closeProgram();
@@ -2397,7 +2399,6 @@
     if (e.target.id === 'programModal') closeProgram();
   });
 
-  /* CLOSE MODAL WHEN CLICKING OUTSIDE */
   window.addEventListener('click', function(event) {
     if (event.target.classList.contains('modal') || event.target.classList.contains('modal-overlay')) {
       event.target.classList.remove('show');
@@ -2405,7 +2406,7 @@
     }
   });
 
-  /* DONATION POP-UPS */
+  /* DONATION TOAST MESSAGES */
   const toastMessages = [
     "A gift of $10 can help give a child a meal ❤️",
     "$50 can go toward food for children in need ❤️",
