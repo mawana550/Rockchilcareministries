@@ -259,13 +259,182 @@
       line-height: 1.5;
     }
 
+    /* --- Story intro / "After those rough times" --- */
+    .news-intro-lead {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.35rem;
+      font-style: italic;
+      text-align: center;
+      color: var(--dark);
+      max-width: 780px;
+      margin: 10px auto 40px;
+      line-height: 1.5;
+      padding: 0 10px;
+    }
+    .news-intro-lead span {
+      color: var(--orange);
+      font-weight: 700;
+    }
+
+    /* --- "Meet Haniffah" circular profile --- */
+    .meet-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin: 20px auto 40px;
+      max-width: 700px;
+    }
+    .meet-profile {
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 6px solid var(--orange);
+      box-shadow: 0 12px 35px rgba(255, 107, 0, 0.35);
+      margin-bottom: 18px;
+      background: var(--orange-light);
+      position: relative;
+    }
+    .meet-profile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .meet-profile::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      box-shadow: inset 0 0 0 3px rgba(255,255,255,0.85);
+      pointer-events: none;
+    }
+    .meet-label {
+      font-size: .75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--orange);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .meet-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--dark);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+    .meet-tag {
+      font-size: .95rem;
+      color: var(--gray);
+      font-style: italic;
+      max-width: 480px;
+    }
+
+    /* --- Auto image slider (Before & After) --- */
+    .news-slider-wrap {
+      margin: 45px auto 45px;
+      max-width: 950px;
+    }
+    .news-slider-title {
+      text-align: center;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.7rem;
+      font-weight: 900;
+      color: var(--dark);
+      margin-bottom: 6px;
+    }
+    .news-slider-sub {
+      text-align: center;
+      font-size: .9rem;
+      color: var(--gray);
+      font-style: italic;
+      margin-bottom: 22px;
+    }
+    .news-slider {
+      position: relative;
+      height: clamp(240px, 52vw, 480px);
+      border-radius: 20px;
+      overflow: hidden;
+      background: #111;
+      box-shadow: 0 15px 45px rgba(0,0,0,.2);
+    }
+    .ns-slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transform: scale(1);
+      transition: opacity 1.4s ease-in-out, transform 6s ease-out;
+    }
+    .ns-slide.on {
+      opacity: 1;
+      transform: scale(1.06);
+    }
+    .ns-slide::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 45%;
+      background: linear-gradient(transparent, rgba(0,0,0,.7));
+      pointer-events: none;
+    }
+    .ns-tag {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: var(--orange);
+      color: #fff;
+      font-size: .72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 50px;
+      z-index: 3;
+    }
+    .ns-caption {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      color: #fff;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      font-weight: 700;
+      line-height: 1.3;
+      z-index: 3;
+      text-shadow: 0 2px 12px rgba(0,0,0,.6);
+    }
+    .ns-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .ns-dots span {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--border);
+      transition: .3s;
+      cursor: pointer;
+    }
+    .ns-dots span.on {
+      background: var(--orange);
+      width: 26px;
+      border-radius: 6px;
+    }
+
+    /* --- Newspaper body --- */
     .news-body {
       font-family: Georgia, 'Times New Roman', serif;
       font-size: 1.08rem;
       line-height: 1.75;
       color: #222;
-      columns: 2;
-      column-gap: 45px;
       text-align: justify;
     }
     .news-body p {
@@ -287,12 +456,10 @@
       color: var(--dark);
       margin: 28px 0 12px;
       line-height: 1.2;
-      column-span: all;
       border-left: 5px solid var(--orange);
       padding-left: 14px;
     }
     .news-body .news-pull-quote {
-      column-span: all;
       font-family: 'Playfair Display', Georgia, serif;
       font-size: 1.6rem;
       font-style: italic;
@@ -307,28 +474,44 @@
       background: var(--orange-light);
       border-radius: 4px;
     }
-    .news-body .news-inline-img {
-      break-inside: avoid;
+
+    /* Full-width story image with caption */
+    .story-figure {
+      margin: 25px 0;
       width: 100%;
-      margin: 20px 0;
-      border-radius: 6px;
     }
-    .news-body .news-inline-img img {
+    .story-figure img {
       width: 100%;
-      border-radius: 6px;
+      max-height: 480px;
+      object-fit: cover;
+      border-radius: 12px;
       display: block;
+      box-shadow: 0 10px 30px rgba(0,0,0,.12);
     }
-    .news-body .news-inline-img figcaption {
-      font-size: .8rem;
+    .story-figure figcaption {
+      font-size: .85rem;
       color: var(--gray);
       font-style: italic;
-      margin-top: 8px;
+      margin-top: 10px;
       text-align: center;
-      line-height: 1.4;
+      line-height: 1.5;
+    }
+
+    /* Round siblings image */
+    .story-figure.round-siblings img {
+      border-radius: 50%;
+      width: 280px;
+      height: 280px;
+      max-height: 280px;
+      object-fit: cover;
+      margin: 0 auto;
+      border: 6px solid var(--orange-light);
+    }
+    .story-figure.round-siblings figcaption {
+      margin-top: 14px;
     }
 
     .news-cta {
-      column-span: all;
       background: linear-gradient(135deg, var(--orange-light), #fff);
       border: 2px solid var(--orange);
       border-radius: 16px;
@@ -346,7 +529,6 @@
     }
 
     .news-stats-row {
-      column-span: all;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 15px;
@@ -395,47 +577,12 @@
     }
 
     @media (max-width: 800px) {
-      .news-body { columns: 1; }
       .news-stats-row { grid-template-columns: 1fr; }
-      .news-body h3 { column-span: none; }
-      .news-body .news-pull-quote { column-span: none; padding: 20px; font-size: 1.3rem; }
-      .news-cta { column-span: none; }
-      .news-stats-row { column-span: none; }
-    }
-
-    /* Impact Story Modal Layout (legacy - kept for safety) */
-    .impact-modal-box {
-      max-width: 750px !important;
-      padding: 35px 30px !important;
-    }
-    .impact-story-block {
-      margin-bottom: 35px;
-      background: var(--light);
-      padding: 24px;
-      border-radius: 18px;
-      border-top: 4px solid var(--orange);
-      text-align: center;
-    }
-    .impact-story-block h4 {
-      color: var(--orange);
-      font-size: 1.3rem;
-      margin-bottom: 14px;
-      font-weight: 700;
-    }
-    .impact-story-block img {
-      width: 100%;
-      max-height: 320px;
-      object-fit: cover;
-      border-radius: 14px;
-      margin: 0 auto 16px;
-      display: block;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-    }
-    .impact-story-block p {
-      font-size: 0.95rem;
-      color: #444;
-      line-height: 1.6;
-      text-align: left;
+      .news-body .news-pull-quote { padding: 20px; font-size: 1.3rem; }
+      .meet-profile { width: 140px; height: 140px; }
+      .meet-name { font-size: 1.6rem; }
+      .story-figure.round-siblings img { width: 220px; height: 220px; max-height: 220px; }
+      .news-slider { height: 260px; }
     }
 
     /* ================= SECTIONS ================= */
@@ -450,14 +597,8 @@
       animation: fadeIn .45s ease;
     }
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(12px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     .section-heading {
       text-align: center;
@@ -528,9 +669,7 @@
       margin-bottom: 20px;
       font-weight: 800;
     }
-    .hero h1 span {
-      color: #ff8a35;
-    }
+    .hero h1 span { color: #ff8a35; }
     .hero p {
       font-size: 1.1rem;
       color: #f3f3f3;
@@ -677,9 +816,7 @@
       border-radius: 17px;
       transition: .4s;
     }
-    .photo-strip img:hover {
-      transform: scale(1.025);
-    }
+    .photo-strip img:hover { transform: scale(1.025); }
     /* ================= CARDS ================= */
     .cards {
       display: grid;
@@ -711,13 +848,8 @@
       font-size: 1.5rem;
       margin-bottom: 17px;
     }
-    .card h3 {
-      margin-bottom: 8px;
-    }
-    .card p {
-      color: var(--gray);
-      font-size: .92rem;
-    }
+    .card h3 { margin-bottom: 8px; }
+    .card p { color: var(--gray); font-size: .92rem; }
     .card-link-text {
       display: inline-block;
       margin-top: 12px;
@@ -845,9 +977,7 @@
       display: block;
       transition: .4s;
     }
-    .gallery-item:hover img {
-      transform: scale(1.05);
-    }
+    .gallery-item:hover img { transform: scale(1.05); }
     .gallery-caption {
       position: absolute;
       bottom: 0;
@@ -893,13 +1023,8 @@
       grid-template-columns: 2fr 1fr 1fr;
       gap: 35px;
     }
-    footer h3 {
-      margin-bottom: 15px;
-    }
-    footer p {
-      color: #bbb;
-      font-size: .9rem;
-    }
+    footer h3 { margin-bottom: 15px; }
+    footer p { color: #bbb; font-size: .9rem; }
     .socials {
       display: flex;
       gap: 10px;
@@ -938,9 +1063,7 @@
       justify-content: center;
       padding: 20px;
     }
-    .modal.show, .modal-overlay.show {
-      display: flex;
-    }
+    .modal.show, .modal-overlay.show { display: flex; }
     .modal-box, .modal-card {
       width: 100%;
       max-width: 580px;
@@ -953,14 +1076,8 @@
       animation: modalIn .3s ease;
     }
     @keyframes modalIn {
-      from {
-        opacity: 0;
-        transform: scale(.92);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
+      from { opacity: 0; transform: scale(.92); }
+      to { opacity: 1; transform: scale(1); }
     }
     .close, .modal-close {
       position: absolute;
@@ -971,9 +1088,7 @@
       color: #777;
       transition: .2s;
     }
-    .close:hover, .modal-close:hover {
-      color: var(--orange);
-    }
+    .close:hover, .modal-close:hover { color: var(--orange); }
     .modal-title {
       color: var(--orange);
       font-size: 1.8rem;
@@ -1086,19 +1201,11 @@
       font-size: .85rem;
     }
     @keyframes toastIn {
-      from {
-        opacity: 0;
-        transform: translateX(100px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
+      from { opacity: 0; transform: translateX(100px); }
+      to { opacity: 1; transform: translateX(0); }
     }
     @media(max-width:850px) {
-      .menu-toggle {
-        display: block;
-      }
+      .menu-toggle { display: block; }
       .nav {
         position: fixed;
         top: var(--header-height);
@@ -1111,70 +1218,28 @@
         display: none;
         gap: 15px;
       }
-      .nav.show-menu {
-        display: flex;
-      }
-      .hero {
-        min-height: 570px;
-        padding: 35px 25px;
-      }
-      .hero h1 {
-        font-size: 2.8rem;
-      }
-      .stats {
-        grid-template-columns: repeat(2,1fr);
-        margin: -30px 4% 40px;
-      }
-      .photo-strip {
-        grid-template-columns: 1fr;
-      }
-      .photo-strip img {
-        height: 230px;
-      }
-      .campaign-box {
-        padding: 20px;
-      }
-      .footer-grid {
-        grid-template-columns: 1fr;
-      }
+      .nav.show-menu { display: flex; }
+      .hero { min-height: 570px; padding: 35px 25px; }
+      .hero h1 { font-size: 2.8rem; }
+      .stats { grid-template-columns: repeat(2,1fr); margin: -30px 4% 40px; }
+      .photo-strip { grid-template-columns: 1fr; }
+      .photo-strip img { height: 230px; }
+      .campaign-box { padding: 20px; }
+      .footer-grid { grid-template-columns: 1fr; }
     }
     @media(max-width:500px) {
-      .page-section {
-        padding: 35px 4%;
-      }
-      .hero {
-        border-radius: 18px;
-      }
-      .hero h1 {
-        font-size: 2.3rem;
-      }
-      .hero p {
-        font-size: .95rem;
-      }
-      .stats {
-        gap: 10px;
-      }
-      .stat {
-        padding: 18px 8px;
-      }
-      .stat h3 {
-        font-size: 1.3rem;
-      }
-      .section-heading h2 {
-        font-size: 2rem;
-      }
-      .campaign-title {
-        font-size: 2rem;
-      }
-      .progress-info {
-        font-size: .85rem;
-      }
-      .donation-banner {
-        padding: 30px 20px;
-      }
-      .donation-banner h2 {
-        font-size: 1.8rem;
-      }
+      .page-section { padding: 35px 4%; }
+      .hero { border-radius: 18px; }
+      .hero h1 { font-size: 2.3rem; }
+      .hero p { font-size: .95rem; }
+      .stats { gap: 10px; }
+      .stat { padding: 18px 8px; }
+      .stat h3 { font-size: 1.3rem; }
+      .section-heading h2 { font-size: 2rem; }
+      .campaign-title { font-size: 2rem; }
+      .progress-info { font-size: .85rem; }
+      .donation-banner { padding: 30px 20px; }
+      .donation-banner h2 { font-size: 1.8rem; }
     }
 
     /* ================= SLIDESHOW ================= */
@@ -1251,6 +1316,7 @@
     @media (prefers-reduced-motion: reduce) {
       .reveal { opacity: 1; transform: none; transition: none; }
       .float-heart, #cursorGlow { display: none; }
+      .ns-slide { transition: opacity 1.4s ease-in-out; transform: none !important; }
     }
   </style>
 </head>
@@ -1540,10 +1606,10 @@
       <div class="news-kicker">Stories of Hope • Rock ChildCare Ministries Uganda</div>
     </div>
 
-    <h2 class="news-article-headline">From a Humble Home to a Bright Future</h2>
+    <h2 class="news-article-headline">After Those Rough Times, Hope Found a Home</h2>
     <p class="news-standfirst">
-      How one girl's journey through Rock ChildCare Ministries became a story of hope,
-      resilience, and the power of a helping hand.
+      A story of one girl, her family, and the helping hands that turned hardship into a future —
+      told in pictures and words.
     </p>
 
     <div class="news-meta">
@@ -1552,27 +1618,52 @@
       <span>Feature Story</span>
     </div>
 
-    <img src="/IMG_0719.jpg" alt="The Beginning Childhood Home" class="news-hero-img">
-    <p class="news-caption">
-      The humble home where Haniffah's journey began — a place of limited resources, but endless potential.
+    <p class="news-intro-lead">
+      After those rough times — the long nights, the empty cupboards, the dreams that seemed out of reach —
+      <span>a new chapter began.</span> This is the story of Haniffah, and of every child still waiting
+      for their own helping hand.
     </p>
 
     <div class="news-body">
       <p>
-        Haniffah is one of the children who have witnessed the touch of hope under Rock ChildCare Ministries.
-        Before hope took root, this humble house was where her journey began. Growing up with minimal resources
-        alongside five other siblings — Nakato, Siama, Sukran, Kato and Hirrat — basic daily needs like school fees,
-        uniforms, and learning materials were distant dreams.
+        Before hope took root, life for Haniffah and her family was a daily struggle. Every morning brought
+        the same questions: would there be food today? Would school fees be paid? Could a bright girl with
+        big dreams ever find a way forward?
       </p>
+
+      <!-- MEET HANIFFAH with circular profile -->
+      <div class="meet-block">
+        <div class="meet-profile">
+          <img src="/niffa.jpg" alt="Meet Haniffah">
+        </div>
+        <div class="meet-label">Meet</div>
+        <h3 class="meet-name">Haniffah</h3>
+        <p class="meet-tag">A bright, resilient girl whose story became one of hope through Rock ChildCare Ministries.</p>
+      </div>
 
       <p>
-        Like so many children in vulnerable circumstances, her potential was limited only by her surroundings —
-        waiting for an opportunity to step toward a different future.
+        Haniffah is one of the children who have witnessed the touch of hope under Rock ChildCare Ministries.
+        She grew up in a humble house — a place of limited resources, but endless potential. It was a home
+        that held more love than money, more hope than certainty.
       </p>
 
-      <figure class="news-inline-img">
-        <img src="/IMG_0254.jpg" alt="The Beginning Childhood Home">
-        <figcaption>The family home — a place where hope once seemed far away.</figcaption>
+      <!-- Haniffah's house image -->
+      <figure class="story-figure">
+        <img src="/IMG_0719.jpg" alt="Haniffah's house">
+        <figcaption>Haniffah's house — where her journey began. A humble home that became the starting point of a remarkable story.</figcaption>
+      </figure>
+
+      <p>
+        Growing up with minimal resources alongside five siblings — Nakato, Siama, Sukran, Kato and Hirrat —
+        basic daily needs like school fees, uniforms, and learning materials were distant dreams. Like so many
+        children in vulnerable circumstances, her potential was limited only by her surroundings, waiting for
+        an opportunity to step toward a different future.
+      </p>
+
+      <!-- Five siblings image (rounded) -->
+      <figure class="story-figure round-siblings">
+        <img src="/IMG_0254.jpg" alt="Haniffah and her five siblings">
+        <figcaption>Haniffah and her five siblings — Nakato, Siama, Sukran, Kato and Hirrat — growing up together with little but hope.</figcaption>
       </figure>
 
       <h3>A Spark of Hope</h3>
@@ -1584,9 +1675,9 @@
         brand-new notebook, a school uniform, and a reason to dream big.
       </p>
 
-      <figure class="news-inline-img">
-        <img src="/IMG_1155.jpg" alt="The Beginning Childhood Home">
-        <figcaption>The first steps toward a new future — school supplies in hand.</figcaption>
+      <figure class="story-figure">
+        <img src="/IMG_1155.jpg" alt="The first steps toward a new future">
+        <figcaption>The first steps toward a new future — school supplies in hand and hope in her heart.</figcaption>
       </figure>
 
       <blockquote class="news-pull-quote">
@@ -1601,10 +1692,39 @@
         own destiny and uplift her entire community.
       </p>
 
-      <figure class="news-inline-img">
-        <img src="/niffa.jpg" alt="Growing and Learning Educated Today">
+      <figure class="story-figure">
+        <img src="/niffa.jpg" alt="Haniffah today">
         <figcaption>Haniffah today — educated, confident, and ready to shape her own destiny.</figcaption>
       </figure>
+
+      <!-- AUTO-SLIDING before & after slider -->
+      <div class="news-slider-wrap">
+        <h3 class="news-slider-title">Before &amp; After</h3>
+        <p class="news-slider-sub">The same children, the same hope — transformed by your generosity.</p>
+        <div class="news-slider" id="newsSlider">
+          <div class="ns-slide on" style="background-image:url('/IMG_0719.jpg')">
+            <span class="ns-tag">Before</span>
+            <div class="ns-caption">Where every story begins — a humble home and a heart full of hope.</div>
+          </div>
+          <div class="ns-slide" style="background-image:url('/IMG_0254.jpg')">
+            <span class="ns-tag">Before</span>
+            <div class="ns-caption">Five siblings, one shared journey — learning to rise together.</div>
+          </div>
+          <div class="ns-slide" style="background-image:url('/IMG_1155.jpg')">
+            <span class="ns-tag">After</span>
+            <div class="ns-caption">The first classroom, the first notebook — a new chapter begins.</div>
+          </div>
+          <div class="ns-slide" style="background-image:url('/niffa.jpg')">
+            <span class="ns-tag">After</span>
+            <div class="ns-caption">Educated, confident, empowered — Haniffah today.</div>
+          </div>
+          <div class="ns-slide" style="background-image:url('/IMG_1150.jpg')">
+            <span class="ns-tag">After</span>
+            <div class="ns-caption">A community lifted by hope — one child at a time.</div>
+          </div>
+        </div>
+        <div class="ns-dots" id="newsSliderDots"></div>
+      </div>
 
       <div class="news-stats-row">
         <div class="news-stat">
@@ -1622,9 +1742,15 @@
       </div>
 
       <p>
-        Haniffah's story is one of many. Every day, more children across Uganda are waiting for their own
-        chapter of hope to begin. Your support is the hand that turns these dreams into reality — providing
-        food, education, shelter, and the skills that help children rise.
+        <strong>Haniffah's story is one of many.</strong> Across Uganda, countless children are still waiting
+        for their own chapter of hope to begin. Your support is the hand that turns these dreams into reality —
+        providing food, education, shelter, and the skills that help children rise.
+      </p>
+
+      <p>
+        Every gift, big or small, becomes part of a story. It becomes a school uniform, a warm meal, a safe
+        bed, a sewing machine, a reason to believe tomorrow can be different. This is what your generosity
+        makes possible.
       </p>
 
       <div class="news-cta">
@@ -2420,6 +2546,66 @@
   }
 
   initGallery();
+
+  /* ============ NEWS PAGE AUTO SLIDER (Before & After) ============ */
+  (function initNewsSlider() {
+    const slider = document.getElementById('newsSlider');
+    const dotsBox = document.getElementById('newsSliderDots');
+    if (!slider || !dotsBox) return;
+
+    const slides = slider.querySelectorAll('.ns-slide');
+    if (!slides.length) return;
+
+    // Build dots
+    slides.forEach((_, i) => {
+      const d = document.createElement('span');
+      if (i === 0) d.classList.add('on');
+      d.addEventListener('click', () => goTo(i, true));
+      dotsBox.appendChild(d);
+    });
+    const dots = dotsBox.querySelectorAll('span');
+
+    let idx = 0;
+    let timer = null;
+    const DURATION = 4000;
+
+    function goTo(i, manual) {
+      slides[idx].classList.remove('on');
+      dots[idx].classList.remove('on');
+      idx = (i + slides.length) % slides.length;
+      slides[idx].classList.add('on');
+      dots[idx].classList.add('on');
+      if (manual) restart();
+    }
+
+    function next() { goTo(idx + 1); }
+    function start() {
+      clearInterval(timer);
+      timer = setInterval(next, DURATION);
+    }
+    function restart() {
+      clearInterval(timer);
+      start();
+    }
+
+    // Only run when impact section is visible
+    const impactSection = document.getElementById('impact-section');
+    const observer = new MutationObserver(() => {
+      if (impactSection.classList.contains('active-section')) {
+        start();
+      } else {
+        clearInterval(timer);
+      }
+    });
+    observer.observe(impactSection, { attributes: true, attributeFilter: ['class'] });
+
+    // Also start if already visible
+    if (impactSection.classList.contains('active-section')) start();
+
+    // Pause on hover
+    slider.addEventListener('mouseenter', () => clearInterval(timer));
+    slider.addEventListener('mouseleave', () => start());
+  })();
 
   (function () {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
