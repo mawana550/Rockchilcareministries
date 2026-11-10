@@ -353,35 +353,6 @@
       font-style: italic;
       margin-bottom: 22px;
     }
-    .news-slider {
-      position: relative;
-      height: clamp(240px, 52vw, 480px);
-      border-radius: 20px;
-      overflow: hidden;
-      background: #111;
-      box-shadow: 0 15px 45px rgba(0,0,0,.2);
-    }
-    .ns-slide {
-      position: absolute;
-      inset: 0;
-      background-size: cover;
-      background-position: center;
-      opacity: 0;
-      transform: scale(1);
-      transition: opacity 1.4s ease-in-out, transform 6s ease-out;
-    }
-    .ns-slide.on {
-      opacity: 1;
-      transform: scale(1.06);
-    }
-    .ns-slide::after {
-      content: "";
-      position: absolute;
-      inset: auto 0 0 0;
-      height: 45%;
-      background: linear-gradient(transparent, rgba(0,0,0,.7));
-      pointer-events: none;
-    }
     .ns-tag {
       position: absolute;
       top: 16px;
@@ -409,25 +380,40 @@
       z-index: 3;
       text-shadow: 0 2px 12px rgba(0,0,0,.6);
     }
-    .ns-dots {
+
+    /* Before & After auto-moving strip */
+    .ba-marquee {
+      overflow: hidden;
+      border-radius: 16px;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+              mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    }
+    .ba-track {
       display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 16px;
+      gap: 18px;
+      width: max-content;
+      animation: baScroll 40s linear infinite;
     }
-    .ns-dots span {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: var(--border);
-      transition: .3s;
-      cursor: pointer;
+    .ba-marquee:hover .ba-track { animation-play-state: paused; }
+    @keyframes baScroll { to { transform: translateX(-50%); } }
+    .ba-card {
+      position: relative;
+      flex: 0 0 auto;
+      height: 300px;
+      min-width: 160px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #111;
+      box-shadow: 0 8px 22px rgba(0,0,0,.18);
     }
-    .ns-dots span.on {
-      background: var(--orange);
-      width: 26px;
-      border-radius: 6px;
+    .ba-card img { height: 100%; width: auto; display: block; }
+    .ba-card::after {
+      content: ""; position: absolute; inset: auto 0 0 0; height: 45%;
+      background: linear-gradient(transparent, rgba(0,0,0,.7)); pointer-events: none;
     }
+    .ba-card .ns-caption { font-size: .95rem; bottom: 12px; left: 14px; right: 14px; }
+    @media (max-width: 700px) { .ba-card { height: 220px; } }
+    @media (prefers-reduced-motion: reduce) { .ba-track { animation-duration: 120s !important; } }
 
     /* --- Newspaper body --- */
     .news-body {
@@ -475,40 +461,47 @@
       border-radius: 4px;
     }
 
-    /* Full-width story image with caption */
+    /* Story images: smaller, never cropped or zoomed */
     .story-figure {
-      margin: 25px 0;
-      width: 100%;
+      margin: 22px auto;
+      max-width: 460px;
+      text-align: center;
     }
     .story-figure img {
       width: 100%;
-      max-height: 480px;
-      object-fit: cover;
-      border-radius: 12px;
+      height: auto;
+      max-height: 340px;
+      object-fit: contain;
+      background: var(--light);
+      border-radius: 10px;
       display: block;
-      box-shadow: 0 10px 30px rgba(0,0,0,.12);
+      margin: 0 auto;
+      box-shadow: 0 8px 22px rgba(0,0,0,.12);
     }
     .story-figure figcaption {
-      font-size: .85rem;
+      font-size: .8rem;
       color: var(--gray);
       font-style: italic;
-      margin-top: 10px;
-      text-align: center;
-      line-height: 1.5;
+      margin-top: 8px;
+      line-height: 1.4;
     }
-
-    /* Round siblings image */
-    .story-figure.round-siblings img {
-      border-radius: 50%;
-      width: 280px;
-      height: 280px;
-      max-height: 280px;
-      object-fit: cover;
-      margin: 0 auto;
-      border: 6px solid var(--orange-light);
+    /* Newspaper style: picture on one side, words continue beside it */
+    .story-figure.float-left {
+      float: left;
+      width: min(40%, 300px);
+      margin: 6px 26px 14px 0;
     }
-    .story-figure.round-siblings figcaption {
-      margin-top: 14px;
+    .story-figure.float-right {
+      float: right;
+      width: min(40%, 300px);
+      margin: 6px 0 14px 26px;
+    }
+    .news-body h3 { clear: both; }
+    .news-body::after { content: ""; display: block; clear: both; }
+    @media (max-width: 700px) {
+      .story-figure.float-left,
+      .story-figure.float-right { float: none; width: 100%; max-width: 360px; margin: 20px auto; }
+      .story-figure img { max-height: 280px; }
     }
 
     .news-cta {
@@ -582,7 +575,6 @@
       .meet-profile { width: 140px; height: 140px; }
       .meet-name { font-size: 1.6rem; }
       .story-figure.round-siblings img { width: 220px; height: 220px; max-height: 220px; }
-      .news-slider { height: 260px; }
     }
 
     /* ================= SECTIONS ================= */
@@ -1316,7 +1308,6 @@
     @media (prefers-reduced-motion: reduce) {
       .reveal { opacity: 1; transform: none; transition: none; }
       .float-heart, #cursorGlow { display: none; }
-      .ns-slide { transition: opacity 1.4s ease-in-out; transform: none !important; }
     }
   </style>
 </head>
@@ -1633,26 +1624,26 @@
         Before hope took root, life for Haniffah and her family was a daily struggle. Every morning brought
         the same questions: would there be food today? Would school fees be paid? Could a bright girl with
         big dreams ever find a way forward?
-         </p>
-        <!-- Haniffah's house image -->
-      <figure class="story-figure">
-        <img src="/IMG_0719.jpg" alt="Haniffah's house">
-        <figcaption>Haniffah's house — where her journey began. A humble home that became the starting point of a remarkable story.</figcaption>
-      </figure>
-
-      <p>
-        Haniffah is one of the children who have witnessed the touch of hope under Rock ChildCare Ministries.
-        She grew up in a humble house — a place of limited resources, but endless potential. It was a home
-        that held more love than money, more hope than certainty.
       </p>
 
-      <!-- Haniffah's house image -->
+      <!-- Image 1: small, centered -->
       <figure class="story-figure">
         <img src="/IMG_0719.jpg" alt="Haniffah's house">
-        <figcaption>Haniffah's house — where her journey began. A humble home that became the starting point of a remarkable story.</figcaption>
+        <figcaption>Haniffah's house, where her journey began.</figcaption>
+      </figure>
+
+      <!-- Image 2: image on the LEFT, story continues on the right -->
+      <figure class="story-figure float-left">
+        <img src="/IMG_0719.jpg" alt="Haniffah's house">
+        <figcaption>A humble home that became the starting point of a remarkable story.</figcaption>
       </figure>
       <p>
-        Growing up with minimal resources alongside five siblings — Nakato, Siama, Sukran, Kato and Hirrat —
+        Haniffah is one of the children who have witnessed the touch of hope under Rock ChildCare Ministries.
+        She grew up in a humble house, a place of limited resources but endless potential. It was a home
+        that held more love than money, more hope than certainty.
+      </p>
+      <p>
+        Growing up with minimal resources alongside five siblings (Nakato, Siama, Sukran, Kato and Hirrat),
         basic daily needs like school fees, uniforms, and learning materials were distant dreams. Like so many
         children in vulnerable circumstances, her potential was limited only by her surroundings, waiting for
         an opportunity to step toward a different future.
@@ -1660,22 +1651,22 @@
 
       <h3>A Spark of Hope</h3>
 
+      <!-- Image 3: image on the RIGHT, story continues on the left -->
+      <figure class="story-figure float-right">
+        <img src="/IMG_0719.jpg" alt="Haniffah's house">
+        <figcaption>Where hope first arrived.</figcaption>
+      </figure>
       <p>
         When our organization met her and the family, we saw a bright, resilient girl with endless potential
-        waiting to be unlocked. 
-        <!-- Haniffah's house image -->
-      <figure class="story-figure">
-        <img src="/IMG_0719.jpg" alt="Haniffah's house">
-        <figcaption>Haniffah's house — where her journey began. A humble home that became the starting point of a remarkable story.</figcaption>
-      </figure>
-        With the generous support of people like you, we provided her with basic care,
+        waiting to be unlocked. With the generous support of people like you, we provided her with basic care,
         mentorship, and full educational support. For the first time, she walked into a classroom holding a
         brand-new notebook, a school uniform, and a reason to dream big.
       </p>
 
+      <!-- Image 4: small, full photo, no zoom -->
       <figure class="story-figure">
         <img src="/IMG_1155.jpg" alt="The first steps toward a new future">
-        <figcaption>The first steps toward a new future — school supplies in hand and hope in her heart.</figcaption>
+        <figcaption>The first steps toward a new future: school supplies in hand and hope in her heart.</figcaption>
       </figure>
 
       <blockquote class="news-pull-quote">
@@ -1684,45 +1675,33 @@
 
       <h3>Growing &amp; Learning</h3>
 
+      <!-- Image 5: image on the LEFT again -->
+      <figure class="story-figure float-left">
+        <img src="/niffa.jpg" alt="Haniffah today">
+        <figcaption>Haniffah today: educated, confident, and ready to shape her own destiny.</figcaption>
+      </figure>
       <p>
         Years of dedication, learning, and steady support have transformed her world. Today, she isn't just
-        going to school — she is thriving. Educated, confident, and empowered, she is preparing to shape her
+        going to school; she is thriving. Educated, confident, and empowered, she is preparing to shape her
         own destiny and uplift her entire community.
       </p>
 
-      <figure class="story-figure">
-        <img src="/niffa.jpg" alt="Haniffah today">
-        <figcaption>Haniffah today — educated, confident, and ready to shape her own destiny.</figcaption>
-      </figure>
-
-      <!-- AUTO-SLIDING before & after slider -->
-      <div class="news-slider-wrap">
+      <!-- BEFORE & AFTER: auto-moving strip -->
+      <div class="news-slider-wrap" style="clear:both">
         <h3 class="news-slider-title">Before &amp; After</h3>
-        <p class="news-slider-sub">The same children, the same hope — transformed by your generosity.</p>
-        <div class="news-slider" id="newsSlider">
-          <div class="ns-slide on" style="background-image:url('/IMG_0719.jpg')">
-            <span class="ns-tag">Before</span>
-            <div class="ns-caption">Where every story begins — a humble home and a heart full of hope.</div>
-          </div>
-          <div class="ns-slide" style="background-image:url('/IMG_0254.jpg')">
-            <span class="ns-tag">Before</span>
-            <div class="ns-caption">Five siblings, one shared journey — learning to rise together.</div>
-          </div>
-          <div class="ns-slide" style="background-image:url('/IMG_1155.jpg')">
-            <span class="ns-tag">After</span>
-            <div class="ns-caption">The first classroom, the first notebook — a new chapter begins.</div>
-          </div>
-          <div class="ns-slide" style="background-image:url('/niffa.jpg')">
-            <span class="ns-tag">After</span>
-            <div class="ns-caption">Educated, confident, empowered — Haniffah today.</div>
-          </div>
-          <div class="ns-slide" style="background-image:url('/IMG_1150.jpg')">
-            <span class="ns-tag">After</span>
-            <div class="ns-caption">A community lifted by hope — one child at a time.</div>
+        <p class="news-slider-sub">The same children, the same hope, transformed by your generosity.</p>
+        <div class="ba-marquee" id="baMarquee">
+          <div class="ba-track" id="baTrack">
+            <!-- To add more children, copy one ba-card line and change the photo, tag and caption -->
+            <div class="ba-card"><img src="/IMG_0719.jpg" alt=""><span class="ns-tag">Before</span><div class="ns-caption">A humble home and a heart full of hope.</div></div>
+            <div class="ba-card"><img src="/IMG_0254.jpg" alt=""><span class="ns-tag">Before</span><div class="ns-caption">Five siblings, one shared journey.</div></div>
+            <div class="ba-card"><img src="/IMG_1155.jpg" alt=""><span class="ns-tag">After</span><div class="ns-caption">The first classroom, the first notebook.</div></div>
+            <div class="ba-card"><img src="/niffa.jpg" alt=""><span class="ns-tag">After</span><div class="ns-caption">Educated, confident, empowered.</div></div>
+            <div class="ba-card"><img src="/IMG_1150.jpg" alt=""><span class="ns-tag">After</span><div class="ns-caption">A community lifted by hope.</div></div>
           </div>
         </div>
-        <div class="ns-dots" id="newsSliderDots"></div>
       </div>
+
 
       <div class="news-stats-row">
         <div class="news-stat">
@@ -2545,64 +2524,17 @@
 
   initGallery();
 
-  /* ============ NEWS PAGE AUTO SLIDER (Before & After) ============ */
-  (function initNewsSlider() {
-    const slider = document.getElementById('newsSlider');
-    const dotsBox = document.getElementById('newsSliderDots');
-    if (!slider || !dotsBox) return;
-
-    const slides = slider.querySelectorAll('.ns-slide');
-    if (!slides.length) return;
-
-    // Build dots
-    slides.forEach((_, i) => {
-      const d = document.createElement('span');
-      if (i === 0) d.classList.add('on');
-      d.addEventListener('click', () => goTo(i, true));
-      dotsBox.appendChild(d);
+  /* ============ BEFORE & AFTER AUTO-MOVING STRIP ============ */
+  (function initBeforeAfter() {
+    const track = document.getElementById('baTrack');
+    if (!track) return;
+    const cards = Array.from(track.children);
+    cards.forEach(c => {
+      const clone = c.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      track.appendChild(clone);
     });
-    const dots = dotsBox.querySelectorAll('span');
-
-    let idx = 0;
-    let timer = null;
-    const DURATION = 4000;
-
-    function goTo(i, manual) {
-      slides[idx].classList.remove('on');
-      dots[idx].classList.remove('on');
-      idx = (i + slides.length) % slides.length;
-      slides[idx].classList.add('on');
-      dots[idx].classList.add('on');
-      if (manual) restart();
-    }
-
-    function next() { goTo(idx + 1); }
-    function start() {
-      clearInterval(timer);
-      timer = setInterval(next, DURATION);
-    }
-    function restart() {
-      clearInterval(timer);
-      start();
-    }
-
-    // Only run when impact section is visible
-    const impactSection = document.getElementById('impact-section');
-    const observer = new MutationObserver(() => {
-      if (impactSection.classList.contains('active-section')) {
-        start();
-      } else {
-        clearInterval(timer);
-      }
-    });
-    observer.observe(impactSection, { attributes: true, attributeFilter: ['class'] });
-
-    // Also start if already visible
-    if (impactSection.classList.contains('active-section')) start();
-
-    // Pause on hover
-    slider.addEventListener('mouseenter', () => clearInterval(timer));
-    slider.addEventListener('mouseleave', () => start());
+    track.style.animationDuration = Math.max(20, cards.length * 7) + 's';
   })();
 
   (function () {
