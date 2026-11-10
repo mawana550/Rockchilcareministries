@@ -1116,6 +1116,79 @@
       .reveal { opacity: 1; transform: none; transition: none; }
       .float-heart, #cursorGlow { display: none; }
     }
+
+    /* ================= LIVELY MOTION PACK ================= */
+    /* Burger -> X */
+    .menu-toggle { width: 46px; height: 46px; border-radius: 12px; align-items: center; justify-content: center; position: relative; -webkit-tap-highlight-color: transparent; transition: background .3s; }
+    .menu-toggle:active { background: var(--orange-light); }
+    .burger { position: relative; display: block; width: 26px; height: 20px; margin: 0 auto; }
+    .burger span { position: absolute; left: 0; width: 100%; height: 3px; border-radius: 3px; background: var(--dark);
+      transition: transform .45s cubic-bezier(.68,-.45,.27,1.45), top .35s ease, opacity .25s ease, background .3s ease, width .3s ease; }
+    .burger span:nth-child(1) { top: 0; }
+    .burger span:nth-child(2) { top: 8.5px; width: 70%; }
+    .burger span:nth-child(3) { top: 17px; }
+    .menu-toggle.open .burger span { background: var(--orange); }
+    .menu-toggle.open .burger span:nth-child(1) { top: 8.5px; transform: rotate(45deg); }
+    .menu-toggle.open .burger span:nth-child(2) { opacity: 0; transform: translateX(-14px); }
+    .menu-toggle.open .burger span:nth-child(3) { top: 8.5px; transform: rotate(-45deg); }
+
+    /* Header */
+    header { transition: box-shadow .3s, height .3s; }
+    header.scrolled { box-shadow: 0 6px 28px rgba(0,0,0,.14); }
+    .brand img { transition: transform .6s cubic-bezier(.22,.8,.3,1); }
+    .brand:hover img { transform: rotate(-8deg) scale(1.1); }
+    .nav a { position: relative; }
+    .nav a:not(.btn)::after { content: ""; position: absolute; left: 0; bottom: -4px; height: 2px; width: 100%; background: var(--orange); transform: scaleX(0); transform-origin: left; transition: transform .35s ease; }
+    .nav a:hover::after, .nav a.active::after { transform: scaleX(1); }
+
+    /* Mobile menu slides + links pop in one by one */
+    @media (max-width: 850px) {
+      .nav { display: flex !important; opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-14px) scale(.98); transform-origin: top;
+        transition: opacity .35s ease, transform .4s cubic-bezier(.22,.8,.3,1), visibility 0s linear .4s; }
+      .nav.show-menu { opacity: 1; visibility: visible; pointer-events: auto; transform: none; transition-delay: 0s; }
+      .nav li { opacity: 0; transform: translateX(-24px); }
+      .nav.show-menu li { animation: navItemIn .5s cubic-bezier(.22,.8,.3,1) forwards; }
+      .nav.show-menu li:nth-child(1) { animation-delay: .05s; } .nav.show-menu li:nth-child(2) { animation-delay: .11s; }
+      .nav.show-menu li:nth-child(3) { animation-delay: .17s; } .nav.show-menu li:nth-child(4) { animation-delay: .23s; }
+      .nav.show-menu li:nth-child(5) { animation-delay: .29s; } .nav.show-menu li:nth-child(6) { animation-delay: .35s; }
+    }
+    @keyframes navItemIn { from { opacity: 0; transform: translateX(-24px); } to { opacity: 1; transform: none; } }
+
+    /* Hero entrance */
+    .hero-tag, .hero h1, .hero p, .hero-buttons { animation: heroUp .9s cubic-bezier(.22,.8,.3,1) both; }
+    .hero-tag { animation-delay: .1s; } .hero h1 { animation-delay: .25s; } .hero p { animation-delay: .4s; } .hero-buttons { animation-delay: .55s; }
+    @keyframes heroUp { from { opacity: 0; transform: translateY(34px); } to { opacity: 1; transform: none; } }
+
+    /* Scroll reveals (removed again once finished so hover effects still work) */
+    .fx { opacity: 0; transform: translateY(34px); transition: opacity .8s ease, transform .9s cubic-bezier(.22,.8,.3,1); transition-delay: var(--d, 0s); }
+    .fx.from-left { transform: translateX(-60px); } .fx.from-right { transform: translateX(60px); }
+    .fx.zoom { transform: scale(.85); }
+    .fx.in { opacity: 1; transform: none; }
+    /* word-by-word headlines */
+    .wd { display: inline-block; opacity: 0; transform: translateY(.7em) rotate(4deg); transition: opacity .6s ease, transform .7s cubic-bezier(.22,.8,.3,1); transition-delay: calc(var(--w) * 70ms); }
+    .words-in .wd { opacity: 1; transform: none; }
+
+    /* Always-alive details */
+    .impact-float-btn { animation: floaty 3s ease-in-out infinite, glowPulse 2.6s ease-in-out infinite; }
+    @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+    @keyframes glowPulse { 0%,100% { box-shadow: 0 10px 30px rgba(255,107,0,.4); } 50% { box-shadow: 0 10px 42px rgba(255,107,0,.75); } }
+    .btn-primary { background-size: 200% 100%; }
+    header .btn-primary { animation: softPulse 2.4s ease-in-out infinite; }
+    @keyframes softPulse { 0%,100% { box-shadow: 0 7px 20px rgba(255,107,0,.25); } 50% { box-shadow: 0 7px 28px rgba(255,107,0,.6); } }
+    .card i, .stat i, .pm-icon { transition: transform .45s cubic-bezier(.34,1.56,.64,1); }
+    .card:hover i, .stat:hover i { transform: scale(1.18) rotate(-8deg); }
+    .progress span { background-size: 200% 100%; animation: progressGrow 1.5s ease, shimmer 2.4s linear infinite; }
+    @keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+    .photo-strip img, .gallery-item img { transition: transform .6s cubic-bezier(.22,.8,.3,1), box-shadow .4s; }
+    .photo-strip img:hover { box-shadow: 0 14px 30px rgba(0,0,0,.22); }
+    .page-section.active-section { animation: pageIn .6s cubic-bezier(.22,.8,.3,1); }
+    @keyframes pageIn { from { opacity: 0; transform: translateY(22px) scale(.99); } to { opacity: 1; transform: none; } }
+    @media (hover: none) { .card:active, .stat:active, .btn:active { transform: scale(.96); transition: transform .15s; } }
+    @media (prefers-reduced-motion: reduce) {
+      .fx, .wd { opacity: 1 !important; transform: none !important; transition: none !important; }
+      .impact-float-btn, header .btn-primary, .hero-tag, .hero h1, .hero p, .hero-buttons, .nav.show-menu li { animation: none !important; }
+      .nav li { opacity: 1; transform: none; }
+    }
   </style>
 </head>
 <body>
@@ -1129,8 +1202,8 @@
     </div>
   </div>
   <nav class="nav-container">
-    <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">
-      <i class="fas fa-bars"></i>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation" aria-expanded="false">
+      <span class="burger" aria-hidden="true"><span></span><span></span><span></span></span>
     </button>
     <ul class="nav" id="mainNav">
       <li><a href="javascript:void(0)" onclick="showTab('home')" id="nav-home" class="active">Home</a></li>
@@ -2716,6 +2789,74 @@
 
   setTimeout(showToast, 5000);
   setInterval(showToast, 14000);
+
+  /* ============ LIVELY MOTION PACK ============ */
+  (function () {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* burger <-> X: follows the menu state (also closes when a tab is picked) */
+    if (menuToggle && mainNav) {
+      const sync = () => {
+        const open = mainNav.classList.contains('show-menu');
+        menuToggle.classList.toggle('open', open);
+        menuToggle.setAttribute('aria-expanded', open);
+      };
+      new MutationObserver(sync).observe(mainNav, { attributes: true, attributeFilter: ['class'] });
+      document.addEventListener('click', e => {
+        if (mainNav.classList.contains('show-menu') && !e.target.closest('#mainNav, #menuToggle')) mainNav.classList.remove('show-menu');
+      });
+    }
+
+    /* header shadow on scroll */
+    const hdr = document.querySelector('header');
+    window.addEventListener('scroll', () => hdr && hdr.classList.toggle('scrolled', window.scrollY > 10), { passive: true });
+
+    if (reduce || !('IntersectionObserver' in window)) return;
+
+    /* headlines: words fly in one by one */
+    document.querySelectorAll('.section-heading h2, .news-article-headline, .campaign-title, .news-masthead h1').forEach(h => {
+      if (h.children.length) return;
+      h.innerHTML = h.textContent.trim().split(/\s+/).map((w, i) => '<span class="wd" style="--w:' + i + '">' + w + '</span>').join(' ');
+      h.classList.add('wd-host');
+    });
+
+    /* everything else: fade / slide up as you scroll */
+    const sel = '.page-section p, .page-section h3, .page-section .card, .stat, .photo-strip img, .news-body figure, .news-body blockquote, ' +
+      '.news-stat, .progress-card, .meet-block, .news-intro-lead, .news-cta, .ba-marquee, .contact-card, .amounts, footer .footer-grid > div';
+    const els = [...document.querySelectorAll(sel)].filter(el =>
+      !el.closest('.modal-card, .modal-box, .hero') && !el.classList.contains('reveal') && !el.closest('.reveal') && !el.closest('.news-slider-wrap p'));
+    const seen = new Map();
+    els.forEach(el => {
+      const par = el.parentElement, n = seen.get(par) || 0; seen.set(par, n + 1);
+      el.style.setProperty('--d', Math.min(n, 5) * 0.09 + 's');
+      el.classList.add('fx');
+      if (el.matches('.float-left')) el.classList.add('from-left');
+      else if (el.matches('.float-right')) el.classList.add('from-right');
+      else if (el.matches('.stat, .news-stat, .meet-block, .photo-strip img')) el.classList.add('zoom');
+    });
+
+    const countUp = el => {
+      const m = el.textContent.trim().match(/^(\D*)([\d,]+)(.*)$/);
+      if (!m) return;
+      const to = +m[2].replace(/,/g, ''), t0 = performance.now();
+      (function step(t) {
+        const p = Math.min((t - t0) / 1500, 1);
+        el.textContent = m[1] + Math.round(to * (1 - Math.pow(1 - p, 3))).toLocaleString() + m[3];
+        if (p < 1) requestAnimationFrame(step);
+      })(t0);
+    };
+
+    const io = new IntersectionObserver(entries => entries.forEach(en => {
+      if (!en.isIntersecting) return;
+      const el = en.target; io.unobserve(el);
+      if (el.classList.contains('wd-host')) { el.classList.add('words-in'); return; }
+      el.classList.add('in');
+      el.querySelectorAll('h3, strong').forEach(x => { if (/^\D*\d/.test(x.textContent) && x.children.length === 0) countUp(x); });
+      setTimeout(() => el.classList.remove('fx', 'in', 'from-left', 'from-right', 'zoom'), 1700);
+    }), { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+
+    document.querySelectorAll('.fx, .wd-host').forEach(el => io.observe(el));
+  })();
 </script>
 </body>
 </html>
