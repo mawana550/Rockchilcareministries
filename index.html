@@ -73,10 +73,7 @@
       font-size: .72rem;
       font-weight: 600;
     }
-    .nav-container {
-      display: flex;
-      align-items: center;
-    }
+    .nav-container { display: flex; align-items: center; }
     .nav {
       display: flex;
       align-items: center;
@@ -91,10 +88,7 @@
       cursor: pointer;
       transition: .25s;
     }
-    .nav a:hover,
-    .nav a.active {
-      color: var(--orange);
-    }
+    .nav a:hover, .nav a.active { color: var(--orange); }
     .menu-toggle {
       display: none;
       background: transparent;
@@ -129,14 +123,8 @@
       color: var(--orange);
       border: 2px solid var(--orange);
     }
-    .btn-outline:hover {
-      background: var(--orange);
-      color: white;
-    }
-    .btn-large {
-      padding: 15px 32px;
-      font-size: 1rem;
-    }
+    .btn-outline:hover { background: var(--orange); color: white; }
+    .btn-large { padding: 15px 32px; font-size: 1rem; }
 
     /* Floating Impact Button */
     .impact-float-btn {
@@ -164,21 +152,11 @@
       background: var(--orange-dark);
     }
     @media (max-width: 600px) {
-      .impact-float-btn {
-        bottom: 18px;
-        left: 15px;
-        padding: 10px 18px;
-        font-size: 0.85rem;
-      }
+      .impact-float-btn { bottom: 18px; left: 15px; padding: 10px 18px; font-size: 0.85rem; }
     }
 
     /* ================= NEWSPAPER IMPACT PAGE ================= */
-    .newspaper-page {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 55px 5% 80px;
-    }
-
+    .newspaper-page { max-width: 1100px; margin: 0 auto; padding: 55px 5% 80px; }
     .news-masthead {
       text-align: center;
       border-bottom: 4px double var(--dark);
@@ -204,7 +182,6 @@
       font-weight: 700;
       margin-top: 8px;
     }
-
     .news-article-headline {
       font-family: 'Playfair Display', Georgia, serif;
       font-size: clamp(2rem, 5.5vw, 3.4rem);
@@ -214,7 +191,6 @@
       color: var(--dark);
       margin: 20px 0 12px;
     }
-
     .news-standfirst {
       font-family: 'Playfair Display', Georgia, serif;
       font-size: 1.15rem;
@@ -225,7 +201,6 @@
       margin: 0 auto 25px;
       line-height: 1.5;
     }
-
     .news-meta {
       display: flex;
       justify-content: center;
@@ -243,23 +218,7 @@
     }
     .news-meta span strong { color: var(--dark); }
 
-    .news-hero-img {
-      width: 100%;
-      max-height: 520px;
-      object-fit: cover;
-      border-radius: 4px;
-      margin-bottom: 10px;
-    }
-    .news-caption {
-      font-size: .82rem;
-      color: var(--gray);
-      font-style: italic;
-      text-align: center;
-      margin-bottom: 30px;
-      line-height: 1.5;
-    }
-
-    /* --- Story intro / "After those rough times" --- */
+    /* --- Story intro --- */
     .news-intro-lead {
       font-family: 'Playfair Display', Georgia, serif;
       font-size: 1.35rem;
@@ -271,10 +230,7 @@
       line-height: 1.5;
       padding: 0 10px;
     }
-    .news-intro-lead span {
-      color: var(--orange);
-      font-weight: 700;
-    }
+    .news-intro-lead span { color: var(--orange); font-weight: 700; }
 
     /* --- "Meet Haniffah" circular profile --- */
     .meet-block {
@@ -326,18 +282,16 @@
       line-height: 1.1;
       margin-bottom: 6px;
     }
+    /* Tagline: NORMAL sentence style (no special color/weight) */
     .meet-tag {
       font-size: .95rem;
       color: var(--gray);
-      font-style: italic;
       max-width: 480px;
+      line-height: 1.5;
     }
 
-    /* --- Auto image slider (Before & After) --- */
-    .news-slider-wrap {
-      margin: 45px auto 45px;
-      max-width: 950px;
-    }
+    /* --- Before & After auto-moving strip --- */
+    .news-slider-wrap { margin: 45px auto 45px; max-width: 1000px; }
     .news-slider-title {
       text-align: center;
       font-family: 'Playfair Display', Georgia, serif;
@@ -381,30 +335,41 @@
       text-shadow: 0 2px 12px rgba(0,0,0,.6);
     }
 
-    /* Before & After auto-moving strip */
+    /* Marquee container with edge fade */
     .ba-marquee {
       overflow: hidden;
       border-radius: 16px;
       -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
               mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
     }
+    /* Track: outer gap ONLY between pairs */
     .ba-track {
       display: flex;
-      gap: 18px;
+      gap: 18px;                 /* gap between each Before+After PAIR */
       width: max-content;
       animation: baScroll 40s linear infinite;
     }
     .ba-marquee:hover .ba-track { animation-play-state: paused; }
     @keyframes baScroll { to { transform: translateX(-50%); } }
+
+    /* A pair of Before + After — NO gap between them */
+    .ba-pair {
+      display: flex;
+      gap: 0;                    /* zero gap inside the pair */
+      flex: 0 0 auto;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 8px 22px rgba(0,0,0,.18);
+      background: #111;
+    }
+
     .ba-card {
       position: relative;
       flex: 0 0 auto;
       height: 300px;
       min-width: 160px;
-      border-radius: 14px;
       overflow: hidden;
       background: #111;
-      box-shadow: 0 8px 22px rgba(0,0,0,.18);
     }
     .ba-card img { height: 100%; width: auto; display: block; }
     .ba-card::after {
@@ -412,8 +377,12 @@
       background: linear-gradient(transparent, rgba(0,0,0,.7)); pointer-events: none;
     }
     .ba-card .ns-caption { font-size: .95rem; bottom: 12px; left: 14px; right: 14px; }
-    @media (max-width: 700px) { .ba-card { height: 220px; } }
-    @media (prefers-reduced-motion: reduce) { .ba-track { animation-duration: 120s !important; } }
+    @media (max-width: 700px) {
+      .ba-card { height: 220px; min-width: 130px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .ba-track { animation-duration: 120s !important; }
+    }
 
     /* --- Newspaper body --- */
     .news-body {
@@ -423,9 +392,7 @@
       color: #222;
       text-align: justify;
     }
-    .news-body p {
-      margin-bottom: 1.1em;
-    }
+    .news-body p { margin-bottom: 1.1em; }
     .news-body p:first-of-type::first-letter {
       font-family: 'Playfair Display', Georgia, serif;
       font-size: 4.2rem;
@@ -461,39 +428,24 @@
       border-radius: 4px;
     }
 
-    /* Story images: smaller, never cropped or zoomed */
-    .story-figure {
-      margin: 22px auto;
-      max-width: 460px;
-      text-align: center;
-    }
+    /* Story images */
+    .story-figure { margin: 22px auto; max-width: 460px; text-align: center; }
     .story-figure img {
-      width: 100%;
-      height: auto;
-      max-height: 340px;
-      object-fit: contain;
-      background: var(--light);
-      border-radius: 10px;
-      display: block;
-      margin: 0 auto;
+      width: 100%; height: auto; max-height: 340px;
+      object-fit: contain; background: var(--light);
+      border-radius: 10px; display: block; margin: 0 auto;
       box-shadow: 0 8px 22px rgba(0,0,0,.12);
     }
     .story-figure figcaption {
-      font-size: .8rem;
-      color: var(--gray);
-      font-style: italic;
-      margin-top: 8px;
-      line-height: 1.4;
+      font-size: .8rem; color: var(--gray); font-style: italic;
+      margin-top: 8px; line-height: 1.4;
     }
-    /* Newspaper style: picture on one side, words continue beside it */
     .story-figure.float-left {
-      float: left;
-      width: min(40%, 300px);
+      float: left; width: min(40%, 300px);
       margin: 6px 26px 14px 0;
     }
     .story-figure.float-right {
-      float: right;
-      width: min(40%, 300px);
+      float: right; width: min(40%, 300px);
       margin: 6px 0 14px 26px;
     }
     .news-body h3 { clear: both; }
@@ -522,59 +474,38 @@
     }
 
     .news-stats-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-      margin: 30px 0;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 15px; margin: 30px 0;
     }
     .news-stat {
-      background: var(--light);
-      border: 1px solid var(--border);
+      background: var(--light); border: 1px solid var(--border);
       border-top: 4px solid var(--orange);
-      border-radius: 10px;
-      padding: 20px 15px;
-      text-align: center;
+      border-radius: 10px; padding: 20px 15px; text-align: center;
     }
     .news-stat strong {
       display: block;
       font-family: 'Playfair Display', Georgia, serif;
-      font-size: 2.2rem;
-      font-weight: 900;
-      color: var(--orange);
-      line-height: 1;
+      font-size: 2.2rem; font-weight: 900;
+      color: var(--orange); line-height: 1;
     }
     .news-stat span {
-      font-size: .8rem;
-      color: var(--gray);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-weight: 600;
+      font-size: .8rem; color: var(--gray);
+      text-transform: uppercase; letter-spacing: 1px; font-weight: 600;
     }
 
     .news-back-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 20px;
-      background: none;
-      border: none;
-      color: var(--orange);
-      font-weight: 700;
-      font-size: .9rem;
-      cursor: pointer;
-      padding: 8px 0;
-      transition: .25s;
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-bottom: 20px; background: none; border: none;
+      color: var(--orange); font-weight: 700; font-size: .9rem;
+      cursor: pointer; padding: 8px 0; transition: .25s;
     }
-    .news-back-btn:hover {
-      gap: 12px;
-    }
+    .news-back-btn:hover { gap: 12px; }
 
     @media (max-width: 800px) {
       .news-stats-row { grid-template-columns: 1fr; }
       .news-body .news-pull-quote { padding: 20px; font-size: 1.3rem; }
       .meet-profile { width: 140px; height: 140px; }
       .meet-name { font-size: 1.6rem; }
-      .story-figure.round-siblings img { width: 220px; height: 220px; max-height: 220px; }
     }
 
     /* ================= SECTIONS ================= */
@@ -592,36 +523,21 @@
       from { opacity: 0; transform: translateY(12px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    .section-heading {
-      text-align: center;
-      margin-bottom: 35px;
-    }
-    .section-heading h2 {
-      font-size: 2.4rem;
-      color: var(--orange);
-      margin-bottom: 8px;
-    }
-    .section-heading p {
-      color: var(--gray);
-    }
+    .section-heading { text-align: center; margin-bottom: 35px; }
+    .section-heading h2 { font-size: 2.4rem; color: var(--orange); margin-bottom: 8px; }
+    .section-heading p { color: var(--gray); }
+
     /* ================= HERO ================= */
     .hero {
-      min-height: 620px;
-      border-radius: 25px;
-      overflow: hidden;
-      position: relative;
-      display: flex;
-      align-items: center;
-      background: #1b1b1b;
-      color: white;
-      padding: 70px;
+      min-height: 620px; border-radius: 25px; overflow: hidden;
+      position: relative; display: flex; align-items: center;
+      background: #1b1b1b; color: white; padding: 70px;
     }
     .hero-slides { position: absolute; inset: 0; z-index: 0; }
     .hero-slide {
       position: absolute; inset: 0;
       background-size: cover; background-position: center;
-      opacity: 0;
-      transform: scale(1);
+      opacity: 0; transform: scale(1);
       transition: opacity 1.8s ease-in-out, transform 7s ease-out;
     }
     .hero-slide.on { opacity: 1; transform: scale(1.06); }
@@ -638,73 +554,42 @@
       background: rgba(255,255,255,.45); transition: .4s;
     }
     .hero-dots span.on { background: var(--orange); width: 26px; border-radius: 6px; }
-    .hero-content {
-      max-width: 680px;
-      position: relative;
-      z-index: 2;
-    }
+    .hero-content { max-width: 680px; position: relative; z-index: 2; }
     @media (prefers-reduced-motion: reduce) {
       .hero-slide { transition: opacity 1.8s ease-in-out; transform: none !important; }
     }
     .hero-tag {
-      display: inline-block;
-      background: rgba(255,107,0,.95);
-      padding: 8px 17px;
-      border-radius: 50px;
-      font-size: .85rem;
-      font-weight: 700;
-      margin-bottom: 18px;
+      display: inline-block; background: rgba(255,107,0,.95);
+      padding: 8px 17px; border-radius: 50px;
+      font-size: .85rem; font-weight: 700; margin-bottom: 18px;
     }
     .hero h1 {
       font-size: clamp(2.5rem, 6vw, 4.5rem);
-      line-height: 1.05;
-      margin-bottom: 20px;
-      font-weight: 800;
+      line-height: 1.05; margin-bottom: 20px; font-weight: 800;
     }
     .hero h1 span { color: #ff8a35; }
     .hero p {
-      font-size: 1.1rem;
-      color: #f3f3f3;
-      margin-bottom: 28px;
-      max-width: 620px;
+      font-size: 1.1rem; color: #f3f3f3;
+      margin-bottom: 28px; max-width: 620px;
     }
-    .hero-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 13px;
-    }
+    .hero-buttons { display: flex; flex-wrap: wrap; gap: 13px; }
+
     /* ================= QUICK STATS ================= */
     .stats {
-      display: grid;
-      grid-template-columns: repeat(4,1fr);
-      gap: 15px;
-      margin: -45px 5% 50px;
-      position: relative;
-      z-index: 5;
+      display: grid; grid-template-columns: repeat(4,1fr);
+      gap: 15px; margin: -45px 5% 50px;
+      position: relative; z-index: 5;
     }
     .stat {
-      background: white;
-      padding: 25px 15px;
-      border-radius: 15px;
-      text-align: center;
+      background: white; padding: 25px 15px;
+      border-radius: 15px; text-align: center;
       box-shadow: 0 8px 30px rgba(0,0,0,.1);
-      cursor: pointer;
-      transition: transform .3s, box-shadow .3s;
+      cursor: pointer; transition: transform .3s, box-shadow .3s;
       position: relative;
     }
-    .stat i {
-      color: var(--orange);
-      font-size: 1.6rem;
-      margin-bottom: 8px;
-    }
-    .stat h3 {
-      font-size: 1.7rem;
-      color: var(--dark);
-    }
-    .stat p {
-      color: var(--gray);
-      font-size: .85rem;
-    }
+    .stat i { color: var(--orange); font-size: 1.6rem; margin-bottom: 8px; }
+    .stat h3 { font-size: 1.7rem; color: var(--dark); }
+    .stat p { color: var(--gray); font-size: .85rem; }
     .stat:hover, .stat:focus-visible {
       transform: translateY(-6px);
       box-shadow: 0 14px 36px rgba(255,107,0,.22);
@@ -734,7 +619,8 @@
     }
     .pm-slide {
       position: absolute; inset: 0; width: 100%; height: 100%;
-      object-fit: contain; background: #000; opacity: 0; transition: opacity 1s ease-in-out;
+      object-fit: contain; background: #000;
+      opacity: 0; transition: opacity 1s ease-in-out;
     }
     .pm-slide.on { opacity: 1; }
     .pm-slider::after {
@@ -794,34 +680,27 @@
       .pm-num { display: flex; align-items: center; justify-content: space-between; padding: 12px 18px; text-align: left; }
       .pm-num strong { font-size: 1.5rem; }
     }
+
     /* ================= PHOTO STRIP ================= */
     .photo-strip {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr 1fr;
-      gap: 15px;
-      margin-top: 35px;
+      display: grid; grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 15px; margin-top: 35px;
     }
     .photo-strip img {
-      width: 100%;
-      height: 260px;
-      object-fit: cover;
-      border-radius: 17px;
-      transition: .4s;
+      width: 100%; height: 260px; object-fit: cover;
+      border-radius: 17px; transition: .4s;
     }
     .photo-strip img:hover { transform: scale(1.025); }
+
     /* ================= CARDS ================= */
     .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+      display: grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
       gap: 22px;
     }
     .card {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 28px;
-      transition: .3s;
-      box-shadow: 0 5px 20px rgba(0,0,0,.04);
+      background: white; border: 1px solid var(--border);
+      border-radius: 18px; padding: 28px;
+      transition: .3s; box-shadow: 0 5px 20px rgba(0,0,0,.04);
       cursor: pointer;
     }
     .card:hover {
@@ -829,302 +708,167 @@
       box-shadow: 0 15px 35px rgba(0,0,0,.1);
     }
     .card i {
-      width: 55px;
-      height: 55px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--orange-light);
-      color: var(--orange);
-      border-radius: 14px;
-      font-size: 1.5rem;
-      margin-bottom: 17px;
+      width: 55px; height: 55px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--orange-light); color: var(--orange);
+      border-radius: 14px; font-size: 1.5rem; margin-bottom: 17px;
     }
     .card h3 { margin-bottom: 8px; }
     .card p { color: var(--gray); font-size: .92rem; }
     .card-link-text {
-      display: inline-block;
-      margin-top: 12px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--orange);
+      display: inline-block; margin-top: 12px;
+      font-size: 0.85rem; font-weight: 700; color: var(--orange);
     }
+
     /* ================= CAMPAIGN ================= */
     .campaign-box {
       background: linear-gradient(135deg,#fff4eb,#fff);
       border: 1px solid #ffe0cc;
-      border-radius: 25px;
-      padding: 35px;
-      margin-top: 40px;
+      border-radius: 25px; padding: 35px; margin-top: 40px;
     }
     .campaign-title {
-      text-align: center;
-      color: var(--orange);
-      font-size: 2.8rem;
-      font-weight: 800;
+      text-align: center; color: var(--orange);
+      font-size: 2.8rem; font-weight: 800;
     }
-    .campaign-subtitle {
-      text-align: center;
-      color: var(--gray);
-      margin-bottom: 30px;
-    }
+    .campaign-subtitle { text-align: center; color: var(--gray); margin-bottom: 30px; }
     .campaign-main-photo {
-      width: 100%;
-      max-height: 520px;
-      object-fit: cover;
-      border-radius: 18px;
-      display: block;
+      width: 100%; max-height: 520px;
+      object-fit: cover; border-radius: 18px; display: block;
     }
     .progress-card {
-      background: white;
-      padding: 30px;
+      background: white; padding: 30px;
       border-radius: 20px;
       box-shadow: 0 8px 30px rgba(0,0,0,.07);
       margin-top: 30px;
     }
     .progress-info {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-      font-weight: 700;
+      display: flex; justify-content: space-between;
+      margin-bottom: 10px; font-weight: 700;
     }
     .progress {
-      height: 20px;
-      background: #e9edf1;
-      border-radius: 20px;
-      overflow: hidden;
+      height: 20px; background: #e9edf1;
+      border-radius: 20px; overflow: hidden;
     }
     .progress span {
-      display: block;
-      width: 4.8%;
-      height: 100%;
+      display: block; width: 4.8%; height: 100%;
       background: linear-gradient(90deg,var(--orange),#ff9b52);
       border-radius: 20px;
       animation: progressGrow 1.5s ease;
     }
-    @keyframes progressGrow {
-      from { width: 0; }
-      to { width: 4.8%; }
-    }
+    @keyframes progressGrow { from { width: 0; } to { width: 4.8%; } }
     .amounts {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 22px 0;
+      display: flex; justify-content: center; flex-wrap: wrap;
+      gap: 10px; margin: 22px 0;
     }
     .amount {
-      padding: 11px 22px;
-      border-radius: 50px;
-      background: white;
-      border: 2px solid var(--orange);
-      color: var(--orange);
-      font-weight: 700;
-      cursor: pointer;
-      transition: .2s;
+      padding: 11px 22px; border-radius: 50px;
+      background: white; border: 2px solid var(--orange);
+      color: var(--orange); font-weight: 700;
+      cursor: pointer; transition: .2s;
     }
-    .amount:hover,
-    .amount.selected {
-      background: var(--orange);
-      color: white;
-    }
+    .amount:hover, .amount.selected { background: var(--orange); color: white; }
+
     /* ================= DONATION BANNER ================= */
     .donation-banner {
-      margin-top: 45px;
-      padding: 45px;
-      border-radius: 25px;
+      margin-top: 45px; padding: 45px; border-radius: 25px;
       background:
         linear-gradient(90deg,rgba(255,107,0,.95),rgba(255,107,0,.72)),
         url("/IMG_0716.jpg") center/cover;
-      color: white;
-      text-align: center;
+      color: white; text-align: center;
     }
-    .donation-banner h2 {
-      font-size: 2.3rem;
-      margin-bottom: 10px;
-    }
-    .donation-banner p {
-      max-width: 650px;
-      margin: 0 auto 22px;
-    }
-    .donation-banner .btn {
-      background: white;
-      color: var(--orange);
-    }
-    /* ================= GALLERY ================= */
-    .gallery {
-      columns: 3 280px;
-      column-gap: 18px;
-    }
-    .gallery-item {
-      break-inside: avoid;
-      margin-bottom: 18px;
-      overflow: hidden;
-      border-radius: 15px;
-      position: relative;
-      cursor: pointer;
-    }
-    .gallery-item img {
-      width: 100%;
-      display: block;
-      transition: .4s;
-    }
-    .gallery-item:hover img { transform: scale(1.05); }
-    .gallery-caption {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 25px 15px 12px;
-      color: white;
-      background: linear-gradient(transparent,rgba(0,0,0,.75));
-      font-weight: 600;
-    }
+    .donation-banner h2 { font-size: 2.3rem; margin-bottom: 10px; }
+    .donation-banner p { max-width: 650px; margin: 0 auto 22px; }
+    .donation-banner .btn { background: white; color: var(--orange); }
+
     /* ================= CONTACT ================= */
     .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
       gap: 20px;
     }
     .contact-card {
-      background: var(--light);
-      border-radius: 18px;
-      padding: 28px;
-      border-left: 5px solid var(--orange);
+      background: var(--light); border-radius: 18px;
+      padding: 28px; border-left: 5px solid var(--orange);
     }
-    .contact-card i {
-      color: var(--orange);
-      font-size: 1.5rem;
-      margin-right: 8px;
-    }
-    .contact-card p {
-      margin-top: 8px;
-      color: var(--gray);
-    }
+    .contact-card i { color: var(--orange); font-size: 1.5rem; margin-right: 8px; }
+    .contact-card p { margin-top: 8px; color: var(--gray); }
+
     /* ================= FOOTER ================= */
     footer {
-      background: #171717;
-      color: white;
-      margin-top: 50px;
-      padding: 50px 5% 25px;
+      background: #171717; color: white;
+      margin-top: 50px; padding: 50px 5% 25px;
     }
     .footer-grid {
-      max-width: 1200px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
+      max-width: 1200px; margin: auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr;
       gap: 35px;
     }
     footer h3 { margin-bottom: 15px; }
     footer p { color: #bbb; font-size: .9rem; }
-    .socials {
-      display: flex;
-      gap: 10px;
-      margin-top: 15px;
-    }
+    .socials { display: flex; gap: 10px; margin-top: 15px; }
     .socials a {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: #292929;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      transition: .3s;
+      width: 42px; height: 42px; border-radius: 50%;
+      background: #292929; color: white;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; transition: .3s;
     }
-    .socials a:hover {
-      background: var(--orange);
-      transform: translateY(-3px);
-    }
+    .socials a:hover { background: var(--orange); transform: translateY(-3px); }
     .copyright {
-      text-align: center;
-      border-top: 1px solid #333;
-      margin-top: 35px;
-      padding-top: 20px;
+      text-align: center; border-top: 1px solid #333;
+      margin-top: 35px; padding-top: 20px;
     }
+
     /* ================= MODAL & FORM STYLES ================= */
     .modal, .modal-overlay {
-      position: fixed;
-      inset: 0;
+      position: fixed; inset: 0;
       background: rgba(0,0,0,.75);
       z-index: 3000;
-      display: none;
-      align-items: center;
-      justify-content: center;
+      display: none; align-items: center; justify-content: center;
       padding: 20px;
     }
     .modal.show, .modal-overlay.show { display: flex; }
     .modal-box, .modal-card {
-      width: 100%;
-      max-width: 580px;
-      max-height: 90vh;
-      overflow-y: auto;
-      background: white;
-      border-radius: 22px;
-      padding: 30px;
-      position: relative;
-      animation: modalIn .3s ease;
+      width: 100%; max-width: 580px; max-height: 90vh;
+      overflow-y: auto; background: white;
+      border-radius: 22px; padding: 30px;
+      position: relative; animation: modalIn .3s ease;
     }
     @keyframes modalIn {
       from { opacity: 0; transform: scale(.92); }
       to { opacity: 1; transform: scale(1); }
     }
     .close, .modal-close {
-      position: absolute;
-      top: 12px;
-      right: 20px;
-      font-size: 2rem;
-      cursor: pointer;
-      color: #777;
+      position: absolute; top: 12px; right: 20px;
+      font-size: 2rem; cursor: pointer; color: #777;
       transition: .2s;
     }
     .close:hover, .modal-close:hover { color: var(--orange); }
     .modal-title {
-      color: var(--orange);
-      font-size: 1.8rem;
-      font-weight: 800;
-      margin-bottom: 15px;
+      color: var(--orange); font-size: 1.8rem;
+      font-weight: 800; margin-bottom: 15px;
     }
-    .form-group {
-      margin-bottom: 16px;
-      text-align: left;
-    }
+    .form-group { margin-bottom: 16px; text-align: left; }
     .form-group label {
-      display: block;
-      font-weight: 600;
-      font-size: 0.9rem;
-      margin-bottom: 6px;
-      color: var(--dark);
+      display: block; font-weight: 600;
+      font-size: 0.9rem; margin-bottom: 6px; color: var(--dark);
     }
     .form-group input,
     .form-group select {
-      width: 100%;
-      padding: 12px 15px;
+      width: 100%; padding: 12px 15px;
       border: 1px solid var(--border);
-      border-radius: 10px;
-      font-size: 0.95rem;
-      background: var(--light);
-      outline: none;
+      border-radius: 10px; font-size: 0.95rem;
+      background: var(--light); outline: none;
       transition: 0.25s;
     }
     .form-group input:focus,
     .form-group select:focus {
-      border-color: var(--orange);
-      background: white;
+      border-color: var(--orange); background: white;
     }
     .btn-submit-form {
-      width: 100%;
-      padding: 14px;
-      background: var(--orange);
-      color: white;
-      border: none;
-      border-radius: 50px;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: 0.3s;
+      width: 100%; padding: 14px;
+      background: var(--orange); color: white;
+      border: none; border-radius: 50px;
+      font-weight: 700; font-size: 1rem;
+      cursor: pointer; transition: 0.3s;
       box-shadow: 0 5px 18px rgba(255,107,0,.3);
     }
     .btn-submit-form:hover {
@@ -1133,40 +877,24 @@
     }
     .payment-option {
       background: var(--orange-light);
-      padding: 18px;
-      border-radius: 14px;
-      margin-top: 15px;
-      text-align: left;
+      padding: 18px; border-radius: 14px;
+      margin-top: 15px; text-align: left;
     }
     .payment-option h4 {
-      color: var(--orange);
-      font-weight: 700;
-      margin-bottom: 8px;
+      color: var(--orange); font-weight: 700; margin-bottom: 8px;
     }
     .logo-badge-container {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 12px;
+      display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px;
     }
     .payment-link-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 16px;
-      background: white;
-      color: var(--orange);
-      border: 1.5px solid var(--orange);
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.85rem;
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 16px; background: white;
+      color: var(--orange); border: 1.5px solid var(--orange);
+      border-radius: 8px; text-decoration: none;
+      font-weight: 600; font-size: 0.85rem;
       transition: 0.25s;
     }
-    .payment-link-btn:hover {
-      background: var(--orange);
-      color: white;
-    }
+    .payment-link-btn:hover { background: var(--orange); color: white; }
     .opt { font-weight: 400; color: var(--gray); font-size: .8rem; }
     .pay-summary { background: var(--orange-light); padding: 12px 15px; border-radius: 10px; margin-bottom: 15px; font-size: .92rem; }
     .method-grid { display: grid; gap: 10px; }
@@ -1175,40 +903,115 @@
     .steps { margin: 0 0 12px 18px; font-size: .88rem; }
     .steps li { margin-bottom: 4px; }
     .back-link { background: none; border: none; color: var(--gray); cursor: pointer; margin-top: 15px; font-size: .9rem; text-decoration: underline; }
+
+    /* ================= CHILDREN GALLERY MODAL ================= */
+    .children-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 20px;
+      margin-top: 18px;
+    }
+    .child-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      cursor: pointer;
+      padding: 10px 6px;
+      border-radius: 14px;
+      transition: .25s;
+      background: transparent;
+      border: 1px solid transparent;
+    }
+    .child-card:hover {
+      background: var(--orange-light);
+      border-color: var(--orange);
+      transform: translateY(-3px);
+    }
+    .child-avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid var(--orange);
+      box-shadow: 0 6px 16px rgba(255,107,0,.3);
+      margin-bottom: 8px;
+      background: var(--orange-light);
+    }
+    .child-avatar img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .child-name {
+      font-weight: 700;
+      font-size: .9rem;
+      color: var(--dark);
+      line-height: 1.2;
+    }
+    .child-sub {
+      font-size: .72rem;
+      color: var(--gray);
+      margin-top: 2px;
+    }
+
+    /* Child contact form */
+    .child-form-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+      padding: 14px;
+      background: var(--orange-light);
+      border-radius: 14px;
+      border-left: 4px solid var(--orange);
+    }
+    .child-form-head .child-avatar {
+      width: 70px; height: 70px; margin: 0;
+      border-width: 3px;
+    }
+    .child-form-head h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--dark);
+      line-height: 1.2;
+      margin: 0;
+    }
+    .child-form-head small {
+      font-size: .82rem;
+      color: var(--gray);
+      display: block;
+      margin-top: 2px;
+    }
+    .child-form-intro {
+      font-size: .9rem;
+      color: #555;
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+
     /* ================= TOAST ================= */
     .toast-container {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 4000;
+      position: fixed; bottom: 20px; right: 20px; z-index: 4000;
     }
     .toast {
-      background: white;
-      border-left: 5px solid var(--orange);
-      padding: 13px 18px;
-      border-radius: 10px;
+      background: white; border-left: 5px solid var(--orange);
+      padding: 13px 18px; border-radius: 10px;
       box-shadow: 0 7px 25px rgba(0,0,0,.15);
-      margin-top: 10px;
-      animation: toastIn .4s ease;
+      margin-top: 10px; animation: toastIn .4s ease;
       font-size: .85rem;
     }
     @keyframes toastIn {
       from { opacity: 0; transform: translateX(100px); }
       to { opacity: 1; transform: translateX(0); }
     }
+
     @media(max-width:850px) {
       .menu-toggle { display: block; }
       .nav {
-        position: fixed;
-        top: var(--header-height);
-        left: 0;
-        right: 0;
-        background: white;
-        flex-direction: column;
-        padding: 20px;
+        position: fixed; top: var(--header-height);
+        left: 0; right: 0; background: white;
+        flex-direction: column; padding: 20px;
         box-shadow: 0 10px 20px rgba(0,0,0,.1);
-        display: none;
-        gap: 15px;
+        display: none; gap: 15px;
       }
       .nav.show-menu { display: flex; }
       .hero { min-height: 570px; padding: 35px 25px; }
@@ -1246,13 +1049,17 @@
     }
     .ss-slide img, .ss-slide video { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
     .ss-slide .play-badge {
-      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-      color: #fff; font-size: 3rem; text-shadow: 0 2px 12px rgba(0,0,0,.6); pointer-events: none;
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 3rem;
+      text-shadow: 0 2px 12px rgba(0,0,0,.6); pointer-events: none;
     }
     .ss-arrow {
       position: absolute; top: 50%; transform: translateY(-50%); z-index: 20;
-      width: 44px; height: 44px; border-radius: 50%; border: none; cursor: pointer;
-      background: rgba(255,255,255,.92); color: var(--orange); font-size: 1.1rem;
+      width: 44px; height: 44px; border-radius: 50%; border: none;
+      cursor: pointer;
+      background: rgba(255,255,255,.92); color: var(--orange);
+      font-size: 1.1rem;
       box-shadow: 0 4px 14px rgba(0,0,0,.2); transition: .25s;
     }
     .ss-arrow:hover { background: var(--orange); color: #fff; transform: translateY(-50%) scale(1.1); }
@@ -1356,28 +1163,19 @@
     </div>
     <div class="hero-dots" id="heroDots" aria-hidden="true"><span class="on"></span><span></span><span></span><span></span></div>
     <div class="hero-content">
-      <span class="hero-tag">
-        ❤️ Serving Children in Uganda
-      </span>
-      <h1>
-        Hope Begins With <span>One Helping Hand.</span>
-      </h1>
+      <span class="hero-tag">❤️ Serving Children in Uganda</span>
+      <h1>Hope Begins With <span>One Helping Hand.</span></h1>
       <p>
         Rock ChildCare Ministries is working to support vulnerable
         children and young people through food, education, shelter,
         skills development and community care.
       </p>
       <div class="hero-buttons">
-        <button class="btn btn-primary btn-large" onclick="showTab('campaign')">
-          Support Our Campaign
-        </button>
-        <button class="btn btn-outline btn-large" onclick="showTab('gallery')">
-          View Our Photos
-        </button>
+        <button class="btn btn-primary btn-large" onclick="showTab('campaign')">Support Our Campaign</button>
+        <button class="btn btn-outline btn-large" onclick="showTab('gallery')">View Our Photos</button>
       </div>
     </div>
   </div>
-  <!-- QUICK STATS -->
   <div class="stats">
     <div class="stat" role="button" tabindex="0" onclick="openProgram('children')">
       <i class="fas fa-child"></i>
@@ -1404,7 +1202,6 @@
       <span class="stat-more">Learn more <i class="fas fa-arrow-right" style="font-size:.7rem;margin:0"></i></span>
     </div>
   </div>
-  <!-- PHOTO STRIP -->
   <div class="section-heading">
     <h2>Making a Difference</h2>
     <p>Every contribution can help create another moment of hope.</p>
@@ -1414,7 +1211,6 @@
     <img src="/IMG_8583.jpg" alt="Rock ChildCare Ministries">
     <img src="/IMG_1148.jpg" alt="Rock ChildCare Ministries">
   </div>
-  <!-- WHAT WE DO -->
   <div style="margin-top:65px">
     <div class="section-heading">
       <h2>What We Do</h2>
@@ -1424,51 +1220,33 @@
       <div class="card" onclick="openProgram('food')">
         <i class="fas fa-utensils"></i>
         <h3>Food & Nutrition</h3>
-        <p>
-          Helping provide meals and food assistance to children
-          experiencing food insecurity.
-        </p>
+        <p>Helping provide meals and food assistance to children experiencing food insecurity.</p>
         <span class="card-link-text">Learn More &rarr;</span>
       </div>
       <div class="card" onclick="openProgram('education')">
         <i class="fas fa-book-open"></i>
         <h3>Education</h3>
-        <p>
-          Supporting children's access to education and opportunities
-          to develop their future.
-        </p>
+        <p>Supporting children's access to education and opportunities to develop their future.</p>
         <span class="card-link-text">Learn More &rarr;</span>
       </div>
       <div class="card" onclick="openProgram('shelter')">
         <i class="fas fa-house"></i>
         <h3>Safe Shelter</h3>
-        <p>
-          Working toward safe and supportive environments for
-          vulnerable children.
-        </p>
+        <p>Working toward safe and supportive environments for vulnerable children.</p>
         <span class="card-link-text">Learn More &rarr;</span>
       </div>
       <div class="card" onclick="openProgram('girlskills')">
         <i class="fas fa-scissors"></i>
         <h3>Girls' Skills</h3>
-        <p>
-          Supporting vocational skills, entrepreneurship and
-          practical opportunities for young girls.
-        </p>
+        <p>Supporting vocational skills, entrepreneurship and practical opportunities for young girls.</p>
         <span class="card-link-text">Learn More &rarr;</span>
       </div>
     </div>
   </div>
-  <!-- DONATION CTA -->
   <div class="donation-banner">
     <h2>Give Hope Today ❤️</h2>
-    <p>
-      Your support can contribute toward food, education,
-      skills training and care for vulnerable children.
-    </p>
-    <button class="btn btn-large" onclick="openModal('donateModal')">
-      Donate Now
-    </button>
+    <p>Your support can contribute toward food, education, skills training and care for vulnerable children.</p>
+    <button class="btn btn-large" onclick="openModal('donateModal')">Donate Now</button>
   </div>
 </section>
 
@@ -1476,10 +1254,7 @@
 <section id="about-section" class="page-section">
   <div class="section-heading">
     <h2>About Rock ChildCare Ministries</h2>
-    <p>
-      Restoring hope, dignity and opportunity for vulnerable
-      children and young people in Uganda.
-    </p>
+    <p>Restoring hope, dignity and opportunity for vulnerable children and young people in Uganda.</p>
   </div>
   <div class="photo-strip">
     <img src="/IMG_0721.jpg" alt="About Rock ChildCare Ministries">
@@ -1490,72 +1265,46 @@
     <div class="card" onclick="showTab('impact')">
       <i class="fas fa-bullseye"></i>
       <h3>Our Purpose</h3>
-      <p>
-        To support vulnerable children through food,
-        education, shelter and practical life skills.
-      </p>
+      <p>To support vulnerable children through food, education, shelter and practical life skills.</p>
     </div>
     <div class="card" onclick="openModal('partnerModal')">
       <i class="fas fa-heart"></i>
       <h3>Our Values</h3>
-      <p>
-        Compassion, dignity, transparency, service and
-        community empowerment guide our work.
-      </p>
+      <p>Compassion, dignity, transparency, service and community empowerment guide our work.</p>
     </div>
     <div class="card" onclick="openProgram('girlskills')">
       <i class="fas fa-person-dress"></i>
       <h3>Girls Support</h3>
-      <p>
-        Supporting girls through vocational skills,
-        health education, tailoring and entrepreneurship.
-      </p>
+      <p>Supporting girls through vocational skills, health education, tailoring and entrepreneurship.</p>
     </div>
   </div>
   <div class="donation-banner">
     <h2>Be Part of the Journey</h2>
-    <p>
-      You can help us continue reaching vulnerable children
-      and families.
-    </p>
-    <button class="btn btn-large" onclick="openModal('donateModal')">
-      Support Rock ChildCare Ministries
-    </button>
+    <p>You can help us continue reaching vulnerable children and families.</p>
+    <button class="btn btn-large" onclick="openModal('donateModal')">Support Rock ChildCare Ministries</button>
   </div>
 </section>
 
 <!-- ================= CAMPAIGN ================= -->
 <section id="campaign-section" class="page-section">
   <div class="campaign-box">
-    <h1 class="campaign-title">
-      THE ROCK CAMPAIGN
-    </h1>
-    <p class="campaign-subtitle">
-      Powered by Rock ChildCare Ministries
-    </p>
+    <h1 class="campaign-title">THE ROCK CAMPAIGN</h1>
+    <p class="campaign-subtitle">Powered by Rock ChildCare Ministries</p>
     <img src="/IMG_1151.jpg" class="campaign-main-photo" alt="Children receiving support">
     <div style="text-align:center;margin:35px 0">
       <h2>Connect Your Generosity With Their Survival</h2>
       <p style="color:#666;max-width:700px;margin:10px auto">
-        We are working to reach vulnerable children with food,
-        education and practical support.
+        We are working to reach vulnerable children with food, education and practical support.
       </p>
     </div>
-    <!-- PROGRESS -->
     <div class="progress-card">
       <div class="progress-info">
         <span>Raised: <strong>$2,400</strong></span>
         <span>Goal: <strong>$50,000</strong></span>
       </div>
-      <div class="progress">
-        <span></span>
-      </div>
-      <p style="text-align:center;margin-top:10px;color:#777">
-        4.8% of campaign goal reached
-      </p>
-      <h3 style="text-align:center;margin-top:28px">
-        Choose an Amount
-      </h3>
+      <div class="progress"><span></span></div>
+      <p style="text-align:center;margin-top:10px;color:#777">4.8% of campaign goal reached</p>
+      <h3 style="text-align:center;margin-top:28px">Choose an Amount</h3>
       <div class="amounts">
         <button class="amount" onclick="selectAmount(40)">$40</button>
         <button class="amount" onclick="selectAmount(75)">$75</button>
@@ -1565,12 +1314,9 @@
         <button class="amount" onclick="openModal('donateModal')">Custom</button>
       </div>
       <div style="text-align:center">
-        <button class="btn btn-primary btn-large" onclick="openModal('donateModal')">
-          Donate Now ❤️
-        </button>
+        <button class="btn btn-primary btn-large" onclick="openModal('donateModal')">Donate Now ❤️</button>
       </div>
     </div>
-    <!-- CAMPAIGN PHOTOS -->
     <div style="margin-top:45px">
       <div class="section-heading">
         <h2>Campaign Moments</h2>
@@ -1594,7 +1340,7 @@
 
     <div class="news-masthead">
       <h1>Stories of Hope</h1>
-      <div class="news-kicker"> By Rock ChildCare Ministries Uganda</div>
+      <div class="news-kicker">By Rock ChildCare Ministries Uganda</div>
     </div>
 
     <h1 class="news-article-headline">After Those Rough Times, Hope Found a Home</h1>
@@ -1611,14 +1357,14 @@
     </p>
 
     <div class="news-body">
-       <!-- MEET HANIFFAH with circular profile -->
+      <!-- MEET HANIFFAH with circular profile -->
       <div class="meet-block">
         <div class="meet-profile">
           <img src="/niffa.jpg" alt="Meet Haniffah">
         </div>
         <div class="meet-label">Meet</div>
         <h3 class="meet-name">Haniffah</h3>
-        <p class="meet-tag"> bright, resilient girl whose story became one of hope through Rock ChildCare Ministries.</p>
+        <p class="meet-tag">A bright, resilient girl whose story became one of hope through Rock ChildCare Ministries.</p>
       </div>
       <p>
         Before hope took root, life for Haniffah and her family was a daily struggle. Every morning brought
@@ -1626,13 +1372,11 @@
         big dreams ever find a way forward?
       </p>
 
-      <!-- Image 1: small, centered -->
       <figure class="story-figure">
         <img src="/IMG_0719.jpg" alt="Haniffah's house">
         <figcaption>Haniffah's house, where her journey began.</figcaption>
       </figure>
 
-      <!-- Image 2: image on the LEFT, story continues on the right -->
       <figure class="story-figure float-left">
         <img src="/IMG_0719.jpg" alt="Haniffah's house">
         <figcaption>A humble home that became the starting point of a remarkable story.</figcaption>
@@ -1651,7 +1395,6 @@
 
       <h3>A Spark of Hope</h3>
 
-      <!-- Image 3: image on the RIGHT, story continues on the left -->
       <figure class="story-figure float-right">
         <img src="/IMG_0719.jpg" alt="Haniffah's house">
         <figcaption>Where hope first arrived.</figcaption>
@@ -1663,7 +1406,6 @@
         brand-new notebook, a school uniform, and a reason to dream big.
       </p>
 
-      <!-- Image 4: small, full photo, no zoom -->
       <figure class="story-figure">
         <img src="/IMG_1155.jpg" alt="The first steps toward a new future">
         <figcaption>The first steps toward a new future: school supplies in hand and hope in her heart.</figcaption>
@@ -1675,7 +1417,6 @@
 
       <h3>Growing &amp; Learning</h3>
 
-      <!-- Image 5: image on the LEFT again -->
       <figure class="story-figure float-left">
         <img src="/niffa.jpg" alt="Haniffah today">
         <figcaption>Haniffah today: educated, confident, and ready to shape her own destiny.</figcaption>
@@ -1686,22 +1427,28 @@
         own destiny and uplift her entire community.
       </p>
 
-      <!-- BEFORE & AFTER: auto-moving strip -->
+      <!-- BEFORE & AFTER: auto-moving strip of PAIRS (no gap inside a pair) -->
       <div class="news-slider-wrap" style="clear:both">
         <h3 class="news-slider-title">Before &amp; After</h3>
         <p class="news-slider-sub">The same children, the same hope, transformed by your generosity.</p>
         <div class="ba-marquee" id="baMarquee">
           <div class="ba-track" id="baTrack">
-            <!-- To add more children, copy one ba-card line and change the photo, tag and caption -->
-            <div class="ba-card"><img src="/IMG_0719.jpg" alt=""><span class="ns-tag">Before</span><div class="ns-caption">A humble home and a heart full of hope.</div></div>
-            <div class="ba-card"><img src="/IMG_0254.jpg" alt=""><span class="ns-tag">Before</span><div class="ns-caption">Five siblings, one shared journey.</div></div>
-            <div class="ba-card"><img src="/IMG_1155.jpg" alt=""><span class="ns-tag">After</span><div class="ns-caption">The first classroom, the first notebook.</div></div>
-            <div class="ba-card"><img src="/niffa.jpg" alt=""><span class="ns-tag">After</span><div class="ns-caption">Educated, confident, empowered.</div></div>
-            <div class="ba-card"><img src="/IMG_1150.jpg" alt=""><span class="ns-tag">After</span><div class="ns-caption">A community lifted by hope.</div></div>
+            <!-- Each .ba-pair = one Before + one After with NO gap between them -->
+            <div class="ba-pair">
+              <div class="ba-card"><img src="/IMG_0719.jpg" alt=""><span class="ns-tag">Before</span><div class="ns-caption">A humble home and a heart full of hope.</div></div>
+              <div class="ba-card"><img src="/niffa.jpg" alt=""><span class="ns-tag">After</span><div class="ns-caption">Educated, confident, empowered.</div></div>
+            </div>
+            <div class="ba-pair">
+              <div class="ba-card"><img src="/IMG_0254.jpg" alt=""><span class="ns-tag">Before</span><div class="ns-caption">Five siblings, one shared journey.</div></div>
+              <div class="ba-card"><img src="/IMG_1155.jpg" alt=""><span class="ns-tag">After</span><div class="ns-caption">The first classroom, the first notebook.</div></div>
+            </div>
+            <div class="ba-pair">
+              <div class="ba-card"><img src="/IMG_0719.jpg" alt=""><span class="ns-tag">Before</span><div class="ns-caption">Where the story began.</div></div>
+              <div class="ba-card"><img src="/IMG_1150.jpg" alt=""><span class="ns-tag">After</span><div class="ns-caption">A community lifted by hope.</div></div>
+            </div>
           </div>
         </div>
       </div>
-
 
       <div class="news-stats-row">
         <div class="news-stat">
@@ -1734,7 +1481,7 @@
         <p>
           "Yours is the support that turns these dreams into reality."
         </p>
-        <button class="btn btn-primary btn-large" onclick="donateFromProgram('Education')">
+        <button class="btn btn-primary btn-large" onclick="openChildrenGallery()">
           Support Children Like Haniffah ❤️
         </button>
       </div>
@@ -1746,11 +1493,8 @@
 <section id="gallery-section" class="page-section">
   <div class="section-heading">
     <h2>Our Gallery</h2>
-    <p>
-      A glimpse into the people and moments behind our work.
-    </p>
+    <p>A glimpse into the people and moments behind our work.</p>
   </div>
-  <!-- Main slideshow -->
   <div class="slideshow" id="slideshow">
     <button class="ss-arrow ss-prev" onclick="slideMove(-1)" aria-label="Previous">&#10094;</button>
     <div class="ss-stage" id="ssStage"></div>
@@ -1758,7 +1502,6 @@
   </div>
   <p class="ss-caption" id="ssCaption"></p>
 
-  <!-- Heart of memories -->
   <div class="section-heading" style="margin-top:50px;">
     <h2>Our Hearts, Our Moments ❤️</h2>
     <p>Tap any picture or video to view it.</p>
@@ -1779,28 +1522,23 @@
     <p>Get in touch with Rock ChildCare Ministries or connect with our team.</p>
   </div>
 
-  <!-- OUR LEADERSHIP & STAFF -->
   <div style="margin-bottom: 50px;">
     <h3 style="text-align: center; color: var(--orange); font-size: 1.8rem; margin-bottom: 25px; font-weight: 700;">
       Our Leadership & Staff
     </h3>
     <div class="cards" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); text-align: center;">
-      <!-- Volunteer -->
       <div class="card" style="padding: 20px;">
         <img src="/Hope.jpg" alt="Hope giver" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 15px; border: 3px solid var(--orange);">
         <h3>Volunteer</h3>
         <p style="color: var(--orange); font-weight: 600; margin-bottom: 5px;">Hope Giver</p>
         <p style="font-size: 0.85rem;">You take the first priority as the project can't run without you.</p>
       </div>
-      <!-- Managing Director Card -->
       <div class="card" style="padding: 20px;">
         <img src="/ceo.jpg" alt="Mulwana Patrick" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 15px; border: 3px solid var(--orange);">
         <h3>Mulwana Patrick</h3>
         <p style="color: var(--orange); font-weight: 600; margin-bottom: 5px;">Managing Director</p>
         <p style="font-size: 0.85rem;">Leading the mission and vision to empower vulnerable children in Uganda.</p>
       </div>
-
-      <!-- Secretary Card -->
       <div class="card" style="padding: 20px;">
         <img src="/image.jpg" alt="Mawanda Ian" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 15px; border: 3px solid var(--orange);">
         <h3>Mawanda Ian</h3>
@@ -1810,24 +1548,17 @@
     </div>
   </div>
 
-  <!-- OUR PARTNERS & CONNECT WITH US -->
   <div class="contact-grid">
     <div class="contact-card" style="border-left-color: var(--orange);">
-      <h3 style="margin-bottom: 15px;">
-        <i class="fas fa-handshake"></i> Our Partners
-      </h3>
+      <h3 style="margin-bottom: 15px;"><i class="fas fa-handshake"></i> Our Partners</h3>
       <p style="margin-bottom: 20px;">
         We collaborate with compassionate individuals, local groups, and international sponsors to transform lives.
       </p>
-      <button class="btn btn-primary" onclick="openModal('partnerModal')">
-        Become a Partner
-      </button>
+      <button class="btn btn-primary" onclick="openModal('partnerModal')">Become a Partner</button>
     </div>
 
     <div class="contact-card" style="border-left-color: #25D366;">
-      <h3 style="margin-bottom: 15px;">
-        <i class="fab fa-whatsapp" style="color: #25D366;"></i> Direct Contact & WhatsApp
-      </h3>
+      <h3 style="margin-bottom: 15px;"><i class="fab fa-whatsapp" style="color: #25D366;"></i> Direct Contact & WhatsApp</h3>
       <p><strong>CEO WhatsApp / Phone:</strong> 0753669250</p>
       <p><strong>Secretary Phone:</strong> 0755759491</p>
       <p><strong>Email:</strong> mulwanaian6@gmail.com</p>
@@ -1835,9 +1566,7 @@
     </div>
 
     <div class="contact-card" style="border-left-color: var(--orange);">
-      <h3 style="margin-bottom: 15px;">
-        <i class="fas fa-globe"></i> Reach Out / Connect With Us
-      </h3>
+      <h3 style="margin-bottom: 15px;"><i class="fas fa-globe"></i> Reach Out / Connect With Us</h3>
       <p style="margin-bottom: 15px;">Follow our social platforms for updates, live stories, and news:</p>
       <div style="display: flex; flex-direction: column; gap: 10px;">
         <a href="https://www.facebook.com/share/1FBhfk7q1Q/?mibextid=wwXIfr" target="_blank" class="btn btn-outline" style="text-align: left; padding: 10px 20px;">
@@ -1853,13 +1582,10 @@
     </div>
   </div>
 
-  <!-- DONATION CTA BANNER -->
   <div class="donation-banner" style="margin-top: 40px;">
     <h2>Want to Help?</h2>
     <p>Your support helps us provide food, education, and care to vulnerable children.</p>
-    <button class="btn btn-large" onclick="openModal('donateModal')">
-      Donate ❤️
-    </button>
+    <button class="btn btn-large" onclick="openModal('donateModal')">Donate ❤️</button>
   </div>
 </section>
 
@@ -1872,14 +1598,11 @@
       <h2 class="pm-title" id="pmTitle"></h2>
       <p class="pm-sub" id="pmSub"></p>
     </div>
-
-    <!-- IMAGE SLIDESHOW -->
     <div class="pm-slider" id="pmSlider">
       <button class="pm-arrow pm-prev" onclick="pmMove(-1)" aria-label="Previous photo"><i class="fas fa-chevron-left"></i></button>
       <button class="pm-arrow pm-next" onclick="pmMove(1)" aria-label="Next photo"><i class="fas fa-chevron-right"></i></button>
       <div class="pm-dots" id="pmDots"></div>
     </div>
-
     <div class="pm-body" style="padding-top: 20px;">
       <div class="pm-article" id="pmArticle"></div>
       <div class="pm-numbers" id="pmNumbers"></div>
@@ -1887,6 +1610,70 @@
         <button class="btn btn-primary btn-large" id="pmDonateBtn">Donate ❤️</button>
         <small>Every gift, big or small, helps a child.</small>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= CHILDREN GALLERY MODAL ================= -->
+<div class="modal-overlay" id="childrenGalleryModal">
+  <div class="modal-card" style="max-width: 720px;">
+    <span class="modal-close" onclick="closeModal('childrenGalleryModal')">&times;</span>
+    <h2 class="modal-title" style="text-align:center;">Children Waiting for a Helping Hand ❤️</h2>
+    <p style="text-align:center; color:var(--gray); font-size:.92rem; margin-bottom:14px;">
+      Tap any child to learn more and fill a short form so our team can reach you with their full details.
+    </p>
+    <div class="children-grid" id="childrenGrid"></div>
+  </div>
+</div>
+
+<!-- ================= CHILD CONTACT FORM MODAL ================= -->
+<div class="modal-overlay" id="childFormModal">
+  <div class="modal-card">
+    <span class="modal-close" onclick="closeModal('childFormModal')">&times;</span>
+    <div class="child-form-head">
+      <div class="child-avatar"><img id="cfAvatar" src="" alt=""></div>
+      <div>
+        <h3 id="cfName">Child</h3>
+        <small id="cfSub">Waiting for a helping hand</small>
+      </div>
+    </div>
+    <p class="child-form-intro" id="cfIntro">
+      To receive more details about this child, please fill in this form so we can contact you and share their full story.
+    </p>
+    <form id="childForm" onsubmit="handleChildSubmit(event)">
+      <div class="form-group">
+        <label for="cf-your-name">Your Full Name</label>
+        <input type="text" id="cf-your-name" required placeholder="John Doe">
+      </div>
+      <div class="form-group">
+        <label for="cf-your-phone">Phone Number / WhatsApp</label>
+        <input type="tel" id="cf-your-phone" required placeholder="e.g. +1 555 123 4567">
+      </div>
+      <div class="form-group">
+        <label for="cf-your-email">Email Address</label>
+        <input type="email" id="cf-your-email" required placeholder="you@example.com">
+      </div>
+      <p class="partner-sub">Social media <span class="opt">(optional, fill any you use)</span></p>
+      <div class="form-group">
+        <label for="cf-your-fb"><i class="fab fa-facebook-f" style="color:#1877f2"></i> Facebook username</label>
+        <input type="text" id="cf-your-fb" placeholder="e.g. john.doe">
+      </div>
+      <div class="form-group">
+        <label for="cf-your-ig"><i class="fab fa-instagram" style="color:#e1306c"></i> Instagram username</label>
+        <input type="text" id="cf-your-ig" placeholder="e.g. john_doe">
+      </div>
+      <div class="form-group">
+        <label for="cf-your-tt"><i class="fab fa-tiktok" style="color:#000"></i> TikTok username</label>
+        <input type="text" id="cf-your-tt" placeholder="e.g. john.doe">
+      </div>
+      <p id="cfError" class="partner-error" style="display:none;"></p>
+      <button type="submit" class="btn-submit-form" id="cfBtn">Send My Details</button>
+    </form>
+    <div id="cfThanks" style="display:none;text-align:center;padding:20px 0;">
+      <div style="font-size:3rem;">🎉❤️</div>
+      <h3 style="color:var(--orange);margin:10px 0;">Thank you!</h3>
+      <p>WhatsApp has opened with your details ready. Please press <strong>Send</strong> there so our team receives them and contacts you soon.</p>
+      <button type="button" class="btn-submit-form" style="margin-top:20px;" onclick="closeModal('childFormModal')">Close</button>
     </div>
   </div>
 </div>
@@ -1902,12 +1689,10 @@
         <label for="donor-name">Your Full Name <span class="opt">(optional)</span></label>
         <input type="text" id="donor-name" placeholder="Leave blank to stay anonymous">
       </div>
-
       <div class="form-group">
         <label for="donor-location">Your Location <span class="opt">(optional)</span></label>
         <input type="text" id="donor-location" placeholder="City, Country">
       </div>
-
       <div class="form-group">
         <label for="donor-purpose">Select Support Category</label>
         <select id="donor-purpose" required>
@@ -1918,12 +1703,10 @@
           <option value="General">General Support (where it is needed most)</option>
         </select>
       </div>
-
       <div class="form-group">
         <label for="donor-amount">Donation Amount ($)</label>
         <input type="number" id="donor-amount" value="50" min="1" required>
       </div>
-
       <button type="submit" class="btn-submit-form">Proceed to Payment Options</button>
     </form>
 
@@ -1985,7 +1768,7 @@
     </div>
 
     <p style="text-align: center; margin-top: 20px; font-weight: 600; color: var(--orange);">
-      Your donation creates a difference in a child’s life!
+      Your donation creates a difference in a child's life!
     </p>
   </div>
 </div>
@@ -1998,7 +1781,7 @@
 
     <div id="partnerFormWrap">
       <p class="partner-quote">
-        “Our journey of establishing hope starts with you. Become a partner, a friend or a donor to this hope-giving project.”
+        "Our journey of establishing hope starts with you. Become a partner, a friend or a donor to this hope-giving project."
       </p>
 
       <form id="partnerForm" onsubmit="handlePartnerSubmit(event)">
@@ -2008,12 +1791,10 @@
           <label for="p-name">Your Full Name</label>
           <input type="text" id="p-name" required placeholder="John Doe">
         </div>
-
         <div class="form-group">
           <label for="p-location">Your Location</label>
           <input type="text" id="p-location" placeholder="City, Country">
         </div>
-
         <div class="form-group">
           <label for="p-role">I want to join as</label>
           <select id="p-role" required>
@@ -2029,12 +1810,10 @@
           <label for="p-facebook"><i class="fab fa-facebook-f" style="color:#1877f2"></i> Facebook username</label>
           <input type="text" id="p-facebook" placeholder="e.g. john.doe">
         </div>
-
         <div class="form-group">
           <label for="p-whatsapp"><i class="fab fa-whatsapp" style="color:#25D366"></i> WhatsApp name / number</label>
           <input type="text" id="p-whatsapp" placeholder="e.g. +1 555 123 4567">
         </div>
-
         <div class="form-group">
           <label for="p-email"><i class="fas fa-envelope" style="color:var(--orange)"></i> Email</label>
           <input type="email" id="p-email" placeholder="you@example.com">
@@ -2074,20 +1853,11 @@
   <div class="footer-grid">
     <div>
       <h3>Rock ChildCare Ministries</h3>
-      <p>
-        Supporting vulnerable children and young people
-        through food, education, shelter and skills development.
-      </p>
+      <p>Supporting vulnerable children and young people through food, education, shelter and skills development.</p>
       <div class="socials">
-        <a href="https://www.facebook.com/share/1KEZx2XuXu/?mibextid=wwXIfr" target="_blank">
-          <i class="fab fa-facebook-f"></i>
-        </a>
-        <a href="https://www.instagram.com/patrickm_79?mdxt=eDFwenY3bzVpM2ow" target="_blank">
-          <i class="fab fa-instagram"></i>
-        </a>
-        <a href="https://wa.me/256753669250?s=p" target="_blank">
-          <i class="fab fa-whatsapp"></i>
-        </a>
+        <a href="https://www.facebook.com/share/1KEZx2XuXu/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/patrickm_79?mdxt=eDFwenY3bzVpM2ow" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/256753669250?s=p" target="_blank"><i class="fab fa-whatsapp"></i></a>
       </div>
     </div>
     <div>
@@ -2106,10 +1876,7 @@
     </div>
   </div>
   <div class="copyright">
-    <p>
-      © 2026 Rock ChildCare Ministries Uganda.
-      All rights reserved.
-    </p>
+    <p>© 2026 Rock ChildCare Ministries Uganda. All rights reserved.</p>
   </div>
 </footer>
 
@@ -2118,7 +1885,6 @@
   /* MOBILE MENU TOGGLE */
   const menuToggle = document.getElementById('menuToggle');
   const mainNav = document.getElementById('mainNav');
-
   if (menuToggle && mainNav) {
     menuToggle.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -2129,33 +1895,20 @@
   /* TAB NAVIGATION SWITCHER */
   function showTab(tabName) {
     const sections = document.querySelectorAll('.page-section');
-    sections.forEach(sec => {
-      sec.classList.remove('active-section');
-    });
+    sections.forEach(sec => sec.classList.remove('active-section'));
 
     const navLinks = document.querySelectorAll('.nav a');
-    navLinks.forEach(link => {
-      link.classList.remove('active');
-    });
+    navLinks.forEach(link => link.classList.remove('active'));
 
     const activeSec = document.getElementById(tabName + '-section');
-    if (activeSec) {
-      activeSec.classList.add('active-section');
-    }
+    if (activeSec) activeSec.classList.add('active-section');
 
     const activeNav = document.getElementById('nav-' + tabName);
-    if (activeNav) {
-      activeNav.classList.add('active');
-    }
+    if (activeNav) activeNav.classList.add('active');
 
-    if (mainNav) {
-      mainNav.classList.remove('show-menu');
-    }
+    if (mainNav) mainNav.classList.remove('show-menu');
 
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   /* MODALS */
@@ -2171,9 +1924,7 @@
   function closeModal(id) {
     if (id === 'imageModal') stopVideo();
     const targetModal = document.getElementById(id);
-    if (targetModal) {
-      targetModal.classList.remove('show');
-    }
+    if (targetModal) targetModal.classList.remove('show');
   }
 
   /* DONATION FORM PROCESSING */
@@ -2219,15 +1970,13 @@
 
   function selectAmount(amount) {
     const donorAmountInput = document.getElementById('donor-amount');
-    if (donorAmountInput) {
-      donorAmountInput.value = amount;
-    }
+    if (donorAmountInput) donorAmountInput.value = amount;
     openModal('donateModal');
   }
 
   function stopVideo() {
     const v = document.getElementById('largeVideo');
-    if (v) { v.pause(); }
+    if (v) v.pause();
   }
   function viewImage(src, title, type) {
     const img = document.getElementById('largeImage');
@@ -2280,6 +2029,90 @@
     document.getElementById('partnerThanks').style.display = 'block';
   }
 
+  /* ============ CHILDREN GALLERY + CONTACT FORM ============ */
+  const CHILDREN = [
+    { name: 'Haniffah', sub: 'Education • Uganda',  img: '/niffa.jpg' },
+    { name: 'Nakato',   sub: 'Food & Shelter',      img: '/IMG_0254.jpg' },
+    { name: 'Siama',    sub: 'Education Support',   img: '/IMG_1155.jpg' },
+    { name: 'Sukran',   sub: 'Girls Skills',        img: '/IMG_0721.jpg' },
+    { name: 'Kato',     sub: 'Safe Shelter',        img: '/IMG_0719.jpg' },
+    { name: 'Hirrat',   sub: 'Food Relief',         img: '/IMG_1150.jpg' }
+  ];
+  let currentChild = null;
+
+  function openChildrenGallery() {
+    const grid = document.getElementById('childrenGrid');
+    grid.innerHTML = '';
+    CHILDREN.forEach((c, i) => {
+      const card = document.createElement('div');
+      card.className = 'child-card';
+      card.innerHTML =
+        '<div class="child-avatar"><img src="' + c.img + '" alt="' + c.name + '"></div>' +
+        '<div class="child-name">' + c.name + '</div>' +
+        '<div class="child-sub">' + c.sub + '</div>';
+      card.onclick = () => openChildForm(i);
+      grid.appendChild(card);
+    });
+    openModal('childrenGalleryModal');
+  }
+
+  function openChildForm(idx) {
+    currentChild = CHILDREN[idx];
+    if (!currentChild) return;
+
+    document.getElementById('cfAvatar').src = currentChild.img;
+    document.getElementById('cfName').textContent = currentChild.name;
+    document.getElementById('cfSub').textContent = currentChild.sub;
+    document.getElementById('cfIntro').textContent =
+      'To receive more details about ' + currentChild.name +
+      ', please fill in this form so we can contact you and share their full story.';
+
+    document.getElementById('childForm').reset();
+    document.getElementById('cfError').style.display = 'none';
+    document.getElementById('childForm').style.display = 'block';
+    document.getElementById('cfThanks').style.display = 'none';
+
+    closeModal('childrenGalleryModal');
+    openModal('childFormModal');
+  }
+
+  function handleChildSubmit(event) {
+    event.preventDefault();
+    if (!currentChild) return;
+    const val = id => document.getElementById(id).value.trim();
+    const err = document.getElementById('cfError');
+
+    if (!val('cf-your-name') || !val('cf-your-phone') || !val('cf-your-email')) {
+      err.textContent = 'Please fill in your name, phone number and email.';
+      err.style.display = 'block';
+      return;
+    }
+    err.style.display = 'none';
+
+    const msg =
+      'Hello Rock ChildCare Ministries,\n\n' +
+      'I am interested in learning more about this child:\n' +
+      '• Child Name: ' + currentChild.name + '\n' +
+      '• Category: ' + currentChild.sub + '\n' +
+      '• Child Photo: ' + currentChild.img + '\n\n' +
+      'My details:\n' +
+      '• My Name: ' + val('cf-your-name') + '\n' +
+      '• Phone / WhatsApp: ' + val('cf-your-phone') + '\n' +
+      '• Email: ' + val('cf-your-email') + '\n' +
+      '• Facebook: ' + (val('cf-your-fb') || 'Not given') + '\n' +
+      '• Instagram: ' + (val('cf-your-ig') || 'Not given') + '\n' +
+      '• TikTok: ' + (val('cf-your-tt') || 'Not given') + '\n\n' +
+      'Please send me more details about this child.';
+
+    const link = 'https://wa.me/' + PARTNER_WHATSAPP + '?text=' + encodeURIComponent(msg);
+    const win = window.open(link, '_blank');
+    if (!win) window.location.href = link;
+
+    document.getElementById('childForm').style.display = 'none';
+    document.getElementById('cfThanks').style.display = 'block';
+  }
+
+  /* ============ GALLERY (slider + heart) ============ */
   const ALL_GALLERY = [
     { src: '/IMG_7922.jpg', caption: 'Our moments of hope' },
     { src: '/IMG_0716.jpg', caption: 'Our moments of hope' },
@@ -2443,12 +2276,8 @@
       d.style.pointerEvents = Math.abs(off) > 1 ? 'none' : 'auto';
       const vid = d.querySelector('video');
       if (vid) {
-        if (off === 0) {
-          vid.currentTime = 0;
-          vid.play().catch(() => {});
-        } else {
-          vid.pause();
-        }
+        if (off === 0) { vid.currentTime = 0; vid.play().catch(() => {}); }
+        else vid.pause();
       }
     });
     document.getElementById('ssCaption').textContent = GALLERY[ssCur].caption;
@@ -2528,13 +2357,14 @@
   (function initBeforeAfter() {
     const track = document.getElementById('baTrack');
     if (!track) return;
-    const cards = Array.from(track.children);
-    cards.forEach(c => {
-      const clone = c.cloneNode(true);
+    // Duplicate all PAIRS (not individual cards) so the loop stays seamless
+    const pairs = Array.from(track.children);
+    pairs.forEach(p => {
+      const clone = p.cloneNode(true);
       clone.setAttribute('aria-hidden', 'true');
       track.appendChild(clone);
     });
-    track.style.animationDuration = Math.max(20, cards.length * 7) + 's';
+    track.style.animationDuration = Math.max(24, pairs.length * 9) + 's';
   })();
 
   (function () {
@@ -2599,7 +2429,7 @@
     });
 
     document.addEventListener('click', e => {
-      const b = e.target.closest('.btn, .btn-submit-form, .method-btn, .impact-float-btn');
+      const b = e.target.closest('.btn, .btn-submit-form, .method-btn, .impact-float-btn, .child-card');
       if (!b) return;
       const r = b.getBoundingClientRect(), size = Math.max(r.width, r.height);
       const sp = document.createElement('span');
@@ -2751,8 +2581,7 @@
         el = document.createElement('video');
         el.className = 'pm-slide' + (i === 0 ? ' on' : '');
         el.src = src;
-        el.muted = true;
-        el.defaultMuted = true;
+        el.muted = true; el.defaultMuted = true;
         el.setAttribute('muted', '');
         el.setAttribute('playsinline', '');
         el.setAttribute('webkit-playsinline', '');
@@ -2797,10 +2626,7 @@
 
   function pmGo(i) {
     if (!pmSlides.length) return;
-
-    if (pmSlides[pmIdx].tagName === 'VIDEO') {
-      pmSlides[pmIdx].pause();
-    }
+    if (pmSlides[pmIdx].tagName === 'VIDEO') pmSlides[pmIdx].pause();
     pmSlides[pmIdx].classList.remove('on');
     document.querySelectorAll('#pmDots button')[pmIdx].classList.remove('on');
 
@@ -2851,9 +2677,7 @@
   }
 
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') {
-      closeProgram();
-    }
+    if (e.key === 'Escape') closeProgram();
   });
   document.getElementById('programModal').addEventListener('click', e => {
     if (e.target.id === 'programModal') closeProgram();
